@@ -1,2 +1,2 @@
-# uldhc.github.io
-Github page of University of Latvia Digital Humanities Center
+# ul-dhc.github.io
+Github page of the University of Latvia Digital Humanities Center

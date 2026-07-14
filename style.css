@@ -195,7 +195,14 @@ body{
 
 /* ===== Win panel — recap grid of matched terms ===== */
 .win-panel{ text-align:center; }
-.win-flag{ font-family: var(--font-display); font-weight: 600; color: var(--accent-lilac); font-size: 18px; margin: 4px 0 22px; }
+.win-flag{
+  font-family: var(--font-display);
+  font-weight: 400;
+  color: var(--accent-lilac);
+  font-size: 15px;
+  line-height: 1.45;
+  margin: 4px 0 22px;
+}
 
 .win-grid{ display:grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 26px; }
 

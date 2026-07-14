@@ -241,7 +241,7 @@ function applyTheme(){
   updateLogo();
 }
 
-   evenly-distributed mesh once. */
+
 function buildNetBg(){
   const g = document.querySelector('.net-dots');
   const colors = ['var(--accent-purple)','var(--accent-lilac)','var(--accent-blue)','var(--accent-pink)'];
@@ -264,7 +264,7 @@ function buildNetBg(){
 
   let html = '';
   pts.forEach((p,i)=>{
-   
+  
     let nearest = null, best = Infinity;
     pts.forEach((q,j)=>{
       if(i===j) return;

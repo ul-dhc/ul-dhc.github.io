@@ -56,7 +56,7 @@ const TERMS = [
 /* ---------- i18n strings ---------- */
 const STR = {
   en:{
-    headline:'Diving into <br>humanities<br><span class="accent">digitally.</span>',
+    headline:'Inspiring <br>humanities<br><span class="accent">digitally.</span>',
     lede:'While our new website is being developed...',
     playTitle:'...play the memory game!',
     playSub:'Find matching pairs.',
@@ -69,7 +69,7 @@ const STR = {
     matchDesc:'Another match found.'
   },
   lv:{
-    headline:'Ienirstam<br>humanitārajās zinātnēs<br><span class="accent">digitāli.</span>',
+    headline:'Saviļņojot<br>humanitās zinātnes<br><span class="accent">digitāli.</span>',
     lede:'Kamēr jaunā mājaslapa tiek veidota...',
     playTitle:'... uzspēlē atmiņas spēli!',
     playSub:'Savieno pārus.',

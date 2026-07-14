@@ -90,7 +90,7 @@ body{
 .page{ position: relative; z-index: 1; max-width: 1240px; margin: 0 auto; padding: 28px 32px 60px; }
 
 .topbar{ display:flex; align-items:center; justify-content: space-between; gap: 16px; margin-bottom: 40px; flex-wrap: wrap; }
-.logo{ height: 76px; width: auto; display:block; }
+.logo{ height: 96px; width: auto; display:block; }
 .topbar-controls{ display:flex; gap: 8px; }
 
 .pill-btn{
@@ -213,7 +213,7 @@ body{
   .board{ gap: 8px; }
 }
 @media (max-width: 520px){
-  .logo{ height: 56px; }
+  .logo{ height: 68px; }
 }
 @media (max-width: 480px){
   .board{ gap: 6px; }

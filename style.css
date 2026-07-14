@@ -26,6 +26,7 @@
   --accent-pink-soft: #33192a;
   --shadow: 0 20px 60px rgba(0,0,0,.45);
   --net-dot: rgba(180, 190, 255, .55);
+  --card-dot: rgba(190, 198, 255, .3);
 }
 
 .theme-light{
@@ -47,6 +48,7 @@
   --accent-pink-soft: #fbe9f1;
   --shadow: 0 20px 50px rgba(70,60,120,.12);
   --net-dot: rgba(120, 100, 200, .35);
+  --card-dot: rgba(110, 90, 190, .22);
 }
 
 *{ box-sizing: border-box; }
@@ -63,7 +65,9 @@ body{
 
 /* ===== Background network ===== */
 .bg-net{
-  position: fixed; inset: -6%; z-index: 0; pointer-events: none; opacity: .7;
+  position: fixed; inset: -6%; z-index: 0; pointer-events: none;
+  will-change: transform, opacity;
+  animation: netDrift 60s linear infinite;
 }
 .bg-net svg{ width: 100%; height: 100%; }
 .net-dots circle{ fill: var(--net-dot); }
@@ -71,28 +75,21 @@ body{
 .net-dots circle[data-c]{ fill: currentColor; }
 .net-dots line[data-c]{ stroke: currentColor; }
 
-/* Continuous, non-stop drift — a closed loop path (not alternate) so the
-   motion never visibly reverses or pauses, just keeps gently travelling. */
-.net-dots{
-  animation: netDrift 110s linear infinite, netBreathe 14s ease-in-out infinite;
-  transform-origin: center;
-}
-
+/* One continuous, non-stop loop (not "alternate") combining drift and a
+   gentle opacity breathe in a single animation, on the plain HTML wrapper
+   so the transform always resolves reliably (SVG child elements can be
+   inconsistent with CSS transform across mobile browsers). */
 @keyframes netDrift{
-  0%    { transform: translate(0%, 0%) scale(1); }
-  20%   { transform: translate(1.6%, -1%) scale(1.01); }
-  40%   { transform: translate(0.6%, 1.6%) scale(1.02); }
-  60%   { transform: translate(-1.4%, 1%) scale(1.01); }
-  80%   { transform: translate(-0.8%, -1.4%) scale(1.005); }
-  100%  { transform: translate(0%, 0%) scale(1); }
-}
-@keyframes netBreathe{
-  0%, 100%{ opacity: .78; }
-  50%{ opacity: 1; }
+  0%    { transform: translate(0%, 0%) scale(1);       opacity: .68; }
+  20%   { transform: translate(3%, -2.2%) scale(1.02);  opacity: .78; }
+  40%   { transform: translate(1.2%, 3%) scale(1.04);   opacity: .7; }
+  60%   { transform: translate(-3%, 2%) scale(1.02);    opacity: .78; }
+  80%   { transform: translate(-1.8%, -3%) scale(1.01); opacity: .72; }
+  100%  { transform: translate(0%, 0%) scale(1);        opacity: .68; }
 }
 
 @media (prefers-reduced-motion: reduce){
-  .net-dots{ animation: none; }
+  .bg-net, .net-dots{ animation: none; }
 }
 
 /* ===== Layout ===== */
@@ -168,8 +165,8 @@ body{
 .card-back{
   background: var(--card-back);
   background-image:
-    radial-gradient(var(--net-dot) 1px, transparent 1.4px);
-  background-size: 14px 14px;
+    radial-gradient(var(--card-dot) 1.8px, transparent 2.6px);
+  background-size: 18px 18px;
   color: var(--text-dim); font-weight: 700; font-size: 11px; letter-spacing: .06em;
 }
 .card-front{

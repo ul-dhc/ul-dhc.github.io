@@ -233,7 +233,7 @@ body{
   .win-item svg{ width: 24px; height: 24px; }
 }
 @media (max-width: 560px){
-  .logo{ height: 68px; }
+  .logo{ height: 100px; }
   .headline{ font-size: clamp(28px, 8vw, 36px); }
 }
 @media (max-width: 460px){

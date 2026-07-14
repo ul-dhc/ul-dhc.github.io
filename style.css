@@ -175,6 +175,7 @@ body{
 }
 .card-front svg{ width: 26px; height: 26px; }
 .card-front .term-label{ font-size: 13px; font-weight: 600; line-height: 1.25; padding: 0 4px; word-break: break-word; }
+.card-front .short-label{ display: none; }
 .card-back{ font-size: 12px; }
 
 .card:not(.matched):not(.flipped) .card-inner:hover{ transform: translateY(-2px); }
@@ -233,8 +234,10 @@ body{
   .win-item svg{ width: 24px; height: 24px; }
 }
 @media (max-width: 560px){
-  .logo{ height: 100px; }
+  .logo{ height: 68px; }
   .headline{ font-size: clamp(28px, 8vw, 36px); }
+  .card-front .full-label{ display: none; }
+  .card-front .short-label{ display: inline; }
 }
 @media (max-width: 460px){
   .page{ padding: 14px 8px 32px; }

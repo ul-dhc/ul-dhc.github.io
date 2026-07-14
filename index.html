@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LU DHC — Memory Game</title>
+<meta name="description" content="Digital Humanities Center, University of Latvia — a card matching game connecting digital humanities ideas.">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-dark" data-lang="en">
+
+<div class="bg-net" aria-hidden="true">
+  <svg viewBox="0 0 800 800" preserveAspectRatio="xMidYMid slice"><g class="net-dots"></g></svg>
+</div>
+
+<div class="page">
+
+  <header class="topbar">
+    <img class="logo" id="brandLogo" src="assets/logo-eng-white.png" alt="Digital Humanities Center, University of Latvia">
+    <div class="topbar-controls">
+      <button id="langToggle" class="pill-btn" type="button" aria-label="Switch language">LV</button>
+      <button id="themeToggle" class="pill-btn icon-btn" type="button" aria-label="Toggle light and dark theme">
+        <svg id="themeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="layout">
+
+    <section class="intro">
+      <h1 class="headline" data-i18n="headline">Breathing<br>humanities<br><span class="accent">digitally.</span></h1>
+      <p class="lede" data-i18n="lede">Our new website is being developed.</p>
+
+      <div class="link-row">
+        <span class="link-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V9a3 3 0 0 1 6 0v1"/><circle cx="12" cy="18" r="3"/></svg>
+        </span>
+        <span class="link-text">
+          <strong data-i18n="playTitle">Play the memory game!</strong>
+          <span data-i18n="playSub">Find matching pairs and connect ideas.</span>
+        </span>
+      </div>
+
+      <a class="link-row" href="mailto:dhc@lu.lv">
+        <span class="link-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        </span>
+        <span class="link-text"><strong>dhc@lu.lv</strong></span>
+      </a>
+    </section>
+
+    <section class="board-wrap">
+      <div class="board-header">
+        <span class="board-title" data-i18n="boardTitle">Find all matching pairs</span>
+        <span class="moves-pill"><span data-i18n="moves">Moves</span>: <span id="movesCount">0</span></span>
+      </div>
+
+      <div id="board" class="board" role="group" aria-label="Memory game board"></div>
+
+      <div id="statusMsg" class="status-msg" aria-live="polite"></div>
+
+      <div id="matchInfo" class="match-info" hidden>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 16v-5M12 8h.01"/></svg>
+        <div>
+          <strong id="matchInfoTitle"></strong>
+          <p id="matchInfoText"></p>
+        </div>
+      </div>
+
+      <div id="winPanel" class="win-panel" hidden>
+        <p class="win-flag" data-i18n="winFlag">You connected them all!</p>
+        <div id="winGrid" class="win-grid"></div>
+        <button id="playAgainBtn" class="pill-btn" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg>
+          <span data-i18n="playAgain">Play again</span>
+        </button>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

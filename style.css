@@ -220,6 +220,29 @@ body{
 }
 .win-item svg{ width: 20px; height: 20px; }
 
+/* ===== Fit to one screen on large displays (no vertical scroll) =====
+   Below the mobile breakpoint we keep normal document scrolling, since a
+   tall stacked layout is expected on phones. On larger screens the whole
+   page — header, headline, and the 5x4 board — is sized to fit within
+   100vh instead of overflowing, by making the board fill whatever height
+   is left rather than forcing square cards driven by column width. */
+@media (min-width: 861px){
+  html, body{ height: 100%; }
+  body{ overflow: hidden; }
+  .page{ height: 100vh; display: flex; flex-direction: column; padding-top: 22px; padding-bottom: 22px; }
+  .topbar{ flex: 0 0 auto; margin-bottom: 24px; }
+  .layout{ flex: 1 1 auto; min-height: 0; align-items: stretch; }
+  .intro{ overflow-y: auto; min-height: 0; }
+  .board-wrap{ height: 100%; min-height: 0; display: flex; flex-direction: column; }
+  .board{
+    flex: 1 1 auto; min-height: 0;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+  }
+  .card{ aspect-ratio: unset; }
+  .win-panel{ flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; justify-content: center; overflow-y: auto; }
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 860px){
   .layout{ grid-template-columns: 1fr; gap: 26px; }

@@ -69,7 +69,7 @@ const STR = {
     matchDesc:'Another match found.'
   },
   lv:{
-    headline:'Saviļņojot<br>humanitās zinātnes<br><span class="accent">digitāli.</span>',
+    headline:'Saviļņojot<br>humanitārās zinātnes<br><span class="accent">digitāli.</span>',
     lede:'Kamēr jaunā mājaslapa tiek veidota...',
     playTitle:'... uzspēlē atmiņas spēli!',
     playSub:'Savieno pārus.',

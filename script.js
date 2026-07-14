@@ -241,7 +241,12 @@ function applyTheme(){
   updateLogo();
 }
 
-
+/* ---------- Background network dots ----------
+   A loosely integrated field spread across the whole page (jittered grid,
+   not clustered corners) so it reads as one connected structure — "breathing
+   humanities" — rather than decoration. Motion is handled entirely in CSS
+   (slow drift + opacity breathe) so this only needs to lay out a calm,
+   evenly-distributed mesh once. */
 function buildNetBg(){
   const g = document.querySelector('.net-dots');
   const colors = ['var(--accent-purple)','var(--accent-lilac)','var(--accent-blue)','var(--accent-pink)'];
@@ -264,7 +269,8 @@ function buildNetBg(){
 
   let html = '';
   pts.forEach((p,i)=>{
-  
+    // connect to the nearest neighbour only, within a modest radius,
+    // so the mesh reads as gently linked rather than a dense web
     let nearest = null, best = Infinity;
     pts.forEach((q,j)=>{
       if(i===j) return;
@@ -285,12 +291,18 @@ function buildNetBg(){
 document.getElementById('langToggle').addEventListener('click', ()=>{
   lang = lang === 'en' ? 'lv' : 'en';
   applyLang();
+  history.replaceState(null, '', lang === 'lv' ? '#lv' : '#en');
 });
 document.getElementById('themeToggle').addEventListener('click', ()=>{
   theme = theme === 'dark' ? 'light' : 'dark';
   applyTheme();
 });
 document.getElementById('playAgainBtn').addEventListener('click', resetGame);
+
+// Open directly into the Latvian version when the URL is ul-dhc.github.io/#lv
+if(window.location.hash.replace('#','').toLowerCase() === 'lv'){
+  lang = 'lv';
+}
 
 buildNetBg();
 applyTheme();

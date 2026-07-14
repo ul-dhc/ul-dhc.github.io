@@ -62,11 +62,11 @@ const STR = {
     playSub:'Find matching pairs.',
     boardTitle:'Find all matching pairs',
     moves:'Moves',
-    winFlag:'You connected them all!',
+    winFlag:'Well done! These are just some of the fields we work in – researching, experimenting and collaborating.',
     playAgain:'Play again',
     tryAgain:'Not a match. Try again!',
     matchFound:'Match found!',
-    matchDesc:'Another match found.'
+    matchDesc:'Perfect!'
   },
   lv:{
     headline:'Saviļņojot<br>humanitārās zinātnes<br><span class="accent">digitāli.</span>',
@@ -75,11 +75,11 @@ const STR = {
     playSub:'Savieno pārus.',
     boardTitle:'Atrodi visus pārus',
     moves:'Gājieni',
-    winFlag:'Tev tas izdevās!',
+    winFlag:'Lieliski! Šīs ir dažas no jomām, kurās mēs darbojamies – pētot, eksperimentējot un sadarbojoties.',
     playAgain:'Spēlēt vēlreiz',
     tryAgain:'Nav pāris. Mēģini vēlreiz!',
     matchFound:'Pāris atrasts!',
-    matchDesc:'Vēl viens pāris atrasts.'
+    matchDesc:'Izcili!'
   }
 };
 

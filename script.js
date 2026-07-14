@@ -1,9 +1,4 @@
-/* ============================================================
-   LU DHC — Memory Game
-   Digital Humanities Center, University of Latvia
-   ============================================================ */
 
-/* ---------- Icon library (24x24, stroke, currentColor) ---------- */
 const ICONS = {
   flower: `<circle cx="12" cy="12" r="2.4"/><path d="M12 9.6c0-2.4-1.6-4-3.6-4.4 1 1.8.6 3.4 1.4 4.4M12 9.6c0-2.4 1.6-4 3.6-4.4-1 1.8-.6 3.4-1.4 4.4M12 14.4c0 2.4-1.6 4-3.6 4.4 1-1.8.6-3.4 1.4-4.4M12 14.4c0 2.4 1.6 4 3.6 4.4-1-1.8-.6-3.4 1.4-4.4M9.6 12c-2.4 0-4-1.6-4.4-3.6 1.8 1 3.4.6 4.4 1.4M14.4 12c2.4 0 4 1.6 4.4 3.6-1.8-1-3.4-.6-4.4-1.4"/>`,
   pattern: `<path d="M4 7c2 0 2 3 4 3s2-3 4-3 2 3 4 3 2-3 4-3"/><path d="M4 13c2 0 2 3 4 3s2-3 4-3 2 3 4 3 2-3 4-3"/>`,
@@ -44,9 +39,7 @@ function svgIcon(name){
 }
 
 /* ---------- Terms ---------- */
-/* Each term appears on two identical cards (the classic memory-match
-   mechanic). Which wording shows — English or Latvian — follows the
-   language toggle, so the whole deck is re-labelled when it's switched. */
+
 const TERMS = [
   { id:0, icon:'cpu',      en:'Digital humanities',              lv:'Digitālās humanitārās zinātnes' },
   { id:1, icon:'landmark', en:'Digital cultural heritage',        lv:'Digitālais kultūras mantojums' },
@@ -63,30 +56,30 @@ const TERMS = [
 /* ---------- i18n strings ---------- */
 const STR = {
   en:{
-    headline:'Breathing<br>humanities<br><span class="accent">digitally.</span>',
-    lede:'Our new website is being developed.',
-    playTitle:'Play the memory game!',
-    playSub:'Find matching pairs and connect ideas.',
+    headline:'Diving into <br>humanities<br><span class="accent">digitally.</span>',
+    lede:'While our new website is being developed...',
+    playTitle:'...play the memory game!',
+    playSub:'Find matching pairs.',
     boardTitle:'Find all matching pairs',
     moves:'Moves',
     winFlag:'You connected them all!',
     playAgain:'Play again',
     tryAgain:'Not a match. Try again!',
     matchFound:'Match found!',
-    matchDesc:'Another idea connected.'
+    matchDesc:'Another match found.'
   },
   lv:{
-    headline:'Elpo<br>humanitārās zinātnes<br><span class="accent">digitāli.</span>',
-    lede:'Mūsu jaunā mājaslapa tiek veidota.',
-    playTitle:'Spēlē atmiņas spēli!',
-    playSub:'Atrodi pārus un savieno idejas.',
+    headline:'Ienirstam<br>humanitārajās zinātnēs<br><span class="accent">digitāli.</span>',
+    lede:'Kamēr jaunā mājaslapa tiek veidota...',
+    playTitle:'... uzspēlē atmiņas spēli!',
+    playSub:'Savieno pārus.',
     boardTitle:'Atrodi visus pārus',
     moves:'Gājieni',
-    winFlag:'Tu savienoji tos visus!',
+    winFlag:'Tev tas izdevās!',
     playAgain:'Spēlēt vēlreiz',
     tryAgain:'Nav pāris. Mēģini vēlreiz!',
     matchFound:'Pāris atrasts!',
-    matchDesc:'Vēl viena ideja savienota.'
+    matchDesc:'Vēl viens pāris atrasts.'
   }
 };
 

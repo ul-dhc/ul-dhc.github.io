@@ -278,19 +278,34 @@ function buildNetBg(){
     }
   }
 
-  let html = '';
+  // Build a small pool of candidate edges per point (its 2 nearest
+  // neighbours, not just 1), deduped. Each edge gets its own slow,
+  // independent fade cycle in CSS, so the *set* of visible connections
+  // keeps quietly rewiring — new links form, old ones dissolve — without
+  // any per-frame JS and without dots ever detaching from a line.
+  const edgeKeys = new Set();
+  const edges = [];
   pts.forEach((p,i)=>{
-    // connect to the nearest neighbour only, within a modest radius,
-    // so the mesh reads as gently linked rather than a dense web
-    let nearest = null, best = Infinity;
-    pts.forEach((q,j)=>{
-      if(i===j) return;
-      const d = (p.x-q.x)**2 + (p.y-q.y)**2;
-      if(d < best){ best = d; nearest = q; }
+    const distances = pts
+      .map((q,j)=> j===i ? null : { j, d:(p.x-q.x)**2 + (p.y-q.y)**2 })
+      .filter(Boolean)
+      .sort((a,b)=> a.d-b.d)
+      .slice(0,2);
+    distances.forEach(({j,d})=>{
+      if(d > 95*95) return;
+      const key = i<j ? `${i}-${j}` : `${j}-${i}`;
+      if(edgeKeys.has(key)) return;
+      edgeKeys.add(key);
+      edges.push({ a:p, b:pts[j] });
     });
-    if(nearest && best < 78*78){
-      html += `<line data-c x1="${p.x.toFixed(1)}" y1="${p.y.toFixed(1)}" x2="${nearest.x.toFixed(1)}" y2="${nearest.y.toFixed(1)}" style="color:${p.c};opacity:${(p.o*0.55).toFixed(2)}"/>`;
-    }
+  });
+
+  let html = '';
+  edges.forEach(({a,b})=>{
+    const dur = (16 + Math.random()*22).toFixed(1);      // 16–38s per cycle
+    const delay = (-Math.random()*dur).toFixed(1);        // desync so they don't fade in unison
+    const peak = (Math.max(a.o,b.o) * 0.6).toFixed(2);
+    html += `<line data-c x1="${a.x.toFixed(1)}" y1="${a.y.toFixed(1)}" x2="${b.x.toFixed(1)}" y2="${b.y.toFixed(1)}" style="color:${a.c};--peak:${peak};animation-duration:${dur}s;animation-delay:${delay}s"/>`;
   });
   pts.forEach(p=>{
     html += `<circle data-c cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${p.r.toFixed(2)}" style="color:${p.c};opacity:${p.o.toFixed(2)}"/>`;

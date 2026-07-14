@@ -63,42 +63,28 @@ body{
 
 /* ===== Background network ===== */
 .bg-net{
-  position: fixed; inset: -4%; z-index: 0; pointer-events: none; opacity: .7;
-  animation: bgDrift 64s ease-in-out infinite alternate;
+  position: fixed; inset: -6%; z-index: 0; pointer-events: none; opacity: .7;
 }
 .bg-net svg{ width: 100%; height: 100%; }
 .net-dots circle{ fill: var(--net-dot); }
 .net-dots line{ stroke: var(--net-dot); stroke-width: .7; opacity: .45; }
 .net-dots circle[data-c]{ fill: currentColor; }
 .net-dots line[data-c]{ stroke: currentColor; }
-.net-dots{ animation: netBreathe 14s ease-in-out infinite; transform-origin: center; }
 
-/* Slow, non-stop waves — a nod to "saviļņot" (to ripple/wave) in the
-   Latvian headline. Each path is one full sine period repeated twice
-   (0–800 and 800–1600) so a -800px drift loops with no visible seam. */
-.bg-waves{ opacity: .5; }
-.wave-path{ fill: none; stroke-width: 1.3; }
-.wave-layer{ animation-timing-function: linear; animation-iteration-count: infinite; }
-.wave-layer-1{ color: var(--accent-purple); animation-name: waveDrift; animation-duration: 90s; }
-.wave-layer-1 .wave-path{ stroke: currentColor; opacity: .3; }
-.wave-layer-2{ color: var(--accent-lilac); animation-name: waveDrift; animation-duration: 130s; }
-.wave-layer-2 .wave-path{ stroke: currentColor; opacity: .22; }
-.wave-layer-3{ color: var(--accent-blue); animation-name: waveDriftRev; animation-duration: 150s; }
-.wave-layer-3 .wave-path{ stroke: currentColor; opacity: .26; }
-
-@keyframes waveDrift{
-  from{ transform: translateX(0); }
-  to{ transform: translateX(-800px); }
-}
-@keyframes waveDriftRev{
-  from{ transform: translateX(-800px); }
-  to{ transform: translateX(0); }
+/* Continuous, non-stop drift — a closed loop path (not alternate) so the
+   motion never visibly reverses or pauses, just keeps gently travelling. */
+.net-dots{
+  animation: netDrift 110s linear infinite, netBreathe 14s ease-in-out infinite;
+  transform-origin: center;
 }
 
-@keyframes bgDrift{
-  0%{ transform: translate(0,0) scale(1); }
-  50%{ transform: translate(-1%, 0.7%) scale(1.008); }
-  100%{ transform: translate(0.8%, -0.6%) scale(1); }
+@keyframes netDrift{
+  0%    { transform: translate(0%, 0%) scale(1); }
+  20%   { transform: translate(1.6%, -1%) scale(1.01); }
+  40%   { transform: translate(0.6%, 1.6%) scale(1.02); }
+  60%   { transform: translate(-1.4%, 1%) scale(1.01); }
+  80%   { transform: translate(-0.8%, -1.4%) scale(1.005); }
+  100%  { transform: translate(0%, 0%) scale(1); }
 }
 @keyframes netBreathe{
   0%, 100%{ opacity: .78; }
@@ -106,7 +92,7 @@ body{
 }
 
 @media (prefers-reduced-motion: reduce){
-  .bg-net, .net-dots, .wave-layer{ animation: none; }
+  .net-dots{ animation: none; }
 }
 
 /* ===== Layout ===== */
@@ -190,9 +176,9 @@ body{
   background: var(--card); transform: rotateY(180deg);
   flex-direction: column; gap: 8px; padding: 8px;
 }
-.card-front svg{ width: 19px; height: 19px; }
-.card-front .term-label{ font-size: 9px; font-weight: 600; line-height: 1.18; padding: 0 4px; word-break: break-word; }
-.card-back{ font-size: 10px; }
+.card-front svg{ width: 26px; height: 26px; }
+.card-front .term-label{ font-size: 13px; font-weight: 600; line-height: 1.25; padding: 0 4px; word-break: break-word; }
+.card-back{ font-size: 12px; }
 
 .card:not(.matched):not(.flipped) .card-inner:hover{ transform: translateY(-2px); }
 
@@ -256,11 +242,11 @@ body{
 @media (max-width: 460px){
   .page{ padding: 14px 8px 32px; }
   .board-wrap{ padding: 12px 10px 16px; }
-  .board{ gap: 7px; grid-template-columns: repeat(3, 1fr); }
-  .card-front{ padding: 6px; gap: 6px; }
-  .card-front svg{ width: 26px; height: 26px; }
-  .card-front .term-label{ font-size: 13px; }
-  .card-back{ font-size: 13px; }
+  .board{ gap: 7px; }
+  .card-front{ padding: 6px; gap: 5px; }
+  .card-front svg{ width: 20px; height: 20px; }
+  .card-front .term-label{ font-size: 10.5px; }
+  .card-back{ font-size: 10.5px; }
   .board-title{ font-size: 14px; }
   .moves-pill{ font-size: 11px; padding: 5px 12px; }
   .win-grid{ grid-template-columns: repeat(2, 1fr); gap: 10px; }

@@ -30,7 +30,8 @@ const ICONS = {
   clock: `<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>`,
   transform: `<path d="M4 8h13M17 8l-3-3M17 8l-3 3"/><path d="M20 16H7M7 16l3 3M7 16l3-3"/>`,
   corpus: `<path d="M6 4.5h9l3 3V19a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5.5a1 1 0 0 1 1-1Z"/><path d="M8.5 10h7M8.5 13.5h7M8.5 17h4.5"/>`,
-  dictionary: `<path d="M6 4h11a1.5 1.5 0 0 1 1.5 1.5V20H7.5A1.5 1.5 0 0 1 6 18.5V4Z"/><path d="M6 17h12.5"/><path d="M9.5 8h5"/>`
+  dictionary: `<path d="M6 4h11a1.5 1.5 0 0 1 1.5 1.5V20H7.5A1.5 1.5 0 0 1 6 18.5V4Z"/><path d="M6 17h12.5"/><path d="M9.5 8h5"/>`,
+  dice: `<rect x="4" y="4" width="16" height="16" rx="3.5"/><circle cx="8.5" cy="8.5" r="1.2"/><circle cx="15.5" cy="8.5" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="8.5" cy="15.5" r="1.2"/><circle cx="15.5" cy="15.5" r="1.2"/>`
 };
 
 function svgIcon(name){
@@ -38,18 +39,25 @@ function svgIcon(name){
 }
 
 /* ---------- Terms ---------- */
-
+/* `shortEn`/`shortLv` are optional, shorter versions shown only on small
+   screens (see .short-label / .full-label in style.css) so long terms
+   don't get crushed into an unreadable wrap on a 4-column phone grid. */
 const TERMS = [
-  { id:0, icon:'cpu',      en:'Digital humanities',              lv:'Digitālās humanitārās zinātnes' },
-  { id:1, icon:'landmark', en:'Digital cultural heritage',        lv:'Digitālais kultūras mantojums' },
-  { id:2, icon:'people',   en:'Crowdsourcing',                    lv:'Sabiedrības iesaiste' },
+  { id:0, icon:'cpu',      en:'Digital humanities',              lv:'Digitālās humanitārās zinātnes',
+    shortLv:'DH zinātnes' },
+  { id:1, icon:'landmark', en:'Digital cultural heritage',        lv:'Digitālais kultūras mantojums',
+    shortEn:'Digital heritage', shortLv:'Kultūras mantojums' },
+  { id:2, icon:'dice',     en:'Games',                            lv:'Spēles' },
   { id:3, icon:'flask',    en:'Citizen science',                  lv:'Sabiedriskā zinātne' },
-  { id:4, icon:'nodes',    en:'Language technologies',            lv:'Valodu tehnoloģijas' },
+  { id:4, icon:'nodes',    en:'Language technologies',            lv:'Valodu tehnoloģijas',
+    shortEn:'LangTech', shortLv:'Valodu tehn.' },
   { id:5, icon:'map',      en:'Networks and maps',                lv:'Tīkli un kartes' },
   { id:6, icon:'clock',    en:'Internet history',                 lv:'Interneta vēsture' },
-  { id:7, icon:'pen',      en:'Life writing and digital',         lv:'Dzīves pierakstīšana' },
-  { id:8, icon:'flower',   en:'Digital folkloristics',            lv:'Digitālā folkloristika' },
-  { id:9, icon:'building', en:'Digital humanities infrastructure', lv:'DH infrastruktūra' }
+  { id:7, icon:'pen',      en:'Life writing and digital',         lv:'Dzīves pierakstīšana',
+    shortEn:'Life writing', shortLv:'Dzīvesstāsti' },
+  { id:8, icon:'flower',   en:'Digital folkloristics',            lv:'Digitālā folkloristika',
+    shortEn:'Folkloristics', shortLv:'Folkloristika' },
+  { id:9, icon:'building', en:'DH infrastructure',                lv:'DH infrastruktūra' }
 ];
 
 /* ---------- i18n strings ---------- */
@@ -58,7 +66,8 @@ const STR = {
     headline:'Inspiring <br>humanities<br><span class="accent">digitally.</span>',
     lede:'While our new website is being developed...',
     playTitle:'...play the memory game!',
-    boardTitle:'Find all matching pairs!',
+    playSub:'Find matching pairs.',
+    boardTitle:'Find all matching pairs',
     moves:'Moves',
     winFlag:'Well done!<br>These are some of the fields we work in –<br>researching, experimenting, and collaborating.',
     playAgain:'Play again',
@@ -70,11 +79,12 @@ const STR = {
     headline:'Saviļņojot<br>humanitārās zinātnes<br><span class="accent">digitāli.</span>',
     lede:'Kamēr jaunā mājaslapa tiek veidota...',
     playTitle:'... uzspēlē atmiņas spēli!',
-    boardTitle:'Sameklē pārus!',
+    playSub:'Savieno pārus.',
+    boardTitle:'Sameklē pārus',
     moves:'Gājieni',
     winFlag:'Lieliski!<br>Šīs ir dažas no jomām, kurās mēs darbojamies –<br>pētot, eksperimentējot un sadarbojoties.',
     playAgain:'Spēlēt vēlreiz',
-    tryAgain:'Mēģini vēlreiz!',
+    tryAgain:'Nav pāris. Mēģini vēlreiz!',
     matchFound:'Pāris atrasts!',
     matchDesc:'Izcili!'
   }
@@ -109,6 +119,8 @@ function renderBoard(){
   board.innerHTML = '';
   deck.forEach((c, idx)=>{
     const label = c.term[lang];
+    const shortKey = lang === 'en' ? 'shortEn' : 'shortLv';
+    const shortLabel = c.term[shortKey] || label;
     const el = document.createElement('div');
     el.className = 'card';
     el.dataset.index = idx;
@@ -119,7 +131,8 @@ function renderBoard(){
         <div class="card-face card-back">ULDHC</div>
         <div class="card-face card-front">
           ${svgIcon(c.icon)}
-          <span class="term-label">${label}</span>
+          <span class="term-label full-label">${label}</span>
+          <span class="term-label short-label">${shortLabel}</span>
         </div>
       </div>`;
     el.addEventListener('click', ()=> onCardClick(idx, el));

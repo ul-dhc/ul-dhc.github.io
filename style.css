@@ -73,7 +73,17 @@ body{
 .net-dots circle{ fill: var(--net-dot); }
 .net-dots line{ stroke: var(--net-dot); stroke-width: .7; opacity: .45; }
 .net-dots circle[data-c]{ fill: currentColor; }
-.net-dots line[data-c]{ stroke: currentColor; }
+.net-dots line[data-c]{
+  stroke: currentColor;
+  opacity: 0;
+  animation-name: linkPulse;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+@keyframes linkPulse{
+  0%, 100% { opacity: 0; }
+  50%      { opacity: var(--peak, .3); }
+}
 
 /* One continuous, non-stop loop (not "alternate") combining drift and a
    gentle opacity breathe in a single animation, on the plain HTML wrapper
@@ -90,6 +100,7 @@ body{
 
 @media (prefers-reduced-motion: reduce){
   .bg-net, .net-dots{ animation: none; }
+  .net-dots line[data-c]{ animation: none; opacity: var(--peak, .3); }
 }
 
 /* ===== Layout ===== */

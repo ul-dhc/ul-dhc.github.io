@@ -73,7 +73,7 @@ const STR = {
     lede:'Kamēr jaunā mājaslapa tiek veidota...',
     playTitle:'... uzspēlē atmiņas spēli!',
     playSub:'Savieno pārus.',
-    boardTitle:'Saliec pa pāriem',
+    boardTitle:'Sameklē pārus',
     moves:'Gājieni',
     winFlag:'Lieliski!<br>Šīs ir dažas no jomām, kurās mēs darbojamies –<br>pētot, eksperimentējot un sadarbojoties.',
     playAgain:'Spēlēt vēlreiz',

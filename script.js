@@ -1,4 +1,3 @@
-
 const ICONS = {
   flower: `<circle cx="12" cy="12" r="2.4"/><path d="M12 9.6c0-2.4-1.6-4-3.6-4.4 1 1.8.6 3.4 1.4 4.4M12 9.6c0-2.4 1.6-4 3.6-4.4-1 1.8-.6 3.4-1.4 4.4M12 14.4c0 2.4-1.6 4-3.6 4.4 1-1.8.6-3.4 1.4-4.4M12 14.4c0 2.4 1.6 4 3.6 4.4-1-1.8-.6-3.4 1.4-4.4M9.6 12c-2.4 0-4-1.6-4.4-3.6 1.8 1 3.4.6 4.4 1.4M14.4 12c2.4 0 4 1.6 4.4 3.6-1.8-1-3.4-.6-4.4-1.4"/>`,
   pattern: `<path d="M4 7c2 0 2 3 4 3s2-3 4-3 2 3 4 3 2-3 4-3"/><path d="M4 13c2 0 2 3 4 3s2-3 4-3 2 3 4 3 2-3 4-3"/>`,
@@ -183,6 +182,7 @@ const COLOR_VARS = ['purple','lilac','blue','pink'];
 
 function showWin(){
   document.getElementById('board').style.display = 'none';
+  document.querySelector('.board-header').hidden = true;
   document.getElementById('matchInfo').hidden = true;
   document.getElementById('statusMsg').textContent = '';
   const winPanel = document.getElementById('winPanel');
@@ -208,6 +208,7 @@ function resetGame(){
   lockBoard = false;
   document.getElementById('movesCount').textContent = 0;
   document.getElementById('statusMsg').textContent = '';
+  document.querySelector('.board-header').hidden = false;
   document.getElementById('matchInfo').hidden = true;
   document.getElementById('winPanel').hidden = true;
   document.getElementById('board').style.display = 'grid';
@@ -240,11 +241,6 @@ function applyTheme(){
   updateLogo();
 }
 
-/* ---------- Background network dots ----------
-   A loosely integrated field spread across the whole page (jittered grid,
-   not clustered corners) so it reads as one connected structure — "breathing
-   humanities" — rather than decoration. Motion is handled entirely in CSS
-   (slow drift + opacity breathe) so this only needs to lay out a calm,
    evenly-distributed mesh once. */
 function buildNetBg(){
   const g = document.querySelector('.net-dots');
@@ -268,8 +264,7 @@ function buildNetBg(){
 
   let html = '';
   pts.forEach((p,i)=>{
-    // connect to the nearest neighbour only, within a modest radius,
-    // so the mesh reads as gently linked rather than a dense web
+   
     let nearest = null, best = Infinity;
     pts.forEach((q,j)=>{
       if(i===j) return;

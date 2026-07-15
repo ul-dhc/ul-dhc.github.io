@@ -58,7 +58,7 @@ const TERMS = [
 
 const STR = {
   en:{
-    headline:'Inspire <br>humanities<br><span class="accent">digitally.</span>',
+    headline:'Inspiring <br>humanities<br><span class="accent">digitally.</span>',
     lede:'While our new website is being developed...',
     playTitle:'...play the memory game!',
     boardTitle:'Find all matching pairs!',

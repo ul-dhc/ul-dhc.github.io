@@ -148,6 +148,7 @@ body{
 
 /* ===== Board ===== */
 .board-wrap{
+  position: relative;
   background: var(--bg-elevated); border: 1px solid var(--border-soft); border-radius: var(--radius-lg);
   padding: 26px 28px 30px; box-shadow: var(--shadow);
 }
@@ -204,10 +205,14 @@ body{
 .status-msg.wrong{ color: var(--accent-pink); }
 
 .match-info{
-  margin-top: 16px; display:flex; gap: 12px; align-items:flex-start;
+  position: absolute; left: 28px; right: 28px; bottom: 26px; z-index: 5;
+  display:flex; gap: 12px; align-items:flex-start;
   background: var(--accent-purple-soft); border: 1px solid var(--border-soft); border-radius: var(--radius-md);
-  padding: 14px 16px; color: var(--accent-purple);
+  padding: 14px 16px; color: var(--accent-purple); box-shadow: var(--shadow);
+  opacity: 0; transform: translateY(8px); pointer-events: none;
+  transition: opacity .3s ease, transform .3s ease;
 }
+.match-info.visible{ opacity: 1; transform: translateY(0); }
 .match-info p{ margin: 4px 0 0; color: var(--text-dim); font-size: 13px; line-height: 1.45; }
 .match-info strong{ font-size: 14px; }
 
@@ -259,6 +264,7 @@ body{
   .layout{ grid-template-columns: 1fr; gap: 26px; }
   .page{ padding: 16px 12px 36px; }
   .board-wrap{ padding: 16px 14px 20px; border-radius: var(--radius-md); }
+  .match-info{ left: 14px; right: 14px; bottom: 14px; }
   .board{ gap: 8px; grid-template-columns: repeat(4, 1fr); }
   .card-front svg{ width: 24px; height: 24px; }
   .card-front .term-label{ font-size: 12px; line-height: 1.2; }
@@ -276,6 +282,7 @@ body{
 @media (max-width: 460px){
   .page{ padding: 14px 8px 32px; }
   .board-wrap{ padding: 12px 10px 16px; }
+  .match-info{ left: 10px; right: 10px; bottom: 10px; }
   .board{ gap: 7px; }
   .card-front{ padding: 6px; gap: 5px; }
   .card-front svg{ width: 20px; height: 20px; }

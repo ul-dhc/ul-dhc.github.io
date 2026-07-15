@@ -71,7 +71,7 @@ const STR = {
   },
   lv:{
     headline:'Saviļņojot<br>humanitārās zinātnes<br><span class="accent">digitāli.</span>',
-    lede:'Kamēr jaunā mājaslapa tiek veidota...',
+    lede:'Kamēr mūsu jaunā mājaslapa tiek veidota...',
     playTitle:'... uzspēlē atmiņas spēli!',
     boardTitle:'Savieno pārus!',
     moves:'Gājieni',

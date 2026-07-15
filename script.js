@@ -58,7 +58,7 @@ const TERMS = [
 
 const STR = {
   en:{
-    headline:'Inspiring <br>humanities<br><span class="accent">digitally.</span>',
+    headline:'Inspire <br>humanities<br><span class="accent">digitally.</span>',
     lede:'While our new website is being developed...',
     playTitle:'...play the memory game!',
     boardTitle:'Find all matching pairs!',
@@ -70,7 +70,7 @@ const STR = {
     matchDesc:'Perfect!'
   },
   lv:{
-    headline:'Saviļņojot<br>humanitārās zinātnes<br><span class="accent">digitāli.</span>',
+    headline:'Saviļņo<br>humanitārās zinātnes<br><span class="accent">digitāli.</span>',
     lede:'Kamēr mūsu jaunā mājaslapa tiek veidota...',
     playTitle:'... uzspēlē atmiņas spēli!',
     boardTitle:'Savieno pārus!',

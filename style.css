@@ -1,4 +1,3 @@
-/* ===== Tokens ===== */
 :root{
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -63,7 +62,6 @@ body{
   overflow-x: hidden;
 }
 
-/* ===== Background network ===== */
 .bg-net{
   position: fixed; inset: -6%; z-index: 0; pointer-events: none;
   will-change: transform, opacity;
@@ -85,10 +83,6 @@ body{
   50%      { opacity: var(--peak, .3); }
 }
 
-/* One continuous, non-stop loop (not "alternate") combining drift and a
-   gentle opacity breathe in a single animation, on the plain HTML wrapper
-   so the transform always resolves reliably (SVG child elements can be
-   inconsistent with CSS transform across mobile browsers). */
 @keyframes netDrift{
   0%    { transform: translate(0%, 0%) scale(1);       opacity: .68; }
   20%   { transform: translate(3%, -2.2%) scale(1.02);  opacity: .78; }
@@ -103,7 +97,6 @@ body{
   .net-dots line[data-c]{ animation: none; opacity: var(--peak, .3); }
 }
 
-/* ===== Layout ===== */
 .page{ position: relative; z-index: 1; max-width: 1240px; margin: 0 auto; padding: 28px 32px 60px; }
 
 .topbar{ display:flex; align-items:center; justify-content: space-between; gap: 16px; margin-bottom: 40px; flex-wrap: wrap; }
@@ -123,7 +116,6 @@ body{
 
 .layout{ display:grid; grid-template-columns: 340px 1fr; gap: 56px; align-items: start; }
 
-/* ===== Intro column ===== */
 .headline{
   font-family: var(--font-display); font-weight: 600;
   font-size: clamp(34px, 4vw, 44px); line-height: 1.08; letter-spacing: -0.01em;
@@ -146,7 +138,6 @@ body{
 .link-text strong{ font-size: 14.5px; font-weight: 600; }
 .link-text span:not(strong){ color: var(--text-dim); }
 
-/* ===== Board ===== */
 .board-wrap{
   position: relative;
   background: var(--bg-elevated); border: 1px solid var(--border-soft); border-radius: var(--radius-lg);
@@ -195,7 +186,6 @@ body{
 .card.wrong .card-back{ animation: shake .4s ease; }
 @keyframes shake{ 25%{ transform: translateX(-4px);} 75%{ transform: translateX(4px);} }
 
-/* pair color coding — cycles through 4 accents via data-color (0-3), set in JS */
 .card.matched[data-color="0"] .card-front{ border-color: var(--accent-purple); background: var(--accent-purple-soft); color: var(--accent-purple); }
 .card.matched[data-color="1"] .card-front{ border-color: var(--accent-lilac); background: var(--accent-lilac-soft); color: var(--accent-lilac); }
 .card.matched[data-color="2"] .card-front{ border-color: var(--accent-blue); background: var(--accent-blue-soft); color: var(--accent-blue); }
@@ -216,7 +206,6 @@ body{
 .match-info p{ margin: 4px 0 0; color: var(--text-dim); font-size: 13px; line-height: 1.45; }
 .match-info strong{ font-size: 14px; }
 
-/* ===== Win panel — recap grid of matched terms ===== */
 .win-panel{ text-align:center; }
 .win-flag{
   font-family: var(--font-display);
@@ -236,12 +225,6 @@ body{
 }
 .win-item svg{ width: 20px; height: 20px; }
 
-/* ===== Fit to one screen on large displays (no vertical scroll) =====
-   Below the mobile breakpoint we keep normal document scrolling, since a
-   tall stacked layout is expected on phones. On larger screens the whole
-   page — header, headline, and the 5x4 board — is sized to fit within
-   100vh instead of overflowing, by making the board fill whatever height
-   is left rather than forcing square cards driven by column width. */
 @media (min-width: 861px){
   html, body{ height: 100%; }
   body{ overflow: hidden; }
@@ -259,7 +242,6 @@ body{
   .win-panel{ flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; justify-content: center; overflow-y: auto; }
 }
 
-/* ===== Responsive ===== */
 @media (max-width: 860px){
   .layout{ grid-template-columns: 1fr; gap: 26px; }
   .page{ padding: 16px 12px 36px; }

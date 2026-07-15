@@ -149,7 +149,7 @@ function onCardClick(idx, el){
   flipped.push({ idx, el });
   document.getElementById('statusMsg').textContent = '';
   document.getElementById('statusMsg').classList.remove('wrong');
-  document.getElementById('matchInfo').hidden = true;
+  document.getElementById('matchInfo').classList.remove('visible');
 
   if(flipped.length === 2){
     moves++;
@@ -182,11 +182,14 @@ function onCardClick(idx, el){
   }
 }
 
+let matchInfoTimer = null;
 function showMatchInfo(term){
   const info = document.getElementById('matchInfo');
   document.getElementById('matchInfoTitle').textContent = term[lang];
   document.getElementById('matchInfoText').textContent = STR[lang].matchDesc;
-  info.hidden = false;
+  info.classList.add('visible');
+  clearTimeout(matchInfoTimer);
+  matchInfoTimer = setTimeout(()=> info.classList.remove('visible'), 2200);
 }
 
 const COLOR_VARS = ['purple','lilac','blue','pink'];
@@ -194,7 +197,7 @@ const COLOR_VARS = ['purple','lilac','blue','pink'];
 function showWin(){
   document.getElementById('board').style.display = 'none';
   document.querySelector('.board-header').hidden = true;
-  document.getElementById('matchInfo').hidden = true;
+  document.getElementById('matchInfo').classList.remove('visible');
   document.getElementById('statusMsg').textContent = '';
   const winPanel = document.getElementById('winPanel');
   const grid = document.getElementById('winGrid');
@@ -220,7 +223,7 @@ function resetGame(){
   document.getElementById('movesCount').textContent = 0;
   document.getElementById('statusMsg').textContent = '';
   document.querySelector('.board-header').hidden = false;
-  document.getElementById('matchInfo').hidden = true;
+  document.getElementById('matchInfo').classList.remove('visible');
   document.getElementById('winPanel').hidden = true;
   document.getElementById('board').style.display = 'grid';
   renderBoard();
@@ -278,11 +281,7 @@ function buildNetBg(){
     }
   }
 
-  // Build a small pool of candidate edges per point (its 2 nearest
-  // neighbours, not just 1), deduped. Each edge gets its own slow,
-  // independent fade cycle in CSS, so the *set* of visible connections
-  // keeps quietly rewiring — new links form, old ones dissolve — without
-  // any per-frame JS and without dots ever detaching from a line.
+  
   const edgeKeys = new Set();
   const edges = [];
   pts.forEach((p,i)=>{

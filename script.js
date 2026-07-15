@@ -38,10 +38,6 @@ function svgIcon(name){
   return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${ICONS[name]}</svg>`;
 }
 
-/* ---------- Terms ---------- */
-/* `shortEn`/`shortLv` are optional, shorter versions shown only on small
-   screens (see .short-label / .full-label in style.css) so long terms
-   don't get crushed into an unreadable wrap on a 4-column phone grid. */
 const TERMS = [
   { id:0, icon:'cpu',      en:'Digital humanities',              lv:'Digitālās humanitārās zinātnes',
     shortLv:'DH zinātnes' },
@@ -60,7 +56,6 @@ const TERMS = [
   { id:9, icon:'building', en:'DH infrastructure',                lv:'DH infrastruktūra' }
 ];
 
-/* ---------- i18n strings ---------- */
 const STR = {
   en:{
     headline:'Inspiring <br>humanities<br><span class="accent">digitally.</span>',
@@ -88,7 +83,6 @@ const STR = {
   }
 };
 
-/* ---------- State ---------- */
 let lang = 'lv';
 let theme = 'dark';
 let deck = [];
@@ -97,14 +91,12 @@ let matchedCount = 0;
 let moves = 0;
 let lockBoard = false;
 
-/* ---------- Init ---------- */
 function buildDeck(){
   const cards = [];
   TERMS.forEach(t=>{
     cards.push({ pairId:t.id, icon:t.icon, term:t });
     cards.push({ pairId:t.id, icon:t.icon, term:t });
   });
-  // shuffle
   for(let i=cards.length-1;i>0;i--){
     const j = Math.floor(Math.random()*(i+1));
     [cards[i],cards[j]] = [cards[j],cards[i]];
@@ -227,7 +219,6 @@ function resetGame(){
   renderBoard();
 }
 
-/* ---------- i18n apply ---------- */
 function applyLang(){
   document.documentElement.lang = lang;
   document.body.dataset.lang = lang;
@@ -247,15 +238,12 @@ function updateLogo(){
   logo.src = `assets/logo-${langKey}-${shade}.png`;
 }
 
-/* ---------- Theme ---------- */
 function applyTheme(){
   document.body.classList.toggle('theme-dark', theme==='dark');
   document.body.classList.toggle('theme-light', theme==='light');
   updateLogo();
 }
 
-/* ---------- Background network dots ----------
-*/
 function buildNetBg(){
   const g = document.querySelector('.net-dots');
   const colors = ['var(--accent-purple)','var(--accent-lilac)','var(--accent-blue)','var(--accent-pink)'];
@@ -263,7 +251,7 @@ function buildNetBg(){
   const pts = [];
   for(let r=0;r<rows;r++){
     for(let c=0;c<cols;c++){
-      if(Math.random() > 0.7) continue; // organic sparseness, not a full grid
+      if(Math.random() > 0.7) continue;
       const jitterX = (Math.random()-0.5) * cellW * 0.85;
       const jitterY = (Math.random()-0.5) * cellH * 0.85;
       pts.push({
@@ -276,7 +264,6 @@ function buildNetBg(){
     }
   }
 
- 
   const edgeKeys = new Set();
   const edges = [];
   pts.forEach((p,i)=>{
@@ -296,8 +283,8 @@ function buildNetBg(){
 
   let html = '';
   edges.forEach(({a,b})=>{
-    const dur = (16 + Math.random()*22).toFixed(1);      // 16–38s per cycle
-    const delay = (-Math.random()*dur).toFixed(1);        // desync so they don't fade in unison
+    const dur = (16 + Math.random()*22).toFixed(1);
+    const delay = (-Math.random()*dur).toFixed(1);
     const peak = (Math.max(a.o,b.o) * 0.6).toFixed(2);
     html += `<line data-c x1="${a.x.toFixed(1)}" y1="${a.y.toFixed(1)}" x2="${b.x.toFixed(1)}" y2="${b.y.toFixed(1)}" style="color:${a.c};--peak:${peak};animation-duration:${dur}s;animation-delay:${delay}s"/>`;
   });
@@ -307,7 +294,6 @@ function buildNetBg(){
   g.innerHTML = html;
 }
 
-/* ---------- Wire up ---------- */
 document.getElementById('langToggle').addEventListener('click', ()=>{
   lang = lang === 'en' ? 'lv' : 'en';
   applyLang();

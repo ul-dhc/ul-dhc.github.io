@@ -66,10 +66,9 @@ const STR = {
     headline:'Inspiring <br>humanities<br><span class="accent">digitally.</span>',
     lede:'While our new website is being developed...',
     playTitle:'...play the memory game!',
-    playSub:'Find matching pairs.',
-    boardTitle:'Find all matching pairs',
+    boardTitle:'Find all matching pairs!',
     moves:'Moves',
-    winFlag:'Well done!<br>These are some of the fields we work in –<br>researching, experimenting, and collaborating.',
+    winFlag:'Well done!<br>These are some of the fields we work in – researching, experimenting, and collaborating.',
     playAgain:'Play again',
     tryAgain:'Not a match. Try again!',
     matchFound:'Match found!',
@@ -79,10 +78,9 @@ const STR = {
     headline:'Saviļņojot<br>humanitārās zinātnes<br><span class="accent">digitāli.</span>',
     lede:'Kamēr jaunā mājaslapa tiek veidota...',
     playTitle:'... uzspēlē atmiņas spēli!',
-    playSub:'Savieno pārus.',
-    boardTitle:'Sameklē pārus',
+    boardTitle:'Savieno pārus!',
     moves:'Gājieni',
-    winFlag:'Lieliski!<br>Šīs ir dažas no jomām, kurās mēs darbojamies –<br>pētot, eksperimentējot un sadarbojoties.',
+    winFlag:'Lielisks veikums!<br>Šīs ir dažas no jomām, kurās mēs darbojamies – pētot, eksperimentējot un sadarbojoties.',
     playAgain:'Spēlēt vēlreiz',
     tryAgain:'Nav pāris. Mēģini vēlreiz!',
     matchFound:'Pāris atrasts!',
@@ -91,7 +89,7 @@ const STR = {
 };
 
 /* ---------- State ---------- */
-let lang = 'en';
+let lang = 'lv';
 let theme = 'dark';
 let deck = [];
 let flipped = [];
@@ -231,6 +229,7 @@ function resetGame(){
 
 /* ---------- i18n apply ---------- */
 function applyLang(){
+  document.documentElement.lang = lang;
   document.body.dataset.lang = lang;
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const key = el.dataset.i18n;
@@ -256,11 +255,7 @@ function applyTheme(){
 }
 
 /* ---------- Background network dots ----------
-   A loosely integrated field spread across the whole page (jittered grid,
-   not clustered corners) so it reads as one connected structure — "breathing
-   humanities" — rather than decoration. Motion is handled entirely in CSS
-   (slow drift + opacity breathe) so this only needs to lay out a calm,
-   evenly-distributed mesh once. */
+*/
 function buildNetBg(){
   const g = document.querySelector('.net-dots');
   const colors = ['var(--accent-purple)','var(--accent-lilac)','var(--accent-blue)','var(--accent-pink)'];
@@ -281,7 +276,7 @@ function buildNetBg(){
     }
   }
 
-  
+ 
   const edgeKeys = new Set();
   const edges = [];
   pts.forEach((p,i)=>{
@@ -324,8 +319,10 @@ document.getElementById('themeToggle').addEventListener('click', ()=>{
 });
 document.getElementById('playAgainBtn').addEventListener('click', resetGame);
 
-// Open directly into the Latvian version when the URL is ul-dhc.github.io/#lv
-if(window.location.hash.replace('#','').toLowerCase() === 'lv'){
+const hash = window.location.hash.replace('#','').toLowerCase();
+if(hash === 'en'){
+  lang = 'en';
+} else if(hash === 'lv'){
   lang = 'lv';
 }
 

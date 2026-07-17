@@ -67,7 +67,7 @@ const STR = {
     playAgain:'Play again',
     tryAgain:'Not a match. Try again!',
     matchFound:'Match found!',
-    matchDesc:'Perfect!'
+    matchDesc:'perfect!'
   },
   lv:{
     headline:'Saviļņo<br>humanitārās zinātnes<br><span class="accent">digitāli.</span>',
@@ -79,7 +79,7 @@ const STR = {
     playAgain:'Spēlēt vēlreiz',
     tryAgain:'Nav pāris. Mēģini vēlreiz!',
     matchFound:'Pāris atrasts!',
-    matchDesc:'Izcili!'
+    matchDesc:'lieliski!'
   }
 };
 

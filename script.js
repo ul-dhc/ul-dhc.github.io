@@ -138,8 +138,7 @@ function onCardClick(idx, el){
   el.classList.add('flipped');
   flipped.push({ idx, el });
   document.getElementById('statusMsg').textContent = '';
-  document.getElementById('statusMsg').classList.remove('wrong');
-  document.getElementById('matchInfo').classList.remove('visible');
+  document.getElementById('statusMsg').classList.remove('wrong','success');
 
   if(flipped.length === 2){
     moves++;
@@ -172,14 +171,11 @@ function onCardClick(idx, el){
   }
 }
 
-let matchInfoTimer = null;
 function showMatchInfo(term){
-  const info = document.getElementById('matchInfo');
-  document.getElementById('matchInfoTitle').textContent = term[lang];
-  document.getElementById('matchInfoText').textContent = STR[lang].matchDesc;
-  info.classList.add('visible');
-  clearTimeout(matchInfoTimer);
-  matchInfoTimer = setTimeout(()=> info.classList.remove('visible'), 2200);
+  const msg = document.getElementById('statusMsg');
+  msg.textContent = `${term[lang]} — ${STR[lang].matchDesc}`;
+  msg.classList.remove('wrong');
+  msg.classList.add('success');
 }
 
 const COLOR_VARS = ['purple','lilac','blue','pink'];
@@ -187,7 +183,6 @@ const COLOR_VARS = ['purple','lilac','blue','pink'];
 function showWin(){
   document.getElementById('board').style.display = 'none';
   document.querySelector('.board-header').hidden = true;
-  document.getElementById('matchInfo').classList.remove('visible');
   document.getElementById('statusMsg').textContent = '';
   const winPanel = document.getElementById('winPanel');
   const grid = document.getElementById('winGrid');
@@ -212,8 +207,8 @@ function resetGame(){
   lockBoard = false;
   document.getElementById('movesCount').textContent = 0;
   document.getElementById('statusMsg').textContent = '';
+  document.getElementById('statusMsg').classList.remove('wrong','success');
   document.querySelector('.board-header').hidden = false;
-  document.getElementById('matchInfo').classList.remove('visible');
   document.getElementById('winPanel').hidden = true;
   document.getElementById('board').style.display = 'grid';
   renderBoard();

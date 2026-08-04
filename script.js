@@ -39,10 +39,6 @@ function svgIcon(name){
 }
 
 const TERMS = [
-  { id:0, icon:'cpu',      en:'Digital humanities',              lv:'Digitālās humanitārās zinātnes',
-    shortLv:'DH zinātnes' },
-  { id:1, icon:'landmark', en:'Digital cultural heritage',        lv:'Digitālais kultūras mantojums',
-    shortEn:'Digital heritage', shortLv:'Kultūras mantojums' },
   { id:2, icon:'dice',     en:'Educational games',                            lv:'Izglītojošas spēles', shortEn:'Games', shortLv:'Spēles' },
   { id:3, icon:'flask',    en:'Citizen science',                  lv:'Sabiedriskā zinātne' },
   { id:4, icon:'nodes',    en:'Language technologies',            lv:'Valodu tehnoloģijas',
@@ -65,6 +61,7 @@ const STR = {
     moves:'Moves',
     winFlag:'Well done!<br>These are some of the fields we work in – researching, experimenting, and collaborating.',
     playAgain:'Play again',
+    showAll:'Skip the game',
     tryAgain:'Not a match. Try again!',
     matchFound:'Match found!',
     matchDesc:'perfect!'
@@ -77,6 +74,7 @@ const STR = {
     moves:'Gājieni',
     winFlag:'Lielisks veikums!<br>Šīs ir dažas no jomām, kurās mēs darbojamies – pētot, eksperimentējot un sadarbojoties.',
     playAgain:'Spēlēt vēlreiz',
+    showAll:'Izlaist spēli',
     tryAgain:'Nav pāris. Mēģini vēlreiz!',
     matchFound:'Pāris atrasts!',
     matchDesc:'lieliski!'
@@ -90,6 +88,8 @@ let flipped = [];
 let matchedCount = 0;
 let moves = 0;
 let lockBoard = false;
+let revealTimer = null;
+let isFinishing = false;
 
 function buildDeck(){
   const cards = [];
@@ -111,20 +111,22 @@ function renderBoard(){
     const label = c.term[lang];
     const shortKey = lang === 'en' ? 'shortEn' : 'shortLv';
     const shortLabel = c.term[shortKey] || label;
-    const el = document.createElement('div');
+    const el = document.createElement('button');
     el.className = 'card';
+    el.type = 'button';
     el.dataset.index = idx;
     el.dataset.pair = c.pairId;
-    el.dataset.color = c.pairId % 4;
+    el.dataset.color = TERMS.findIndex(t => t.id === c.pairId);
+    el.setAttribute('aria-label', lang === 'lv' ? `Paslēpta kartīte ${idx + 1}` : `Hidden card ${idx + 1}`);
     el.innerHTML = `
-      <div class="card-inner">
-        <div class="card-face card-back">ULDHC</div>
-        <div class="card-face card-front">
+      <span class="card-inner">
+        <span class="card-face card-back">ULDHC</span>
+        <span class="card-face card-front">
           ${svgIcon(c.icon)}
           <span class="term-label full-label">${label}</span>
           <span class="term-label short-label">${shortLabel}</span>
-        </div>
-      </div>`;
+        </span>
+      </span>`;
     el.addEventListener('click', ()=> onCardClick(idx, el));
     board.appendChild(el);
   });
@@ -136,6 +138,7 @@ function onCardClick(idx, el){
   if(flipped.length === 2) return;
 
   el.classList.add('flipped');
+  el.setAttribute('aria-label', deck[idx].term[lang]);
   flipped.push({ idx, el });
   document.getElementById('statusMsg').textContent = '';
   document.getElementById('statusMsg').classList.remove('wrong','success');
@@ -155,7 +158,7 @@ function onCardClick(idx, el){
         matchedCount++;
         showMatchInfo(cardA.term);
         if(matchedCount === TERMS.length) setTimeout(showWin, 500);
-      }, 450);
+      }, 120);
     } else {
       const msg = document.getElementById('statusMsg');
       msg.textContent = STR[lang].tryAgain;
@@ -164,52 +167,110 @@ function onCardClick(idx, el){
       setTimeout(()=>{
         a.el.classList.remove('flipped','wrong');
         b.el.classList.remove('flipped','wrong');
+        a.el.setAttribute('aria-label', lang === 'lv' ? `Paslēpta kartīte ${a.idx + 1}` : `Hidden card ${a.idx + 1}`);
+        b.el.setAttribute('aria-label', lang === 'lv' ? `Paslēpta kartīte ${b.idx + 1}` : `Hidden card ${b.idx + 1}`);
         flipped = [];
         lockBoard = false;
-      }, 850);
+      }, 760);
     }
   }
 }
 
 function showMatchInfo(term){
   const msg = document.getElementById('statusMsg');
-  msg.textContent = `${term[lang]} — ${STR[lang].matchDesc}`;
+  msg.textContent = `${term[lang]} – ${STR[lang].matchDesc}`;
   msg.classList.remove('wrong');
   msg.classList.add('success');
 }
 
-const COLOR_VARS = ['purple','lilac','blue','pink'];
+const COLOR_VARS = ['blue','pink','purple','lilac','cyan','amber','green','coral'];
 
 function showWin(){
-  document.getElementById('board').style.display = 'none';
-  document.querySelector('.board-header').hidden = true;
+  if(isFinishing || !document.getElementById('winPanel').hidden) return;
+  isFinishing = true;
+  lockBoard = true;
+  const board = document.getElementById('board');
+  const sourceCards = [...board.querySelectorAll('.card')];
+  const sourceRects = sourceCards.map(card => card.getBoundingClientRect());
   document.getElementById('statusMsg').textContent = '';
   const winPanel = document.getElementById('winPanel');
   const grid = document.getElementById('winGrid');
   grid.innerHTML = '';
-  TERMS.forEach(t=>{
-    const colorName = COLOR_VARS[t.id % 4];
+  TERMS.forEach((t, index)=>{
+    const colorName = COLOR_VARS[index];
     const item = document.createElement('div');
     item.className = 'win-item';
+    item.dataset.pair = t.id;
+    item.style.setProperty('--arrival-delay', `${index * 65}ms`);
     item.style.setProperty('--pc', `var(--accent-${colorName})`);
     item.style.setProperty('--pc-soft', `var(--accent-${colorName}-soft)`);
     item.innerHTML = `${svgIcon(t.icon)}<span>${t[lang]}</span>`;
     grid.appendChild(item);
   });
+  document.querySelector('.board-header').hidden = true;
+  document.getElementById('showAllBtn').hidden = true;
+  board.style.display = 'none';
   winPanel.hidden = false;
+  winPanel.classList.remove('has-arrived');
+  winPanel.classList.add('is-arriving');
+
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduced){
+    winPanel.classList.remove('is-arriving');
+    winPanel.classList.add('has-arrived');
+    isFinishing = false;
+    return;
+  }
+
+  const targets = new Map([...grid.querySelectorAll('.win-item')].map(item => [Number(item.dataset.pair), item.getBoundingClientRect()]));
+  sourceCards.forEach((card, index)=>{
+    const term = deck[index].term;
+    const termIndex = TERMS.findIndex(t => t.id === term.id);
+    const colorName = COLOR_VARS[termIndex];
+    const start = sourceRects[index];
+    const target = targets.get(term.id);
+    const ghost = document.createElement('div');
+    ghost.className = 'transition-card';
+    ghost.style.setProperty('--tc', `var(--accent-${colorName})`);
+    ghost.style.setProperty('--tc-soft', `var(--accent-${colorName}-soft)`);
+    Object.assign(ghost.style, { left:`${start.left}px`, top:`${start.top}px`, width:`${start.width}px`, height:`${start.height}px` });
+    ghost.innerHTML = `${svgIcon(term.icon)}<span>${term[lang]}</span>`;
+    document.body.appendChild(ghost);
+    const dx = target.left - start.left;
+    const dy = target.top - start.top;
+    const sx = target.width / start.width;
+    const sy = target.height / start.height;
+    ghost.animate([
+      { transform:'translate3d(0,0,0) scale(1)', opacity:1, filter:'blur(0)' },
+      { transform:`translate3d(${dx * .18}px,${dy * .18 - 16}px,0) scale(1.035)`, opacity:1, offset:.28 },
+      { transform:`translate3d(${dx}px,${dy}px,0) scale(${sx},${sy})`, opacity:.08, filter:'blur(4px)' }
+    ], { duration:1100, delay:(index % 4) * 45 + Math.floor(index / 4) * 28, easing:'cubic-bezier(.22,.72,.28,1)', fill:'forwards' });
+    setTimeout(()=>ghost.remove(), 1450);
+  });
+
+  setTimeout(()=>{
+    winPanel.classList.remove('is-arriving');
+    winPanel.classList.add('has-arrived');
+    isFinishing = false;
+  }, 900);
 }
 
 function resetGame(){
+  clearTimeout(revealTimer);
+  revealTimer = null;
   deck = buildDeck();
   flipped = [];
   matchedCount = 0;
   moves = 0;
   lockBoard = false;
+  isFinishing = false;
   document.getElementById('movesCount').textContent = 0;
   document.getElementById('statusMsg').textContent = '';
   document.getElementById('statusMsg').classList.remove('wrong','success');
   document.querySelector('.board-header').hidden = false;
+  document.getElementById('showAllBtn').hidden = false;
   document.getElementById('winPanel').hidden = true;
+  document.getElementById('winPanel').classList.remove('is-arriving','has-arrived');
   document.getElementById('board').style.display = 'grid';
   renderBoard();
 }
@@ -299,6 +360,19 @@ document.getElementById('themeToggle').addEventListener('click', ()=>{
   applyTheme();
 });
 document.getElementById('playAgainBtn').addEventListener('click', resetGame);
+document.getElementById('showAllBtn').addEventListener('click', ()=>{
+  if(lockBoard) return;
+  lockBoard = true;
+  document.querySelectorAll('.card').forEach((card, index)=>{
+    card.querySelector('.card-inner').style.transitionDelay = `${index * 105}ms`;
+    card.classList.add('flipped','matched');
+    card.setAttribute('aria-label', deck[index].term[lang]);
+  });
+  revealTimer = setTimeout(()=>{
+    document.querySelectorAll('.card').forEach(card => { card.querySelector('.card-inner').style.transitionDelay = ''; });
+    showWin();
+  }, 2400);
+});
 
 const hash = window.location.hash.replace('#','').toLowerCase();
 if(hash === 'en'){

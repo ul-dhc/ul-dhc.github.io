@@ -1,6 +1,8 @@
 const translations = {
   lv: {
     title: 'LU-107',
+    headerLogo: 'https://researchgames.eu/games/LU107/assets/lu-lv-white.png',
+    headerLogoAlt: 'Latvijas Universitāte',
     nav: ['Piedalies', 'Spēlē', 'Novēli'],
     heroTitle: 'Latvijas Universitātei – 107',
     heroLead: 'Studentus, darbiniekus, absolventus un LU draugus aicinām',
@@ -35,7 +37,7 @@ const translations = {
     fullscreen: 'Pilnekrāna režīms',
     gamePreviewKicker: 'LU 107 · jubilejas spēle',
     gamePreviewTitle: 'Cik labi Tu pazīsti Latvijas Universitāti?',
-    gamePreviewText: '18 uzdevumi piecās kārtās par LU vēsturi, mūsdienām, kultūru, sportu un vietām.',
+    gamePreviewText: '18 uzdevumi piecās kārtās · aptuveni 5–7 minūtes · līdz 200 punktiem.',
     gameRounds: ['LU vēsture', 'LU mūsdienās', 'Kultūra un sports', 'Atpazīsti vietu', 'Fināls'],
     gameLaunch: 'Atvērt spēli',
     wishTitle: 'LU-107<br>novēlējumu siena',
@@ -60,6 +62,8 @@ const translations = {
   },
   en: {
     title: 'UL-107',
+    headerLogo: 'https://researchgames.eu/games/LU107/assets/lu-en-white.png',
+    headerLogoAlt: 'University of Latvia',
     nav: ['Take part', 'Play', 'Send wishes'],
     heroTitle: 'The University of Latvia turns 107',
     heroLead: 'We invite students, staff, alumni and friends of the University of Latvia to',
@@ -94,7 +98,7 @@ const translations = {
     fullscreen: 'Full-screen mode',
     gamePreviewKicker: 'UL 107 · anniversary game',
     gamePreviewTitle: 'How well do you know the University of Latvia?',
-    gamePreviewText: '18 tasks in five rounds covering UL history, present-day life, culture, sport and places.',
+    gamePreviewText: '18 tasks in five rounds · approximately 5–7 minutes · up to 200 points.',
     gameRounds: ['UL History', 'UL Today', 'Culture & Sports', 'Recognise the Place', 'Final'],
     gameLaunch: 'Open the game',
     wishTitle: 'UL-107<br>wish wall',
@@ -135,6 +139,36 @@ const setManyText = (selector, values) => {
   });
 };
 
+const setControlText = (selector, value) => {
+  const element = document.querySelector(selector);
+  if (!element) return;
+  const icon = element.querySelector('svg');
+  if (!icon) {
+    if (element.textContent !== value) element.textContent = value;
+    return;
+  }
+  [...element.childNodes].forEach((node) => {
+    if (node !== icon) node.remove();
+  });
+  element.insertBefore(document.createTextNode(`${value} `), icon);
+};
+
+const setManyControlText = (selector, values) => {
+  document.querySelectorAll(selector).forEach((element, index) => {
+    const value = values[index];
+    if (value === undefined) return;
+    const icon = element.querySelector('svg');
+    if (!icon) {
+      if (element.textContent !== value) element.textContent = value;
+      return;
+    }
+    [...element.childNodes].forEach((node) => {
+      if (node !== icon) node.remove();
+    });
+    element.insertBefore(document.createTextNode(`${value} `), icon);
+  });
+};
+
 function ensureLanguageSwitcher() {
   const header = document.querySelector('.site-header');
   if (!header || header.querySelector('.language-switcher')) return;
@@ -148,13 +182,16 @@ function ensureLanguageSwitcher() {
 function ensureGamePreview() {
   const frame = document.querySelector('.browser-frame');
   if (!frame || frame.querySelector('.game-launch-card')) return;
+  frame.querySelector('.browser-bar')?.remove();
   frame.querySelector('iframe')?.remove();
   const card = document.createElement('a');
   card.className = 'game-launch-card';
   card.href = 'https://researchgames.eu/games/LU107/';
   card.target = '_blank';
   card.rel = 'noopener';
-  card.innerHTML = '<div class="game-launch-copy"><p class="game-launch-kicker"></p><h3 class="game-launch-title"></h3><p class="game-launch-text"></p><ul class="game-rounds"><li></li><li></li><li></li><li></li><li></li></ul><span class="game-launch-button"><span class="game-launch-label"></span><span class="game-launch-arrow" aria-hidden="true">↗</span></span></div>';
+  const diagonalIcon = document.querySelector('.voice-option b svg')?.cloneNode(true);
+  card.innerHTML = '<div class="game-launch-copy"><p class="game-launch-kicker"></p><h3 class="game-launch-title"></h3><p class="game-launch-text"></p><ul class="game-rounds"><li><span class="game-round-number">01</span><span class="game-round-name"></span></li><li><span class="game-round-number">02</span><span class="game-round-name"></span></li><li><span class="game-round-number">03</span><span class="game-round-name"></span></li><li><span class="game-round-number">04</span><span class="game-round-name"></span></li><li><span class="game-round-number">05</span><span class="game-round-name"></span></li></ul><span class="game-launch-button"><span class="game-launch-label"></span></span></div>';
+  if (diagonalIcon) card.querySelector('.game-launch-button')?.append(diagonalIcon);
   frame.append(card);
 }
 
@@ -169,30 +206,36 @@ function translatePage(language) {
   ensureLanguageSwitcher();
   ensureGamePreview();
 
+  const headerLogo = document.querySelector('.site-header .brand img');
+  if (headerLogo) {
+    headerLogo.src = t.headerLogo;
+    headerLogo.alt = t.headerLogoAlt;
+  }
+  document.querySelector('.site-header .brand')?.setAttribute('aria-label', t.headerLogoAlt);
+
   setManyText('.site-header nav a', t.nav);
   setText('.hero-copy h1', t.heroTitle);
   setText('.hero-copy .lead', t.heroLead);
   setManyText('.hero-list li span', t.heroItems);
-  setText('.hero-button', t.heroButton);
+  setControlText('.hero-button', t.heroButton);
   setText('.choice-intro h2', t.choiceTitle);
   setManyText('.choice > .card-kicker', t.choiceKickers);
   setManyText('.choice-copy h3', t.choiceTitles);
   setManyText('.choice-copy > p', t.choiceTexts);
-  setManyText('.choice-copy .button', t.choiceButtons);
+  setManyControlText('.choice-copy .button', t.choiceButtons);
   setText('.voice-heading .section-label', t.voiceLabel);
   setHtml('.voice-heading h2', t.voiceTitle);
   setText('.voice-heading > div:first-child > p:last-child', t.voiceIntro);
   setManyText('.voice-option h3', t.voiceTitles);
   setManyText('.voice-option p', t.voiceTexts);
-  setManyText('.voice-option b', t.voiceButtons);
+  setManyControlText('.voice-option b', t.voiceButtons);
   setHtml('.game-section .section-heading h2', t.gameTitle);
   setText('.game-section .section-heading > p', t.gameIntro);
   setText('.browser-bar p', t.gameBar);
-  setText('.browser-bar a', t.fullscreen);
   setText('.game-launch-kicker', t.gamePreviewKicker);
   setText('.game-launch-title', t.gamePreviewTitle);
   setText('.game-launch-text', t.gamePreviewText);
-  setManyText('.game-rounds li', t.gameRounds);
+  setManyText('.game-round-name', t.gameRounds);
   setText('.game-launch-label', t.gameLaunch);
   setHtml('.wish-heading > h2', t.wishTitle);
   setText('.wish-heading > p', t.wishIntro);
@@ -202,7 +245,7 @@ function translatePage(language) {
   setHtml('.wish-form label:nth-of-type(1) > span', t.wishLabel);
   setHtml('.wish-form label:nth-of-type(2) > span', t.nameLabel);
   setText('.wish-form .consent span', t.consent);
-  setText('.wish-form button', t.submit);
+  setControlText('.wish-form button', t.submit);
   setText('.wall-loading', t.loading);
   setText('#info-title', t.infoTitle);
   setHtml('#info .project-info-dialog p:nth-of-type(1)', t.infoLead);

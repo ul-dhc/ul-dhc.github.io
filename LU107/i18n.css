@@ -209,6 +209,10 @@ html[lang="en"] .wish-heading .wall-total::after {
   margin-top: 28px;
 }
 
+.game-section .section-heading > p {
+  display: none;
+}
+
 .wish-section .wish-wall {
   display: block;
   columns: 4;

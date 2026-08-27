@@ -182,6 +182,29 @@ html[lang="en"] .wish-heading .wall-total::after {
   display: grid;
 }
 
+.wish-heading > .wish-submit-notice {
+  grid-column: 1 / -1;
+  grid-row: auto;
+  margin: 24px 0 0;
+  padding: 16px 18px;
+  border: 1px solid #86b99a;
+  border-left: 4px solid #237a46;
+  background: #f2faf5;
+  color: #185f36;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.wish-submit-notice[hidden] {
+  display: none;
+}
+
+.wish-section .form-status.success {
+  color: #185f36;
+}
+
 .wish-section .wall-live {
   margin-top: 28px;
 }

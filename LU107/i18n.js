@@ -55,6 +55,7 @@ const translations = {
     namePlaceholder: 'Tavs vārds',
     consent: 'Piekrītu, ka novēlējums tiek publiski parādīts LU jubilejas novēlējumu sienā.',
     submit: 'Nosūtīt novēlējumu',
+    submitSuccess: 'Paldies! Novēlējums nosūtīts apstiprināšanai. To redzēsit uz apsveikumu sienas pēc kāda brīža.',
     loading: 'Ielādē novēlējumus…',
     infoTitle: 'Par šo iniciatīvu',
     infoLead: 'LU-107 jubilejas digitālo vietni izveidoja <a href="https://dhc.lu.lv/">LU Digitālo humanitāro zinātņu centrs</a> sadarbībā ar <a href="https://www.muzejs.lu.lv/">LU Muzeju</a> un <a href="https://www.lu.lv/par-mums/administracija/departamenti/komunikacijas-departaments/">LU Komunikācijas departamentu</a>.',
@@ -120,6 +121,7 @@ const translations = {
     namePlaceholder: 'Your name',
     consent: 'I agree that my wish may be displayed publicly on the UL anniversary wish wall.',
     submit: 'Send wish',
+    submitSuccess: 'Thank you! Your greeting has been submitted for approval. It will appear on the greeting wall shortly.',
     loading: 'Loading wishes…',
     infoTitle: 'About this initiative',
     infoLead: 'The LU-107 anniversary digital site was created by the <a href="https://dhc.lu.lv/">UL Digital Humanities Centre</a> in cooperation with the <a href="https://www.muzejs.lu.lv/">UL Museum</a> and the <a href="https://www.lu.lv/par-mums/administracija/departamenti/komunikacijas-departaments/">UL Communications Department</a>.',
@@ -230,6 +232,15 @@ function ensureWishWallLayout() {
     thanks.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart" aria-hidden="true"><path d="M19.5 12.572 12 20l-7.5-7.428A5 5 0 1 1 12 6.006a5 5 0 1 1 7.5 6.572"></path></svg><span class="wall-thanks-label"></span>';
     total.append(thanks);
   }
+  let notice = heading.querySelector('.wish-submit-notice');
+  if (!notice) {
+    notice = document.createElement('p');
+    notice.className = 'wish-submit-notice';
+    notice.setAttribute('role', 'status');
+    notice.hidden = true;
+    heading.append(notice);
+  }
+  if (section.getAttribute('data-submit-notice') === 'true') notice.hidden = false;
 }
 
 function translatePage(language) {
@@ -288,6 +299,7 @@ function translatePage(language) {
   setHtml('.wish-form label:nth-of-type(2) > span', t.nameLabel);
   setText('.wish-form .consent span', t.consent);
   setControlText('.wish-form button', t.submit);
+  setText('.wish-submit-notice', t.submitSuccess);
   setText('.wall-loading', t.loading);
   setText('#info-title', t.infoTitle);
   setHtml('#info .project-info-dialog p:nth-of-type(1)', t.infoLead);
@@ -336,6 +348,11 @@ document.addEventListener('click', (event) => {
     const isOpen = section?.getAttribute('data-form-open') === 'true';
     section?.setAttribute('data-form-open', String(!isOpen));
     wishToggle.setAttribute('aria-expanded', String(!isOpen));
+    if (!isOpen) {
+      section?.setAttribute('data-submit-notice', 'false');
+      const notice = section?.querySelector('.wish-submit-notice');
+      if (notice) notice.hidden = true;
+    }
     if (!isOpen) section?.querySelector('.wish-form textarea')?.focus();
     return;
   }
@@ -356,6 +373,27 @@ document.addEventListener('click', (event) => {
   event.preventDefault();
   target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
+
+document.addEventListener('submit', (event) => {
+  const form = event.target.closest?.('.wish-form');
+  if (!form || !form.checkValidity()) return;
+  const section = form.closest('.wish-section');
+  section?.setAttribute('data-form-open', 'false');
+  section?.setAttribute('data-submit-notice', 'true');
+  section?.querySelector('.wish-form-toggle')?.setAttribute('aria-expanded', 'false');
+  const showNotice = () => {
+    ensureWishWallLayout();
+    const lang = document.documentElement.lang === 'en' ? 'en' : 'lv';
+    const notice = document.querySelector('.wish-submit-notice');
+    if (notice) {
+      notice.textContent = translations[lang].submitSuccess;
+      notice.hidden = false;
+    }
+  };
+  showNotice();
+  setTimeout(showNotice, 150);
+  setTimeout(showNotice, 700);
+}, true);
 
 if (!['#lv', '#en', '#info'].includes(location.hash.toLowerCase())) {
   history.replaceState(null, '', '#lv');

@@ -159,7 +159,7 @@ html[lang="en"] .wish-heading .wall-total::after {
   padding: 14px 18px;
   border: 1px solid #1879a7;
   border-radius: 10px;
-  background: #fff;
+  background: #fff !important;
   color: #153f78;
   cursor: pointer;
   font-weight: 700;
@@ -199,22 +199,17 @@ html[lang="en"] .wish-heading .wall-total::after {
 
 .wish-section .wall-live .wish {
   position: relative;
-  min-height: 174px;
+  min-height: 0;
   margin: 0;
-  padding: 25px 25px 35px;
+  padding: 25px;
   border-radius: 14px;
   background: linear-gradient(145deg, var(--wish-tint), #fff);
   box-shadow: 0 9px 22px rgba(18, 58, 107, 0.06);
 }
 
 .wish-section .wall-live .wish::after {
-  content: "";
-  position: absolute;
-  right: 20px;
-  bottom: 16px;
-  width: 46px;
-  height: 8px;
-  background: radial-gradient(circle, var(--wish-accent) 0 3px, transparent 3.5px) 0 0 / 11px 8px repeat-x;
+  content: none;
+  display: none;
 }
 
 .wish-section .wall-live .wish p {

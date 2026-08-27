@@ -42,6 +42,7 @@ const translations = {
     gameRounds: ['LU vēsture', 'LU mūsdienās', 'Kultūra un sports LU', 'Atpazīsti vietu', 'Fināla izaicinājums'],
     gameRoundCounts: ['5 jautājumi', '5 jautājumi', '5 jautājumi', '1 uzdevums', '2 uzdevumi'],
     gameLaunch: 'Atvērt spēli',
+    wishAnchor: 'apsveikumi',
     wishTitle: 'Apsveikumu siena',
     wishIntro: 'Latvijas Universitātei 107. dzimšanas dienā mēs vēlam…',
     wishCount: 'apsveikumi',
@@ -108,6 +109,7 @@ const translations = {
     gameRounds: ['UL History', 'UL Today', 'Culture & Sports at UL', 'Recognise the Place', 'Final Challenge'],
     gameRoundCounts: ['5 questions', '5 questions', '5 questions', '1 task', '2 tasks'],
     gameLaunch: 'Open the game',
+    wishAnchor: 'greetings',
     wishTitle: 'Birthday wall',
     wishIntro: 'On the University of Latvia’s 107th birthday, we wish…',
     wishCount: 'greetings',
@@ -288,6 +290,11 @@ function translatePage(language) {
   setManyText('.game-round-name', t.gameRounds);
   setManyText('.game-round-count', t.gameRoundCounts);
   setText('.game-launch-label', t.gameLaunch);
+  const wishSection = document.querySelector('.wish-section');
+  const wishHash = `#${t.wishAnchor}`;
+  if (wishSection) wishSection.id = t.wishAnchor;
+  document.querySelector('.site-header nav a:nth-child(3)')?.setAttribute('href', wishHash);
+  document.querySelector('.choice-copy .button[href="#noveli"], .choice-copy .button[href="#apsveikumi"], .choice-copy .button[href="#greetings"]')?.setAttribute('href', wishHash);
   setHtml('.wish-heading > h2', t.wishTitle);
   setText('.wish-heading > p', t.wishIntro);
   setHtml('.wall-total span', t.wishCount);
@@ -324,12 +331,16 @@ function translatePage(language) {
     fullscreenLink.target = '_blank';
     fullscreenLink.rel = 'noopener';
   }
+
+  if (location.hash.toLowerCase() === wishHash) {
+    requestAnimationFrame(() => wishSection?.scrollIntoView({ block: 'start' }));
+  }
 }
 
 function selectedLanguage() {
   const hash = location.hash.toLowerCase();
-  if (hash === '#en') return 'en';
-  if (hash === '#lv') return 'lv';
+  if (hash === '#en' || hash === '#greetings') return 'en';
+  if (hash === '#lv' || hash === '#apsveikumi') return 'lv';
   try {
     return localStorage.getItem('lu107-language') === 'en' ? 'en' : 'lv';
   } catch {

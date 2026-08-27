@@ -1,7 +1,7 @@
 const translations = {
   lv: {
     title: 'LU-107',
-    headerLogo: 'https://researchgames.eu/games/LU107/assets/lu-lv-white.png',
+    headerLogo: 'https://researchgames.eu/games/LU107/assets/lu-lv-white-cropped.png',
     headerLogoAlt: 'Latvijas Universitāte',
     nav: ['Piedalies', 'Spēlē', 'Novēli'],
     heroTitle: 'Latvijas Universitātei – 107',
@@ -63,7 +63,7 @@ const translations = {
   },
   en: {
     title: 'UL-107',
-    headerLogo: 'https://researchgames.eu/games/LU107/assets/lu-en-white.png',
+    headerLogo: 'https://researchgames.eu/games/LU107/assets/lu-en-white-cropped.png',
     headerLogoAlt: 'University of Latvia',
     nav: ['Take part', 'Play', 'Send wishes'],
     heroTitle: 'The University of Latvia turns 107',

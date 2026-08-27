@@ -33,6 +33,11 @@ const translations = {
     gameIntro: 'Uzspēlē LU 107. jubilejas spēli!',
     gameBar: 'LU 107 · jubilejas spēle',
     fullscreen: 'Pilnekrāna režīms',
+    gamePreviewKicker: 'LU 107 · jubilejas spēle',
+    gamePreviewTitle: 'Cik labi Tu pazīsti Latvijas Universitāti?',
+    gamePreviewText: '18 uzdevumi piecās kārtās par LU vēsturi, mūsdienām, kultūru, sportu un vietām.',
+    gameRounds: ['LU vēsture', 'LU mūsdienās', 'Kultūra un sports', 'Atpazīsti vietu', 'Fināls'],
+    gameLaunch: 'Atvērt spēli',
     wishTitle: 'LU-107<br>novēlējumu siena',
     wishIntro: 'Lasi saņemtos novēlējumus un pievieno savējo!',
     wishCount: 'novēlējumi<br>Latvijas Universitātei',
@@ -87,6 +92,11 @@ const translations = {
     gameIntro: 'Play the UL 107 anniversary game!',
     gameBar: 'UL 107 · anniversary game',
     fullscreen: 'Full-screen mode',
+    gamePreviewKicker: 'UL 107 · anniversary game',
+    gamePreviewTitle: 'How well do you know the University of Latvia?',
+    gamePreviewText: '18 tasks in five rounds covering UL history, present-day life, culture, sport and places.',
+    gameRounds: ['UL History', 'UL Today', 'Culture & Sports', 'Recognise the Place', 'Final'],
+    gameLaunch: 'Open the game',
     wishTitle: 'UL-107<br>wish wall',
     wishIntro: 'Read the wishes and add your own!',
     wishCount: 'wishes for the<br>University of Latvia',
@@ -135,6 +145,19 @@ function ensureLanguageSwitcher() {
   header.append(switcher);
 }
 
+function ensureGamePreview() {
+  const frame = document.querySelector('.browser-frame');
+  if (!frame || frame.querySelector('.game-launch-card')) return;
+  frame.querySelector('iframe')?.remove();
+  const card = document.createElement('a');
+  card.className = 'game-launch-card';
+  card.href = 'https://researchgames.eu/games/LU107/';
+  card.target = '_blank';
+  card.rel = 'noopener';
+  card.innerHTML = '<div class="game-launch-copy"><p class="game-launch-kicker"></p><h3 class="game-launch-title"></h3><p class="game-launch-text"></p><ul class="game-rounds"><li></li><li></li><li></li><li></li><li></li></ul><span class="game-launch-button"><span class="game-launch-label"></span><span class="game-launch-arrow" aria-hidden="true">↗</span></span></div>';
+  frame.append(card);
+}
+
 function translatePage(language) {
   const lang = language === 'en' ? 'en' : 'lv';
   const t = translations[lang];
@@ -144,6 +167,7 @@ function translatePage(language) {
     localStorage.setItem('lu107-language', lang);
   } catch {}
   ensureLanguageSwitcher();
+  ensureGamePreview();
 
   setManyText('.site-header nav a', t.nav);
   setText('.hero-copy h1', t.heroTitle);
@@ -165,6 +189,11 @@ function translatePage(language) {
   setText('.game-section .section-heading > p', t.gameIntro);
   setText('.browser-bar p', t.gameBar);
   setText('.browser-bar a', t.fullscreen);
+  setText('.game-launch-kicker', t.gamePreviewKicker);
+  setText('.game-launch-title', t.gamePreviewTitle);
+  setText('.game-launch-text', t.gamePreviewText);
+  setManyText('.game-rounds li', t.gameRounds);
+  setText('.game-launch-label', t.gameLaunch);
   setHtml('.wish-heading > h2', t.wishTitle);
   setText('.wish-heading > p', t.wishIntro);
   setHtml('.wall-total span', t.wishCount);
@@ -192,10 +221,6 @@ function translatePage(language) {
     link.setAttribute('aria-current', link.dataset.language === lang ? 'true' : 'false');
   });
 
-  const gameFrame = document.querySelector('.game-section iframe');
-  if (gameFrame && gameFrame.src !== 'https://researchgames.eu/games/LU107/') {
-    gameFrame.src = 'https://researchgames.eu/games/LU107/';
-  }
   const fullscreenLink = document.querySelector('.browser-bar a');
   if (fullscreenLink) {
     fullscreenLink.href = 'https://researchgames.eu/games/LU107/';

@@ -1,0 +1,14 @@
+.browser-frame > iframe{display:none}
+.game-launch-card{position:relative;display:grid;grid-template-columns:1.1fr .9fr;min-height:520px;overflow:hidden;background:#071a2f;color:#fff}
+.game-launch-card::before{content:"";position:absolute;inset:0 0 0 48%;background:linear-gradient(90deg,#071a2f 0%,rgba(7,26,47,.3) 45%,rgba(7,26,47,.08)),url("https://researchgames.eu/games/LU107/assets/lu-main-building.jpg") center/cover no-repeat;transition:transform .45s ease}
+.game-launch-card:hover::before{transform:scale(1.025)}
+.game-launch-copy{position:relative;z-index:1;align-self:center;padding:64px}
+.game-launch-kicker{margin:0 0 18px;color:#f3bb2d;text-transform:uppercase;letter-spacing:.16em;font-size:12px;font-weight:800}
+.game-launch-title{margin:0;font:400 clamp(44px,5vw,72px)/.98 Georgia,serif;letter-spacing:-.04em}
+.game-launch-text{max-width:540px;margin:24px 0 30px;color:#dbe5ed;font-size:18px;line-height:1.55}
+.game-rounds{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;padding:0;list-style:none}
+.game-rounds li{border:1px solid rgba(255,255,255,.28);padding:8px 11px;font-size:11px;line-height:1.25}
+.game-launch-button{display:inline-flex;align-items:center;gap:14px;background:#f3bb2d;color:#071a2f;padding:17px 21px;font-size:13px;font-weight:800}
+.game-launch-arrow{font-size:19px;transition:transform .2s}.game-launch-card:hover .game-launch-arrow{transform:translate(3px,-3px)}
+@media(max-width:900px){.game-launch-card{grid-template-columns:1fr;min-height:620px}.game-launch-card::before{inset:42% 0 0;background:linear-gradient(180deg,#071a2f 0%,rgba(7,26,47,.2) 38%,rgba(7,26,47,.05)),url("https://researchgames.eu/games/LU107/assets/lu-main-building.jpg") center/cover no-repeat}.game-launch-copy{align-self:start;padding:48px}}
+@media(max-width:620px){.game-section{padding:78px 0}.game-section>.section-heading{padding:0 7vw}.browser-frame{border-left:0;border-right:0;box-shadow:none}.browser-bar{padding:0 7vw}.browser-bar>a{display:none}.game-launch-card{min-height:680px}.game-launch-card::before{inset:55% 0 0}.game-launch-copy{padding:40px 7vw}.game-launch-title{font-size:44px}.game-launch-text{font-size:16px}.game-rounds{gap:6px}.game-rounds li{font-size:10px;padding:7px 9px}.game-launch-button{width:100%;justify-content:space-between}}

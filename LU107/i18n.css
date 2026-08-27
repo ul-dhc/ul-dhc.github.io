@@ -51,4 +51,25 @@
     min-width: 31px;
     padding: 7px 6px;
   }
+
+  .voice-options {
+    gap: 12px;
+  }
+
+  .voice-option {
+    min-height: 280px;
+    padding: 26px;
+  }
+
+  .voice-option h3 {
+    margin: 8px 0 10px;
+  }
+
+  .voice-option p {
+    margin: 0;
+  }
+
+  .voice-option b {
+    margin-top: 24px;
+  }
 }

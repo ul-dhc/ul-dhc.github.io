@@ -15,7 +15,7 @@ const translations = {
     heroButton: 'Izvēlies, kā piedalīties',
     choiceTitle: 'Mēs aicinām svinēt LU-107',
     choiceKickers: ['Piedaloties', 'Spēlējot', 'Novēlot'],
-    choiceTitles: ['Izdari labu darbu.', 'Cik labi Tu pazīsti LU?', 'Atstāj savu novēlējumu'],
+    choiceTitles: ['Izdari labu darbu!', 'Cik labi Tu pazīsti LU?', 'Uzraksti savu novēlējumu!'],
     choiceTexts: [
       'Velti dažas minūtes latviešu valodas nākotnei – runā, klausies vai pārbaudi Balsu talkā.',
       'Atklāj universitātes vietas, cilvēkus un stāstus interaktīvā jubilejas spēlē.',

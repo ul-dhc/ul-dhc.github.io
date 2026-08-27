@@ -45,11 +45,13 @@ const translations = {
     consent: 'Piekrītu, ka novēlējums tiek publiski parādīts LU jubilejas novēlējumu sienā.',
     submit: 'Nosūtīt novēlējumu',
     loading: 'Ielādē novēlējumus…',
-    infoTitle: 'Par projektu',
-    infoLead: 'LU 107. jubilejas digitālo pieredzi veidojis LU Digitālo humanitāro zinātņu centrs sadarbībā ar LU Matemātikas un informātikas institūtu, LU Muzeju un LU Komunikācijas departamentu.',
+    infoTitle: 'Par šo iniciatīvu',
+    infoLead: '<a href="https://dhc.lu.lv/">LU Digitālo humanitāro zinātņu centrs</a> sadarbībā ar <a href="https://www.muzejs.lu.lv/">LU Muzeju</a> un <a href="https://www.lu.lv/par-mums/administracija/departamenti/komunikacijas-departaments/">LU Komunikācijas departamentu</a> izveidoja LU 107. jubilejas digitālo vietni.',
     infoProjects: 'Aktivitātes saistītas ar LU DHC projektu <a href="https://www.hzf.lu.lv/petnieciba/projekti/open/" target="_blank" rel="noopener">ȬPEN</a> (Nr. ZDA-LIP 2025/2) un valsts pētījumu programmas projektu <a href="https://digitalhumanities.lv/lv/projekti/digilate/" target="_blank" rel="noopener">DigiLATE</a> (Nr. VPP-IZM-Letonika-2025/1-0004).',
-    infoLink: 'Par projektu',
-    copyright: '<a href="https://dhc.lu.lv/">LU Digitālo humanitāro zinātņu centrs, 2026</a>',
+    infoContact: 'Saziņai: <a href="mailto:dhc@lu.lv">dhc@lu.lv</a>',
+    infoLink: 'Par šo iniciatīvu ↗',
+    infoClose: 'Aizvērt',
+    copyright: '<a href="https://dhc.lu.lv/">© LU Digitālo humanitāro zinātņu centrs, 2026</a>',
   },
   en: {
     title: 'UL-107',
@@ -97,11 +99,13 @@ const translations = {
     consent: 'I agree that my wish may be displayed publicly on the UL anniversary wish wall.',
     submit: 'Send wish',
     loading: 'Loading wishes…',
-    infoTitle: 'About the project',
-    infoLead: 'The UL 107 digital experience was created by the UL Digital Humanities Centre in cooperation with the Institute of Mathematics and Computer Science, the UL Museum and the UL Communications Department.',
+    infoTitle: 'About this initiative',
+    infoLead: 'The <a href="https://dhc.lu.lv/">UL Digital Humanities Centre</a>, in cooperation with the <a href="https://www.muzejs.lu.lv/">UL Museum</a> and the <a href="https://www.lu.lv/par-mums/administracija/departamenti/komunikacijas-departaments/">UL Communications Department</a>, created the UL 107 anniversary digital site.',
     infoProjects: 'The activities are connected with the UL DHC project <a href="https://www.hzf.lu.lv/petnieciba/projekti/open/" target="_blank" rel="noopener">ȬPEN</a> (No. ZDA-LIP 2025/2) and the national research programme project <a href="https://digitalhumanities.lv/lv/projekti/digilate/" target="_blank" rel="noopener">DigiLATE</a> (No. VPP-IZM-Letonika-2025/1-0004).',
-    infoLink: 'About the project',
-    copyright: '<a href="https://dhc.lu.lv/">UL Digital Humanities Centre, 2026</a>',
+    infoContact: 'Contact: <a href="mailto:dhc@lu.lv">dhc@lu.lv</a>',
+    infoLink: 'About this initiative ↗',
+    infoClose: 'Close',
+    copyright: '<a href="https://dhc.lu.lv/">© UL Digital Humanities Centre, 2026</a>',
   },
 };
 
@@ -172,9 +176,11 @@ function translatePage(language) {
   setText('.wish-form button', t.submit);
   setText('.wall-loading', t.loading);
   setText('#info-title', t.infoTitle);
-  setHtml('#info .project-info-inner p:nth-of-type(1)', t.infoLead);
-  setHtml('#info .project-info-inner p:nth-of-type(2)', t.infoProjects);
+  setHtml('#info .project-info-dialog p:nth-of-type(1)', t.infoLead);
+  setHtml('#info .project-info-dialog p:nth-of-type(2)', t.infoProjects);
+  setHtml('#info .project-info-contact', t.infoContact);
   setText('.project-info-link', t.infoLink);
+  document.querySelector('.project-info-close')?.setAttribute('aria-label', t.infoClose);
   setHtml('.site-footer > p', t.copyright);
 
   const textarea = document.querySelector('.wish-form textarea');
@@ -195,7 +201,14 @@ function translatePage(language) {
 }
 
 function selectedLanguage() {
-  return location.hash.toLowerCase() === '#en' ? 'en' : 'lv';
+  const hash = location.hash.toLowerCase();
+  if (hash === '#en') return 'en';
+  if (hash === '#lv') return 'lv';
+  try {
+    return localStorage.getItem('lu107-language') === 'en' ? 'en' : 'lv';
+  } catch {
+    return document.documentElement.lang === 'en' ? 'en' : 'lv';
+  }
 }
 
 function applySelectedLanguage() {
@@ -213,13 +226,14 @@ document.addEventListener('click', (event) => {
 
   const anchor = event.target.closest('a[href^="#"]:not([data-language])');
   if (!anchor) return;
+  if (anchor.getAttribute('href') === '#info') return;
   const target = document.querySelector(anchor.getAttribute('href'));
   if (!target) return;
   event.preventDefault();
   target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
 
-if (!['#lv', '#en'].includes(location.hash.toLowerCase())) {
+if (!['#lv', '#en', '#info'].includes(location.hash.toLowerCase())) {
   history.replaceState(null, '', '#lv');
 }
 

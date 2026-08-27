@@ -283,7 +283,12 @@ html[lang="en"] .wish-heading .wall-total::after {
 }
 
 .wish-section {
+  width: 100%;
+  margin: 0;
+  padding: 100px 7vw;
+  border: 0;
   border-radius: 0;
+  background: #fff;
 }
 
 .wish-heading {
@@ -374,6 +379,11 @@ html[lang="en"] .wish-heading .wall-total::after {
 }
 
 @media (max-width: 760px) {
+  .wish-section {
+    width: 100%;
+    padding: 72px 7vw;
+  }
+
   .wish-heading .wall-total {
     flex-wrap: wrap;
   }

@@ -85,7 +85,7 @@ const translations = {
     voiceButtons: ['Start speaking', 'Start listening', 'Start validating'],
     gameTitle: 'Are you ready<br>for the challenge?',
     gameIntro: 'Play the UL 107 anniversary game!',
-    gameBar: 'UL 107 · anniversary game in Latvian',
+    gameBar: 'UL 107 · anniversary game',
     fullscreen: 'Full-screen mode',
     wishTitle: 'UL-107<br>wish wall',
     wishIntro: 'Read the wishes and add your own!',
@@ -193,10 +193,14 @@ function translatePage(language) {
   });
 
   const gameFrame = document.querySelector('.game-section iframe');
-  if (gameFrame && gameFrame.dataset.language !== lang) {
-    const hadLanguage = Boolean(gameFrame.dataset.language);
-    gameFrame.dataset.language = lang;
-    if ((hadLanguage || lang === 'en') && gameFrame.contentWindow) gameFrame.contentWindow.location.reload();
+  if (gameFrame && gameFrame.src !== 'https://researchgames.eu/games/LU107/') {
+    gameFrame.src = 'https://researchgames.eu/games/LU107/';
+  }
+  const fullscreenLink = document.querySelector('.browser-bar a');
+  if (fullscreenLink) {
+    fullscreenLink.href = 'https://researchgames.eu/games/LU107/';
+    fullscreenLink.target = '_blank';
+    fullscreenLink.rel = 'noopener';
   }
 }
 

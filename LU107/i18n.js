@@ -44,6 +44,7 @@ const translations = {
     wishTitle: 'Apsveikumu siena',
     wishIntro: 'Latvijas Universitātei 107. dzimšanas dienā mēs vēlam…',
     wishCount: 'apsveikumi',
+    wishThanks: 'Paldies, ka esat daļa no LU!',
     wishFormToggle: 'Pievienot apsveikumu',
     formLabel: 'Pievieno savējo',
     formTitle: 'Ko Tu novēli LU?',
@@ -107,6 +108,7 @@ const translations = {
     wishTitle: 'Birthday wall',
     wishIntro: 'On the University of Latvia’s 107th birthday, we wish…',
     wishCount: 'greetings',
+    wishThanks: 'Thank you for being part of UL!',
     wishFormToggle: 'Add a greeting',
     formLabel: 'Add your wish',
     formTitle: 'What do you wish for UL?',
@@ -219,6 +221,13 @@ function ensureWishWallLayout() {
   }
   toggle.setAttribute('aria-controls', 'lu107-wish-form');
   form.id = 'lu107-wish-form';
+  const total = heading.querySelector('.wall-total');
+  if (total && !total.querySelector('.wall-thanks')) {
+    const thanks = document.createElement('span');
+    thanks.className = 'wall-thanks';
+    thanks.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart" aria-hidden="true"><path d="M19.5 12.572 12 20l-7.5-7.428A5 5 0 1 1 12 6.006a5 5 0 1 1 7.5 6.572"></path></svg><span class="wall-thanks-label"></span>';
+    total.append(thanks);
+  }
 }
 
 function translatePage(language) {
@@ -268,6 +277,7 @@ function translatePage(language) {
   setHtml('.wish-heading > h2', t.wishTitle);
   setText('.wish-heading > p', t.wishIntro);
   setHtml('.wall-total span', t.wishCount);
+  setText('.wall-thanks-label', t.wishThanks);
   setControlText('.wish-form-toggle', t.wishFormToggle);
   setText('.wish-form .section-label', t.formLabel);
   setText('.wish-form h3', t.formTitle);

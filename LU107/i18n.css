@@ -282,6 +282,111 @@ html[lang="en"] .wish-heading .wall-total::after {
   }
 }
 
+.wish-section {
+  border-radius: 0;
+}
+
+.wish-heading {
+  grid-template-columns: 1fr;
+}
+
+.wish-heading::after {
+  content: none;
+  display: none;
+}
+
+.wish-heading .wall-total > svg {
+  display: none;
+}
+
+.wish-heading .wall-total::after {
+  content: none;
+  display: none;
+}
+
+.wish-heading .wall-total > div {
+  gap: 6px;
+}
+
+.wall-thanks {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-left: 18px;
+  padding-left: 18px;
+  border-left: 1px solid #d4dfec;
+  color: #60738a;
+  font-size: 15px;
+}
+
+.wall-thanks svg {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  color: #c2374d;
+  stroke-width: 2;
+}
+
+.wall-thanks .wall-thanks-label {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 15px;
+}
+
+.wish-form-toggle,
+.wish-section .wall-live .wish {
+  border-radius: 0;
+}
+
+.wish-form-toggle {
+  box-shadow: none;
+}
+
+.wish-section .wish-form {
+  border: 1px solid #cbd6e2;
+  background: #f7f9fb;
+  color: #0a2037;
+  box-shadow: none;
+}
+
+.wish-section .wish-form .section-label {
+  color: #63788d;
+}
+
+.wish-section .wish-form textarea,
+.wish-section .wish-form input:not([type="checkbox"]) {
+  border-color: #9cabb7;
+  background: #fff;
+  color: #0a2037;
+}
+
+.wish-section .wish-form textarea:focus,
+.wish-section .wish-form input:not([type="checkbox"]):focus {
+  border-color: #1879a7;
+}
+
+.wish-section .wish-form ::placeholder {
+  color: #718295;
+}
+
+.wish-section .wish-form .consent {
+  color: #405466;
+}
+
+@media (max-width: 760px) {
+  .wish-heading .wall-total {
+    flex-wrap: wrap;
+  }
+
+  .wall-thanks {
+    width: 100%;
+    margin: 12px 0 0;
+    padding: 12px 0 0;
+    border-top: 1px solid #d4dfec;
+    border-left: 0;
+  }
+}
+
 @media (max-width: 620px) {
   .language-switcher {
     margin-left: auto;

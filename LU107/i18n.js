@@ -1,6 +1,7 @@
 const translations = {
   lv: {
     title: 'LU-107',
+    metaDescription: 'LU-107 jubilejas digitālā mājvieta.',
     headerLogo: 'https://researchgames.eu/games/LU107/assets/lu-lv-white-cropped.png',
     headerLogoAlt: 'Latvijas Universitāte',
     nav: ['Piedalies', 'Spēlē', 'Novēli'],
@@ -12,7 +13,7 @@ const translations = {
       'atstāt novēlējumu, kas dosies līdzi LU nākamajā gadā',
     ],
     heroButton: 'Izvēlies, kā piedalīties',
-    choiceTitle: 'Mēs aicinām svinēt LU 107',
+    choiceTitle: 'Mēs aicinām svinēt LU-107',
     choiceKickers: ['Piedaloties', 'Spēlējot', 'Novēlot'],
     choiceTitles: ['Izdari labu darbu.', 'Cik labi Tu pazīsti LU?', 'Atstāj savu novēlējumu'],
     choiceTexts: [
@@ -32,10 +33,10 @@ const translations = {
     ],
     voiceButtons: ['Sākt ierunāt', 'Sākt klausīties', 'Sākt pārbaudīt'],
     gameTitle: 'Vai esi gatavs<br>izaicinājumam?',
-    gameIntro: 'Uzspēlē LU 107. jubilejas spēli!',
-    gameBar: 'LU 107 · jubilejas spēle',
+    gameIntro: 'Uzspēlē LU-107 jubilejas spēli!',
+    gameBar: 'LU-107 · jubilejas spēle',
     fullscreen: 'Pilnekrāna režīms',
-    gamePreviewKicker: 'LU 107 · jubilejas spēle',
+    gamePreviewKicker: 'LU-107 · jubilejas spēle',
     gamePreviewTitle: 'Cik labi Tu pazīsti Latvijas Universitāti?',
     gamePreviewText: '18 uzdevumi piecās kārtās · aptuveni 5–7 minūtes · līdz 200 punktiem.',
     gameRounds: ['LU vēsture', 'LU mūsdienās', 'Kultūra un sports LU', 'Atpazīsti vietu', 'Fināla izaicinājums'],
@@ -56,7 +57,7 @@ const translations = {
     submit: 'Nosūtīt novēlējumu',
     loading: 'Ielādē novēlējumus…',
     infoTitle: 'Par šo iniciatīvu',
-    infoLead: 'LU 107. jubilejas digitālo vietni izveidoja <a href="https://dhc.lu.lv/">LU Digitālo humanitāro zinātņu centrs</a> sadarbībā ar <a href="https://www.muzejs.lu.lv/">LU Muzeju</a> un <a href="https://www.lu.lv/par-mums/administracija/departamenti/komunikacijas-departaments/">LU Komunikācijas departamentu</a>.',
+    infoLead: 'LU-107 jubilejas digitālo vietni izveidoja <a href="https://dhc.lu.lv/">LU Digitālo humanitāro zinātņu centrs</a> sadarbībā ar <a href="https://www.muzejs.lu.lv/">LU Muzeju</a> un <a href="https://www.lu.lv/par-mums/administracija/departamenti/komunikacijas-departaments/">LU Komunikācijas departamentu</a>.',
     infoProjects: 'Šīs aktivitātes ir daļa no LU DHC īstenotajiem projektiem: <a href="https://www.hzf.lu.lv/petnieciba/projekti/open/" target="_blank" rel="noopener">ȬPEN</a> (Nr. ZDA-LIP 2025/2) un valsts pētījumu programmas projekta <a href="https://digitalhumanities.lv/lv/projekti/digilate/" target="_blank" rel="noopener">DigiLATE</a> (Nr. VPP-IZM-Letonika-2025/1-0004).',
     infoContact: 'Saziņai: <a href="mailto:dhc@lu.lv">dhc@lu.lv</a>',
     infoLink: 'Par šo iniciatīvu',
@@ -64,7 +65,8 @@ const translations = {
     copyright: '<a href="https://dhc.lu.lv/">© LU Digitālo humanitāro zinātņu centrs, 2026</a>',
   },
   en: {
-    title: 'UL-107',
+    title: 'LU-107',
+    metaDescription: 'LU-107 anniversary digital site.',
     headerLogo: 'https://researchgames.eu/games/LU107/assets/lu-en-white-cropped.png',
     headerLogoAlt: 'University of Latvia',
     nav: ['Take part', 'Play', 'Send wishes'],
@@ -76,7 +78,7 @@ const translations = {
       'leave a wish for the University’s year ahead',
     ],
     heroButton: 'Choose how to take part',
-    choiceTitle: 'Join us in celebrating UL 107',
+    choiceTitle: 'Join us in celebrating LU-107',
     choiceKickers: ['Contribute', 'Play', 'Send a wish'],
     choiceTitles: ['Do a good deed.', 'How well do you know UL?', 'Leave your wish'],
     choiceTexts: [
@@ -96,10 +98,10 @@ const translations = {
     ],
     voiceButtons: ['Start speaking', 'Start listening', 'Start validating'],
     gameTitle: 'Are you ready<br>for the challenge?',
-    gameIntro: 'Play the UL 107 anniversary game!',
-    gameBar: 'UL 107 · anniversary game',
+    gameIntro: 'Play the LU-107 anniversary game!',
+    gameBar: 'LU-107 · anniversary game',
     fullscreen: 'Full-screen mode',
-    gamePreviewKicker: 'UL 107 · anniversary game',
+    gamePreviewKicker: 'LU-107 · anniversary game',
     gamePreviewTitle: 'How well do you know the University of Latvia?',
     gamePreviewText: '18 tasks in five rounds · approximately 5–7 minutes · up to 200 points.',
     gameRounds: ['UL History', 'UL Today', 'Culture & Sports at UL', 'Recognise the Place', 'Final Challenge'],
@@ -120,7 +122,7 @@ const translations = {
     submit: 'Send wish',
     loading: 'Loading wishes…',
     infoTitle: 'About this initiative',
-    infoLead: 'The UL 107th anniversary digital site was created by the <a href="https://dhc.lu.lv/">UL Digital Humanities Centre</a> in cooperation with the <a href="https://www.muzejs.lu.lv/">UL Museum</a> and the <a href="https://www.lu.lv/par-mums/administracija/departamenti/komunikacijas-departaments/">UL Communications Department</a>.',
+    infoLead: 'The LU-107 anniversary digital site was created by the <a href="https://dhc.lu.lv/">UL Digital Humanities Centre</a> in cooperation with the <a href="https://www.muzejs.lu.lv/">UL Museum</a> and the <a href="https://www.lu.lv/par-mums/administracija/departamenti/komunikacijas-departaments/">UL Communications Department</a>.',
     infoProjects: 'These activities form part of projects implemented by UL DHC: <a href="https://www.hzf.lu.lv/petnieciba/projekti/open/" target="_blank" rel="noopener">ȬPEN</a> (No. ZDA-LIP 2025/2) and the national research programme project <a href="https://digitalhumanities.lv/lv/projekti/digilate/" target="_blank" rel="noopener">DigiLATE</a> (No. VPP-IZM-Letonika-2025/1-0004).',
     infoContact: 'Contact: <a href="mailto:dhc@lu.lv">dhc@lu.lv</a>',
     infoLink: 'About this initiative',
@@ -235,6 +237,7 @@ function translatePage(language) {
   const t = translations[lang];
   document.documentElement.lang = lang;
   document.title = t.title;
+  document.querySelector('meta[name="description"]')?.setAttribute('content', t.metaDescription);
   try {
     localStorage.setItem('lu107-language', lang);
   } catch {}

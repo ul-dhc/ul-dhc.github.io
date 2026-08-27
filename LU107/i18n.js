@@ -38,7 +38,8 @@ const translations = {
     gamePreviewKicker: 'LU 107 · jubilejas spēle',
     gamePreviewTitle: 'Cik labi Tu pazīsti Latvijas Universitāti?',
     gamePreviewText: '18 uzdevumi piecās kārtās · aptuveni 5–7 minūtes · līdz 200 punktiem.',
-    gameRounds: ['LU vēsture', 'LU mūsdienās', 'Kultūra un sports', 'Atpazīsti vietu', 'Fināls'],
+    gameRounds: ['LU vēsture', 'LU mūsdienās', 'Kultūra un sports LU', 'Atpazīsti vietu', 'Fināla izaicinājums'],
+    gameRoundCounts: ['5 jautājumi', '5 jautājumi', '5 jautājumi', '1 uzdevums', '2 uzdevumi'],
     gameLaunch: 'Atvērt spēli',
     wishTitle: 'LU-107<br>novēlējumu siena',
     wishIntro: 'Lasi saņemtos novēlējumus un pievieno savējo!',
@@ -99,7 +100,8 @@ const translations = {
     gamePreviewKicker: 'UL 107 · anniversary game',
     gamePreviewTitle: 'How well do you know the University of Latvia?',
     gamePreviewText: '18 tasks in five rounds · approximately 5–7 minutes · up to 200 points.',
-    gameRounds: ['UL History', 'UL Today', 'Culture & Sports', 'Recognise the Place', 'Final'],
+    gameRounds: ['UL History', 'UL Today', 'Culture & Sports at UL', 'Recognise the Place', 'Final Challenge'],
+    gameRoundCounts: ['5 questions', '5 questions', '5 questions', '1 task', '2 tasks'],
     gameLaunch: 'Open the game',
     wishTitle: 'UL-107<br>wish wall',
     wishIntro: 'Read the wishes and add your own!',
@@ -191,7 +193,9 @@ function ensureGamePreview() {
   card.target = '_blank';
   card.rel = 'noopener';
   const diagonalIcon = document.querySelector('.voice-option b svg')?.cloneNode(true);
-  card.innerHTML = '<div class="game-launch-copy"><p class="game-launch-kicker"></p><h3 class="game-launch-title"></h3><p class="game-launch-text"></p><ul class="game-rounds"><li><span class="game-round-number">01</span><span class="game-round-name"></span></li><li><span class="game-round-number">02</span><span class="game-round-name"></span></li><li><span class="game-round-number">03</span><span class="game-round-name"></span></li><li><span class="game-round-number">04</span><span class="game-round-name"></span></li><li><span class="game-round-number">05</span><span class="game-round-name"></span></li></ul><span class="game-launch-button"><span class="game-launch-label"></span></span></div>';
+  const roundImages = ['card-history.jpg', 'card-today.jpg', 'card-culture.jpg', 'card-image.png', 'card-final.jpg'];
+  const rounds = roundImages.map((image, index) => `<li><div class="game-round-copy"><span class="game-round-number">${index + 1}</span><span class="game-round-name"></span></div><div class="game-round-photo" aria-hidden="true"><img src="https://researchgames.eu/games/LU107/assets/${image}" alt=""></div><span class="game-round-count"></span></li>`).join('');
+  card.innerHTML = `<div class="game-launch-copy"><p class="game-launch-kicker"></p><h3 class="game-launch-title"></h3><p class="game-launch-text"></p><ul class="game-rounds">${rounds}</ul><span class="game-launch-button"><span class="game-launch-label"></span></span></div>`;
   if (diagonalIcon) card.querySelector('.game-launch-button')?.append(diagonalIcon);
   frame.append(card);
 }
@@ -237,6 +241,7 @@ function translatePage(language) {
   setText('.game-launch-title', t.gamePreviewTitle);
   setText('.game-launch-text', t.gamePreviewText);
   setManyText('.game-round-name', t.gameRounds);
+  setManyText('.game-round-count', t.gameRoundCounts);
   setText('.game-launch-label', t.gameLaunch);
   setHtml('.wish-heading > h2', t.wishTitle);
   setText('.wish-heading > p', t.wishIntro);

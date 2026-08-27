@@ -8,7 +8,7 @@
 .game-launch-title{margin:0;font:400 clamp(44px,5vw,72px)/.98 Georgia,serif;letter-spacing:-.04em}
 .game-launch-text{max-width:540px;margin:24px 0 30px;color:#dbe5ed;font-size:18px;line-height:1.55}
 .game-rounds{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:0 0 30px;padding:0;list-style:none}
-.game-rounds li{--accent:#017592;position:relative;height:205px;min-width:0;overflow:hidden;border:1px solid color-mix(in srgb,var(--accent) 38%,#35536e);border-top:5px solid var(--accent);border-radius:16px;background:#0b263f;box-shadow:0 10px 30px #0002;transition:transform .26s,border-color .26s,box-shadow .26s}
+.game-rounds li{--accent:#017592;position:relative;height:205px;min-width:0;overflow:hidden;border:1px solid var(--accent);border-radius:16px;background:#0b263f;box-shadow:0 10px 30px #0002;transition:transform .26s,border-color .26s,box-shadow .26s}
 .game-round-copy{display:grid;grid-template-columns:48px minmax(0,1fr);align-items:center;column-gap:12px;height:91px;padding:13px 14px}
 .game-round-number{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 82%,#fff),var(--accent));color:#fff;font-size:18px;font-weight:800;box-shadow:0 8px 20px color-mix(in srgb,var(--accent) 25%,transparent)}
 .game-round-name{color:#fff;font:700 16px/1.12 Georgia,serif;overflow-wrap:break-word}

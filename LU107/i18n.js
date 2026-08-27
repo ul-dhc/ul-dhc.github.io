@@ -17,7 +17,7 @@ const translations = {
     choiceKickers: ['Piedaloties', 'Spēlējot', 'Novēlot'],
     choiceTitles: ['Izdari labu darbu!', 'Cik labi Tu pazīsti LU?', 'Uzraksti savu novēlējumu!'],
     choiceTexts: [
-      'Velti dažas minūtes latviešu valodas nākotnei – runā, klausies vai pārbaudi Balsu talkā.',
+      'Velti dažas minūtes sava laika latviešu valodas nākotnei – ierunā vai klausies un pārbaudi "Balsu talkas" ierakstus.',
       'Atklāj universitātes vietas, cilvēkus un stāstus interaktīvā jubilejas spēlē.',
       'Uzraksti dažus vārdus Latvijas Universitātei un pievienojies kopīgajai jubilejas sienai.',
     ],

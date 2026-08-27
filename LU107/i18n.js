@@ -172,6 +172,7 @@ const setManyControlText = (selector, values) => {
 function ensureLanguageSwitcher() {
   const header = document.querySelector('.site-header');
   if (!header || header.querySelector('.language-switcher')) return;
+  header.querySelector('nav')?.remove();
   const switcher = document.createElement('div');
   switcher.className = 'language-switcher';
   switcher.setAttribute('aria-label', 'Language');

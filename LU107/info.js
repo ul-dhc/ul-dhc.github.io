@@ -9,9 +9,9 @@ function ensureProjectInfo(){
     modal.innerHTML=`<div class="project-info-dialog"><button class="project-info-close" type="button" aria-label="Aizvērt">×</button><h2 id="info-title">Par šo iniciatīvu</h2><p><a href="https://dhc.lu.lv/">LU Digitālo humanitāro zinātņu centrs</a> sadarbībā ar <a href="https://www.muzejs.lu.lv/">LU Muzeju</a> un <a href="https://www.lu.lv/par-mums/administracija/departamenti/komunikacijas-departaments/">LU Komunikācijas departamentu</a> izveidoja LU 107. jubilejas digitālo vietni.</p><p>Aktivitātes saistītas ar LU DHC projektu <a href="https://www.hzf.lu.lv/petnieciba/projekti/open/" target="_blank" rel="noopener">ȬPEN</a> (Nr. ZDA-LIP 2025/2) un valsts pētījumu programmas projektu <a href="https://digitalhumanities.lv/lv/projekti/digilate/" target="_blank" rel="noopener">DigiLATE</a> (Nr. VPP-IZM-Letonika-2025/1-0004).</p><p class="project-info-contact">Saziņai: <a href="mailto:dhc@lu.lv">dhc@lu.lv</a></p></div>`;
     document.body.append(modal);
   }
-  if(!footer.querySelector('.project-info-link')){
-    const link=document.createElement('a');link.className='project-info-link';link.href='#info';link.textContent='Par šo iniciatīvu ↗';footer.insertBefore(link,footer.querySelector('.footer-up'));
-  }
+  let link=footer.querySelector('.project-info-link');
+  if(!link){link=document.createElement('a');link.className='project-info-link';link.href='#info';footer.insertBefore(link,footer.querySelector('.footer-up'))}
+  if(!link.querySelector('svg'))link.innerHTML='<span>Par šo iniciatīvu</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>';
   syncInfoModal();
 }
 
@@ -21,4 +21,4 @@ function syncInfoModal(){const modal=document.querySelector('#info');if(!modal)r
 
 document.addEventListener('click',event=>{const link=event.target.closest('.project-info-link');if(link){event.preventDefault();openInfoModal();return}if(event.target.closest('.project-info-close')||event.target.matches('.project-info-modal')){event.preventDefault();closeInfoModal()}});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&location.hash.toLowerCase()==='#info')closeInfoModal()});window.addEventListener('hashchange',syncInfoModal);
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ensureProjectInfo,{once:true});else ensureProjectInfo();window.addEventListener('load',ensureProjectInfo,{once:true});setTimeout(ensureProjectInfo,1000);
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ensureProjectInfo,{once:true});else ensureProjectInfo();window.addEventListener('load',ensureProjectInfo,{once:true});setTimeout(ensureProjectInfo,1000);setTimeout(ensureProjectInfo,1400);

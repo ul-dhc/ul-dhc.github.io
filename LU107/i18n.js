@@ -57,7 +57,7 @@ const translations = {
     infoLead: '<a href="https://dhc.lu.lv/">LU Digitālo humanitāro zinātņu centrs</a> sadarbībā ar <a href="https://www.muzejs.lu.lv/">LU Muzeju</a> un <a href="https://www.lu.lv/par-mums/administracija/departamenti/komunikacijas-departaments/">LU Komunikācijas departamentu</a> izveidoja LU 107. jubilejas digitālo vietni.',
     infoProjects: 'Aktivitātes saistītas ar LU DHC projektu <a href="https://www.hzf.lu.lv/petnieciba/projekti/open/" target="_blank" rel="noopener">ȬPEN</a> (Nr. ZDA-LIP 2025/2) un valsts pētījumu programmas projektu <a href="https://digitalhumanities.lv/lv/projekti/digilate/" target="_blank" rel="noopener">DigiLATE</a> (Nr. VPP-IZM-Letonika-2025/1-0004).',
     infoContact: 'Saziņai: <a href="mailto:dhc@lu.lv">dhc@lu.lv</a>',
-    infoLink: 'Par šo iniciatīvu ↗',
+    infoLink: 'Par šo iniciatīvu',
     infoClose: 'Aizvērt',
     copyright: '<a href="https://dhc.lu.lv/">© LU Digitālo humanitāro zinātņu centrs, 2026</a>',
   },
@@ -119,7 +119,7 @@ const translations = {
     infoLead: 'The <a href="https://dhc.lu.lv/">UL Digital Humanities Centre</a>, in cooperation with the <a href="https://www.muzejs.lu.lv/">UL Museum</a> and the <a href="https://www.lu.lv/par-mums/administracija/departamenti/komunikacijas-departaments/">UL Communications Department</a>, created the UL 107 anniversary digital site.',
     infoProjects: 'The activities are connected with the UL DHC project <a href="https://www.hzf.lu.lv/petnieciba/projekti/open/" target="_blank" rel="noopener">ȬPEN</a> (No. ZDA-LIP 2025/2) and the national research programme project <a href="https://digitalhumanities.lv/lv/projekti/digilate/" target="_blank" rel="noopener">DigiLATE</a> (No. VPP-IZM-Letonika-2025/1-0004).',
     infoContact: 'Contact: <a href="mailto:dhc@lu.lv">dhc@lu.lv</a>',
-    infoLink: 'About this initiative ↗',
+    infoLink: 'About this initiative',
     infoClose: 'Close',
     copyright: '<a href="https://dhc.lu.lv/">© UL Digital Humanities Centre, 2026</a>',
   },
@@ -257,7 +257,7 @@ function translatePage(language) {
   setHtml('#info .project-info-dialog p:nth-of-type(1)', t.infoLead);
   setHtml('#info .project-info-dialog p:nth-of-type(2)', t.infoProjects);
   setHtml('#info .project-info-contact', t.infoContact);
-  setText('.project-info-link', t.infoLink);
+  setControlText('.project-info-link', t.infoLink);
   document.querySelector('.project-info-close')?.setAttribute('aria-label', t.infoClose);
   setHtml('.site-footer > p', t.copyright);
 

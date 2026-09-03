@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 100">
+  <defs><pattern id="g" width="10" height="10" patternUnits="userSpaceOnUse"><rect x="3.9" y="3.9" width="2.2" height="2.2" fill="#777"/></pattern></defs>
+  <rect x="45" y="10" width="70" height="80" fill="url(#g)"/>
+  <g fill="#8536b8"><rect x="78.6" y="13.6" width="2.8" height="2.8"/><rect x="78.6" y="23.6" width="2.8" height="2.8"/><rect x="78.6" y="33.6" width="2.8" height="2.8"/><rect x="78.6" y="43.6" width="2.8" height="2.8"/><rect x="78.6" y="53.6" width="2.8" height="2.8"/><rect x="78.6" y="63.6" width="2.8" height="2.8"/><rect x="78.6" y="73.6" width="2.8" height="2.8"/><rect x="78.6" y="83.6" width="2.8" height="2.8"/></g>
+</svg>

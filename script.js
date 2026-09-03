@@ -39,7 +39,7 @@ function svgIcon(name){
 }
 
 const TERMS = [
-  { id:2, icon:'dice',     en:'Educational games',                            lv:'Izglītojošas spēles', shortEn:'Games', shortLv:'Spēles' },
+  { id:2, icon:'dice',     en:'Research games',                               lv:'Zinātnes spēles', shortEn:'Research', shortLv:'Zinātnes' },
   { id:3, icon:'flask',    en:'Citizen science',                  lv:'Sabiedriskā zinātne' },
   { id:4, icon:'nodes',    en:'Language technologies',            lv:'Valodu tehnoloģijas',
     shortEn:'LangTech', shortLv:'Valodu tehn.' },
@@ -54,35 +54,157 @@ const TERMS = [
 
 const STR = {
   en:{
-    headline:'Inspiring <br>humanities<br><span class="accent">digitally.</span>',
-    lede:'While our new website is being developed...',
-    playTitle:'...play the memory game!',
-    boardTitle:'Find all matching pairs!',
+    navAbout:'About us',
+    navResources:'Digital resources and tools',
+    navProjects:'Projects',
+    navTeam:'Team',
+    navContact:'Contacts',
+    eyebrow:'University of Latvia',
+    headline:'UL Digital<br>Humanities<br>Centre',
+    tagline:'Inspiring humanities digitally.',
+    lede:'We bring together humanities research and digital methods to deepen understanding of culture and language.',
+    learnMore:'Learn more',
+    contactUs:'Contact us',
+    boardTitle:'Find the pairs',
     moves:'Moves',
-    winFlag:'Well done!<br>These are some of the fields we work in – researching, experimenting, and collaborating.',
+    winFlag:'These are some of the fields we work in – researching, experimenting, and collaborating.',
     playAgain:'Play again',
     showAll:'Skip the game',
     tryAgain:'Not a match. Try again!',
     matchFound:'Match found!',
-    matchDesc:'perfect!'
+    matchDesc:'perfect!',
+    resourceEyebrow:'Open resources',
+    resourceTitle:'Digital resources and tools',
+    teikasTitle:'Legends',
+    teikasDesc:'A digital resource for searching, analysing and mapping Latvian folk legends.',
+    openTool:'Open tool',
+    openResourceDev:'Open resource (in development)',
+    airaDesc:'A tool for transcribing handwriting and describing images with the help of artificial intelligence.',
+    dhDesc:'A platform for news, resources and projects in digital humanities in Latvia.',
+    viewSite:'Visit site',
+    projectsCopy:'We create research projects, digital resources and collaborative networks in Latvia and internationally.',
+    projectsLink:'Discover our work',
+    privacy:'Privacy policy'
+    ,aboutEyebrow:'About us',
+    aboutTitle:'Research, education and collaboration',
+    aboutCopy:'The Digital Humanities Centre of the Faculty of Humanities at the University of Latvia (UL DHC), established in February 2025, is a dynamic unit for the strategic development of digital humanities at the University of Latvia and in Latvia. The Centre aims to strengthen this interdisciplinary field through research, education, the development of digital infrastructure, and international collaboration. The Centre is led by Associate Tenure Professor Sanita Reinsone.',
+    focusResearch:'Research',
+    focusResearchCopy:'International research and development projects in digital cultural heritage, digital folkloristics, life writing, language technologies and artificial intelligence, as well as the study of digital transformation processes, including the history of the internet in Latvia, and other topics related to digital humanities.',
+    focusEducation:'Education',
+    focusEducationCopy:'A digital humanities study course offered in various bachelor’s programs at the Faculty of Humanities, organization of the Baltic Summer School of Digital Humanities, and participation in the development of international study courses and educational materials.',
+    focusInfrastructure:'Digital infrastructure for the humanities',
+    focusInfrastructureCopy:'Creation and development of resources in cooperation with partners, provision of consultations, and diverse international collaboration, including participation in DARIAH-EU and CLARIN-LV.',
+    focusCommunity:'DH communication and collaboration',
+    focusCommunityCopy:'Organization of events, promotion of collaboration within and beyond the University of Latvia, implementation of digital public humanities initiatives, and strengthening the visibility of digital humanities, including coordination of the Latvian digital humanities collaboration platform digitalhumanities.lv.',
+    projectsEyebrow:'Current projects',
+    aisterDesc:'An international Erasmus+ project developing AI and civic engagement solutions for cultural heritage preservation, with a special focus on Ukraine.',
+    openDesc:'Open knowledge ecosystems and AI solutions strengthening citizen science and access to language and cultural heritage.',
+    digilateDesc:'Language resources and AI solutions supporting the sustainability of Latvian in the digital environment.',
+    namsDesc:'Research on Latvian identity and knowledge strategies as resources for societal resilience.',
+    readMore:'Read more',
+    featuredResources:'Resources and tools',
+    teamEyebrow:'The LU DHC team',
+    sanitaRole:'Associate Tenure Professor, Head of LU DHC',
+    ilzeRole:'Senior Expert',
+    luizeRole:'Research Assistant, Doctoral Student',
+    viestursRole:'Research Assistant, Doctoral Student',
+    haraldsRole:'Doctoral Student',
+    externalStaff:'External staff member',
+    edeiteRole:'Research Assistant, Master’s Student',
+    simonaRole:'Laboratory Assistant, Bachelor’s Student',
+    researchInterests:'Research interests',
+    profile:'Profile',
+    luProfile:'UL profile',
+    personalWebsite:'Personal website',
+    sanitaInterests:'Digital participatory methods, digital folkloristics and cultural heritage, digital humanities infrastructures, research games, digital archives and life-writing practices.',
+    ilzeInterests:'Digital archives, digitisation, NLP, autobiographical materials, narrative research, and relationships between art and politics.',
+    luizeInterests:'Digital archiving and academic publishing, data visualisation, open science, life writing and digital folklore.',
+    viestursInterests:'ICT in everyday life, oral history and data visualisation.',
+    haraldsInterests:'Digital humanities, data management, research infrastructure, life writing and literary studies.',
+    edeiteInterests:'Latgalian language history, sociolinguistics and standardisation, digital humanities and folklore archives.',
+    simonaInterests:'Data visualisation, digitisation, legends and folk tales.',
+    contactTitle:'Let’s connect',
+    address:'Visvalža Street 4a–207, Riga, Latvia, LV–1050',
+    footerText:'UL Digital Humanities Centre, 2026'
   },
   lv:{
-    headline:'Saviļņo<br>humanitārās zinātnes<br><span class="accent">digitāli.</span>',
-    lede:'Kamēr mūsu jaunā mājaslapa tiek veidota...',
-    playTitle:'... uzspēlē atmiņas spēli!',
-    boardTitle:'Savieno pārus!',
+    navAbout:'Par mums',
+    navResources:'Digitālie resursi un rīki',
+    navProjects:'Projekti',
+    navTeam:'Komanda',
+    navContact:'Kontakti',
+    eyebrow:'Latvijas Universitāte',
+    headline:'LU Digitālo<br>humanitāro<br>zinātņu centrs',
+    tagline:'Saviļņo humanitārās zinātnes digitāli.',
+    lede:'Apvienojam humanitāro zinātņu pētniecību un digitālās metodes, lai padziļinātu izpratni par kultūru un valodu.',
+    learnMore:'Uzzināt vairāk',
+    contactUs:'Sazināties ar mums',
+    boardTitle:'Savieno pārus',
     moves:'Gājieni',
-    winFlag:'Lielisks veikums!<br>Šīs ir dažas no jomām, kurās mēs darbojamies – pētot, eksperimentējot un sadarbojoties.',
+    winFlag:'Šīs ir dažas no jomām, kurās mēs darbojamies – pētot, eksperimentējot un sadarbojoties.',
     playAgain:'Spēlēt vēlreiz',
     showAll:'Izlaist spēli',
     tryAgain:'Nav pāris. Mēģini vēlreiz!',
     matchFound:'Pāris atrasts!',
-    matchDesc:'lieliski!'
+    matchDesc:'lieliski!',
+    resourceEyebrow:'Atvērtie resursi',
+    resourceTitle:'Digitālie resursi un rīki',
+    teikasTitle:'Teikas',
+    teikasDesc:'Digitāls resurss latviešu tautas teiku meklēšanai, analīzei un kartēšanai.',
+    openTool:'Atvērt rīku',
+    openResourceDev:'Atvērt resursu (izstrādē)',
+    airaDesc:'Rīks rokraksta atšifrēšanai un attēlu aprakstīšanai ar mākslīgā intelekta palīdzību.',
+    dhDesc:'Platforma ziņām, resursiem un projektiem digitālajās humanitārajās zinātnēs Latvijā.',
+    viewSite:'Apskatīt vietni',
+    projectsCopy:'Veidojam pētniecības projektus, digitālos resursus un sadarbības tīklus Latvijā un starptautiski.',
+    projectsLink:'Uzzināt par mūsu darbu',
+    privacy:'Privātuma politika'
+    ,aboutEyebrow:'Par mums',
+    aboutTitle:'Pētniecība, izglītība un sadarbība',
+    aboutCopy:'Latvijas Universitātes Humanitāro zinātņu fakultātes Digitālo humanitāro zinātņu centrs (LU DHC), dibināts 2025. gada februārī, ir dinamiska vienība stratēģiskai digitālo humanitāro zinātņu attīstībai Latvijas Universitātē un Latvijā. Centra mērķis ir stiprināt šo starpdisciplināro jomu, darbojoties pētniecībā, izglītībā, digitālās infrastruktūras attīstībā, kā arī īstenojot starptautisko sadarbību. Centru vada asociētā tenūrprofesore Sanita Reinsone.',
+    focusResearch:'Pētniecība',
+    focusResearchCopy:'Starptautiski pētniecības un attīstības projekti digitālā kultūras mantojuma, digitālās folkloristikas, dzīves pierakstīšanas, valodu tehnoloģiju un mākslīgā intelekta jomās, kā arī digitālās transformācijas procesu, tostarp interneta vēstures izpēte Latvijā, kā arī citas tēmas saistībā ar digitālajām humanitārajām zinātnēm.',
+    focusEducation:'Izglītība',
+    focusEducationCopy:'Digitālo humanitāro zinātņu studiju kurss dažādās LU HZF bakalaura studiju programmās, Baltijas Digitālo humanitāro zinātņu vasaras skolas organizēšana un dalība starptautisko studiju kursu un mācību materiālu izstrāde.',
+    focusInfrastructure:'Humanitāro zinātņu digitālā infrastruktūra',
+    focusInfrastructureCopy:'Resursu veidošana un attīstīšana sadarbībā ar partneriem, konsultāciju sniegšana, kā arī daudzveidīga starptautiskā sadarbība, tostarp iesaiste DARIAH-EU un CLARIN-LV.',
+    focusCommunity:'DH komunikācija un sadarbība',
+    focusCommunityCopy:'Pasākumu organizēšana, sadarbības veicināšana LU un ārpus tās, digitālās sabiedriskās zinātnes iniciatīvu īstenošana, kā arī digitālo humanitāro zinātņu atpazīstamības stiprināšana, tostarp koordinējot Latvijas digitālo humanitāro zinātņu sadarbības platformu digitalhumanities.lv.',
+    projectsEyebrow:'Aktuālie projekti',
+    aisterDesc:'Starptautisks Erasmus+ projekts mākslīgā intelekta un sabiedriskās līdzdalības risinājumiem kultūras mantojuma saglabāšanā, īpaši Ukrainā.',
+    openDesc:'Atvērtu zināšanu ekosistēmas un MI risinājumi sabiedriskās zinātnes, valodu un kultūras mantojuma pieejamības stiprināšanai.',
+    digilateDesc:'Valodas resursi un mākslīgā intelekta risinājumi latviešu valodas ilgtspējai digitālajā vidē.',
+    namsDesc:'Pētījums par latvisko identitāti un zināšanu stratēģijām kā sabiedrības noturības resursu.',
+    readMore:'Lasīt vairāk',
+    featuredResources:'Resursi un rīki',
+    teamEyebrow:'LU DHC komanda',
+    sanitaRole:'asociētā tenūrprofesore, LU DHC vadītāja',
+    ilzeRole:'vecākā eksperte',
+    luizeRole:'zinātniskā asistenta p. i., doktorante',
+    viestursRole:'zinātniskā asistenta p. i., doktorants',
+    haraldsRole:'doktorants',
+    externalStaff:'Ārējais darbinieks',
+    edeiteRole:'zinātniskā asistenta p. i., maģistrantūras studente',
+    simonaRole:'laborante, bakalaura studente',
+    researchInterests:'Pētnieciskās intereses',
+    profile:'Profils',
+    luProfile:'LU profils',
+    personalWebsite:'Personīgā vietne',
+    sanitaInterests:'Digitālās līdzdalības metodes, digitālā folkloristika un kultūras mantojums, digitālās humanitāro zinātņu infrastruktūras, zinātnes spēles, digitālie arhīvi un dzīves pierakstīšanas prakses.',
+    ilzeInterests:'Digitālie arhīvi, digitalizēšana, NLP, autobiogrāfiskie materiāli, naratīvu pētniecība, mākslas un politikas attiecības.',
+    luizeInterests:'Digitālā arhivēšana un akadēmiskā izdevniecība, datu vizualizācija, atvērtā zinātne, dzīves rakstība un digitālā folklora.',
+    viestursInterests:'IKT tehnoloģijas ikdienas dzīvē, mutvārdu vēsture un datu vizualizēšana.',
+    haraldsInterests:'Digitālās humanitārās zinātnes, datu pārvaldība, pētniecības infrastruktūra, dzīves rakstīšana un literatūrzinātne.',
+    edeiteInterests:'Latgaliešu valodas vēsture, sociolingvistika un normēšana, digitālās humanitārās zinātnes un folkloras arhīvi.',
+    simonaInterests:'Datu vizualizācija, digitalizēšana un teikas.',
+    contactTitle:'Sazināsimies',
+    address:'Visvalža iela 4a–207, Rīga, LV–1050',
+    footerText:'LU Digitālo humanitāro zinātņu centrs, 2026'
   }
 };
 
 let lang = 'lv';
-let theme = 'dark';
+let theme = 'light';
 let deck = [];
 let flipped = [];
 let matchedCount = 0;
@@ -208,6 +330,7 @@ function showWin(){
     grid.appendChild(item);
   });
   document.querySelector('.board-header').hidden = true;
+  document.querySelector('.game-meta').hidden = true;
   document.getElementById('showAllBtn').hidden = true;
   board.style.display = 'none';
   winPanel.hidden = false;
@@ -268,6 +391,7 @@ function resetGame(){
   document.getElementById('statusMsg').textContent = '';
   document.getElementById('statusMsg').classList.remove('wrong','success');
   document.querySelector('.board-header').hidden = false;
+  document.querySelector('.game-meta').hidden = false;
   document.getElementById('showAllBtn').hidden = false;
   document.getElementById('winPanel').hidden = true;
   document.getElementById('winPanel').classList.remove('is-arriving','has-arrived');
@@ -283,15 +407,23 @@ function applyLang(){
     el.innerHTML = STR[lang][key];
   });
   document.getElementById('langToggle').textContent = lang === 'en' ? 'LV' : 'EN';
+  document.getElementById('resourcesNavLink').href = '#resources';
+  document.querySelectorAll('.localized-link').forEach(link => {
+    link.href = link.dataset[`${lang}Href`];
+  });
+  if(window.lucide) lucide.createIcons();
   updateLogo();
   resetGame();
 }
 
 function updateLogo(){
   const logo = document.getElementById('brandLogo');
-  const langKey = lang === 'en' ? 'eng' : 'lat';
+  const aboutLogo = document.getElementById('aboutLogo');
+  const langKey = lang === 'en' ? 'en' : 'lv';
   const shade = theme === 'dark' ? 'white' : 'black';
-  logo.src = `assets/logo-${langKey}-${shade}.png`;
+  logo.src = `assets/official-lu-${langKey}-${shade}.png`;
+  aboutLogo.src = `assets/dhc-logo-${langKey}-${shade}.png`;
+  aboutLogo.alt = lang === 'en' ? 'UL Digital Humanities Centre' : 'LU Digitālo humanitāro zinātņu centrs';
 }
 
 function applyTheme(){
@@ -359,6 +491,16 @@ document.getElementById('themeToggle').addEventListener('click', ()=>{
   theme = theme === 'dark' ? 'light' : 'dark';
   applyTheme();
 });
+const menuToggle = document.getElementById('menuToggle');
+const mainNav = document.getElementById('mainNav');
+menuToggle.addEventListener('click', ()=>{
+  const isOpen = mainNav.classList.toggle('open');
+  menuToggle.setAttribute('aria-expanded', String(isOpen));
+});
+mainNav.querySelectorAll('a').forEach(link => link.addEventListener('click', ()=>{
+  mainNav.classList.remove('open');
+  menuToggle.setAttribute('aria-expanded', 'false');
+}));
 document.getElementById('playAgainBtn').addEventListener('click', resetGame);
 document.getElementById('showAllBtn').addEventListener('click', ()=>{
   if(lockBoard) return;
@@ -374,6 +516,18 @@ document.getElementById('showAllBtn').addEventListener('click', ()=>{
   }, 2400);
 });
 
+const fontScales = [0.92, 1, 1.14];
+let fontScaleIndex = Number(localStorage.getItem('dhc-font-scale') || 1);
+function applyFontScale(){
+  fontScaleIndex = Math.max(0, Math.min(fontScales.length - 1, fontScaleIndex));
+  document.documentElement.style.setProperty('--font-scale', fontScales[fontScaleIndex]);
+  document.getElementById('fontDecrease').disabled = fontScaleIndex === 0;
+  document.getElementById('fontIncrease').disabled = fontScaleIndex === fontScales.length - 1;
+  localStorage.setItem('dhc-font-scale', fontScaleIndex);
+}
+document.getElementById('fontDecrease').addEventListener('click', ()=>{ fontScaleIndex--; applyFontScale(); });
+document.getElementById('fontIncrease').addEventListener('click', ()=>{ fontScaleIndex++; applyFontScale(); });
+
 const hash = window.location.hash.replace('#','').toLowerCase();
 if(hash === 'en'){
   lang = 'en';
@@ -381,6 +535,27 @@ if(hash === 'en'){
   lang = 'lv';
 }
 
+function buildResourceDotArt(){
+  const patterns = {
+    'visual-teikas':[26,27,28,29,34,35,36,37],
+    'visual-aira':[3,4,11,12,19,20,27,28,35,36,43,44,51,52,59,60],
+    'visual-dh':[9,14,18,21,27,28,35,36,42,45,49,54]
+  };
+  document.querySelectorAll('.resource-dot-art').forEach(art=>{
+    const type = Object.keys(patterns).find(name=>art.classList.contains(name));
+    const accents = new Set(patterns[type] || []);
+    const fragment = document.createDocumentFragment();
+    for(let index=0;index<64;index++){
+      const dot = document.createElement('span');
+      if(accents.has(index)) dot.className = 'is-accent';
+      fragment.appendChild(dot);
+    }
+    art.replaceChildren(fragment);
+  });
+}
+
 buildNetBg();
+buildResourceDotArt();
+applyFontScale();
 applyTheme();
 applyLang();

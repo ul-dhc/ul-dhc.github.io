@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digitālie resursi un rīki – LU DHC</title>
+  <meta name="description" content="LU Digitālo humanitāro zinātņu centra digitālie resursi un rīki.">
+  <link rel="icon" type="image/png" href="assets/favicon.png?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans:wght@400;500;600&family=Noto+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-light resources-page" data-lang="lv">
+  <div class="bg-net" aria-hidden="true"><svg viewBox="0 0 800 800" preserveAspectRatio="xMidYMid slice"><g class="net-dots"></g></svg></div>
+  <div class="page">
+    <header class="topbar">
+      <a class="brand" href="index.html#lv" aria-label="Sākums"><img class="logo" id="brandLogo" src="assets/official-lu-lv-white.png" alt="Latvijas Universitāte"></a>
+      <nav class="main-nav" id="mainNav" aria-label="Galvenā navigācija">
+        <a href="index.html#about-us" data-i18n="navAbout">Par mums</a>
+        <a href="#top" data-i18n="navResources">Digitālie resursi un rīki</a>
+        <a href="index.html#projects" data-i18n="navProjects">Projekti</a>
+        <a href="index.html#team" data-i18n="navTeam">Komanda</a>
+        <a href="index.html#contacts" data-i18n="navContact">Kontakti</a>
+      </nav>
+      <div class="topbar-controls">
+        <div class="font-controls" aria-label="Teksta izmērs"><button id="fontDecrease" type="button" aria-label="Samazināt teksta izmēru">A−</button><button id="fontIncrease" type="button" aria-label="Palielināt teksta izmēru">A+</button></div>
+        <button id="langToggle" class="lang-btn" type="button">EN</button><span class="control-divider"></span>
+        <button id="themeToggle" class="icon-control theme-btn" type="button" aria-label="Pārslēgt krāsu režīmu"><i data-lucide="sun"></i></button>
+        <button id="menuToggle" class="icon-control menu-btn" type="button" aria-label="Atvērt izvēlni" aria-expanded="false"><span></span><span></span></button>
+      </div>
+    </header>
+    <main id="top">
+      <section class="resources-page-hero"><p class="eyebrow">LU DHC</p><h1 data-i18n="resourceTitle">Digitālie resursi un rīki</h1></section>
+      <section class="resources resources-catalog" aria-label="Digitālie resursi un rīki">
+        <a class="resource-card resource-teikas" href="https://dhc.lu.lv/teikas" target="_blank" rel="noopener"><div class="resource-visual resource-dot-art visual-teikas" aria-hidden="true"></div><div class="resource-copy"><h3 data-i18n="teikasTitle">Teikas</h3><p data-i18n="teikasDesc">Digitāls resurss latviešu tautas teiku meklēšanai, analīzei un kartēšanai.</p><span class="text-link"><span data-i18n="openResourceDev">Atvērt resursu (izstrādē)</span><i data-lucide="arrow-right"></i></span></div></a>
+        <a class="resource-card resource-aira" href="http://dhc.lu.lv/aiRA" target="_blank" rel="noopener"><div class="resource-visual resource-dot-art visual-aira" aria-hidden="true"></div><div class="resource-copy"><h3>aiRA</h3><p data-i18n="airaDesc">Rīks rokraksta atšifrēšanai un attēlu aprakstīšanai ar mākslīgā intelekta palīdzību.</p><span class="text-link"><span data-i18n="openTool">Atvērt rīku</span><i data-lucide="arrow-right"></i></span></div></a>
+        <a class="resource-card resource-dh" href="https://digitalhumanities.lv/" target="_blank" rel="noopener"><div class="resource-visual resource-dot-art visual-dh" aria-hidden="true"></div><div class="resource-copy"><h3>digitalhumanities.lv</h3><p data-i18n="dhDesc">Platforma ziņām, resursiem un projektiem digitālajās humanitārajās zinātnēs Latvijā.</p><span class="text-link"><span data-i18n="viewSite">Apskatīt vietni</span><i data-lucide="arrow-right"></i></span></div></a>
+      </section>
+      <section class="contact-section"><h2 data-i18n="navContact">Kontakti</h2><div class="contact-details"><a href="mailto:dhc@lu.lv"><i data-lucide="mail"></i><span>dhc@lu.lv</span></a><a href="https://www.google.com/maps/search/?api=1&query=Visval%C5%BEa+iela+4a%2C+R%C4%ABga" target="_blank" rel="noopener"><i data-lucide="map-pin"></i><address data-i18n="address">Visvalža iela 4a–207, Rīga, LV–1050</address></a></div></section>
+      <footer class="site-footer"><span data-i18n="footerText">LU Digitālo humanitāro zinātņu centrs, 2026</span></footer>
+    </main>
+  </div>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script src="resources-page.js"></script>
+  <script data-goatcounter="https://ludhc.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

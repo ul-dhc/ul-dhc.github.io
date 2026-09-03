@@ -1,94 +1,182 @@
 <!DOCTYPE html>
 <html lang="lv">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LU DHC</title>
-<meta name="description" content="Digital Humanities Center, University of Latvia">
-
-<meta property="og:title" content="Digital Humanities Center – University of Latvia">
-<meta property="og:description" content="Our new website is being developed. Meanwhile, play the memory game.">
-<meta property="og:image" content="https://ul-dhc.github.io/assets/logo-eng-black.png">
-<meta property="og:url" content="https://ul-dhc.github.io/">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Digital Humanities Center – University of Latvia">
-<meta name="twitter:description" content="Our new website is being developed. Meanwhile, play the memory game.">
-<meta name="twitter:image" content="https://ul-dhc.github.io/assets/logo-eng-black.png">
-<link rel="icon" type="image/png" href="assets/favicon.png?v=2">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071426">
+  <title>LU Digitālo humanitāro zinātņu centrs</title>
+  <meta name="description" content="Latvijas Universitātes Digitālo humanitāro zinātņu centrs – pētniecība, digitālie resursi un sadarbība.">
+  <meta property="og:title" content="LU Digitālo humanitāro zinātņu centrs">
+  <meta property="og:description" content="Saviļņo humanitārās zinātnes digitāli.">
+  <meta property="og:image" content="https://ul-dhc.github.io/assets/logo-lat-black.png">
+  <meta property="og:url" content="https://ul-dhc.github.io/">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="assets/favicon.png?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans:wght@400;500;600&family=Noto+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="theme-dark" data-lang="lv">
+<body class="theme-light" data-lang="lv">
+  <div class="bg-net" aria-hidden="true">
+    <svg viewBox="0 0 800 800" preserveAspectRatio="xMidYMid slice"><g class="net-dots"></g></svg>
+  </div>
 
-<div class="bg-net" aria-hidden="true">
-  <svg viewBox="0 0 800 800" preserveAspectRatio="xMidYMid slice">
-    <g class="net-dots"></g>
-  </svg>
-</div>
-
-<div class="page">
-
-  <header class="topbar">
-    <img class="logo" id="brandLogo" src="assets/logo-eng-white.png" alt="Digital Humanities Center, University of Latvia">
-    <div class="topbar-controls">
-      <button id="langToggle" class="pill-btn" type="button" aria-label="Switch language">EN</button>
-      <button id="themeToggle" class="pill-btn icon-btn" type="button" aria-label="Toggle light and dark theme">
-        <svg id="themeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-      </button>
-    </div>
-  </header>
-
-  <main class="layout">
-
-    <section class="intro">
-      <h1 class="headline" data-i18n="headline">Breathing<br>humanities<br><span class="accent">digitally.</span></h1>
-      <p class="lede" data-i18n="lede">Our new website is being developed.</p>
-
-      <div class="link-row">
-        <span class="link-icon" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V9a3 3 0 0 1 6 0v1"/><circle cx="12" cy="18" r="3"/></svg>
-        </span>
-        <span class="link-text">
-          <strong data-i18n="playTitle">Play the memory game!</strong>
-        </span>
-      </div>
-
-      <a class="link-row" href="mailto:dhc@lu.lv">
-        <span class="link-icon" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-        </span>
-        <span class="link-text"><strong>dhc@lu.lv</strong></span>
+  <div class="page">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Sākums">
+        <img class="logo" id="brandLogo" src="assets/official-lu-lv-white.png" alt="Latvijas Universitāte">
       </a>
-    </section>
-
-    <section class="board-wrap">
-      <div class="board-header">
-        <span class="board-title" data-i18n="boardTitle">Find all matching pairs</span>
-        <span class="moves-pill"><span data-i18n="moves">Moves</span>: <span id="movesCount">0</span></span>
-      </div>
-
-      <div id="board" class="board" role="group" aria-label="Memory game board"></div>
-
-      <div id="statusMsg" class="status-msg" aria-live="polite"></div>
-
-      <button id="showAllBtn" class="show-all-btn" type="button" data-i18n="showAll">Izlaist spēli</button>
-
-      <div id="winPanel" class="win-panel" hidden>
-        <p class="win-flag" data-i18n="winFlag">You connected them all!</p>
-        <div id="winGrid" class="win-grid"></div>
-        <button id="playAgainBtn" class="pill-btn" type="button">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg>
-          <span data-i18n="playAgain">Play again</span>
+      <nav class="main-nav" id="mainNav" aria-label="Galvenā navigācija">
+        <a href="#about-us" data-i18n="navAbout">Par mums</a>
+        <a id="resourcesNavLink" href="#resources" data-i18n="navResources">Digitālie resursi un rīki</a>
+        <a href="#projects" data-i18n="navProjects">Projekti</a>
+        <a href="#team" data-i18n="navTeam">Komanda</a>
+        <a href="#contacts" data-i18n="navContact">Kontakti</a>
+      </nav>
+      <div class="topbar-controls">
+        <div class="font-controls" aria-label="Teksta izmērs">
+          <button id="fontDecrease" type="button" aria-label="Samazināt teksta izmēru">A−</button>
+          <button id="fontIncrease" type="button" aria-label="Palielināt teksta izmēru">A+</button>
+        </div>
+        <button id="langToggle" class="lang-btn" type="button" aria-label="Switch language">EN</button>
+        <span class="control-divider" aria-hidden="true"></span>
+        <button id="themeToggle" class="icon-control theme-btn" type="button" aria-label="Pārslēgt gaišo un tumšo režīmu">
+          <svg id="themeIcon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+        </button>
+        <button id="menuToggle" class="icon-control menu-btn" type="button" aria-label="Atvērt izvēlni" aria-expanded="false" aria-controls="mainNav">
+          <span></span><span></span>
         </button>
       </div>
-    </section>
+    </header>
 
-  </main>
-</div>
+    <main id="top">
+      <section class="hero">
+        <div class="intro">
+          <h1 class="headline" data-i18n="headline">LU Digitālo<br>humanitāro<br>zinātņu centrs</h1>
+          <p class="tagline" data-i18n="tagline">Saviļņo humanitārās zinātnes digitāli.</p>
+          <p class="lede" data-i18n="lede">Apvienojam humanitāro zinātņu pētniecību un digitālās metodes, lai padziļinātu izpratni par kultūru un valodu.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#about-us">
+              <span data-i18n="learnMore">Uzzināt vairāk</span><i data-lucide="arrow-right" aria-hidden="true"></i>
+            </a>
+            <a class="button button-secondary" href="#contacts" data-i18n="contactUs">Sazināties ar mums</a>
+          </div>
+        </div>
 
-<script src="script.js"></script>
+        <section class="board-wrap" aria-labelledby="gameTitle">
+          <div class="board-header" aria-hidden="true"></div>
+          <div id="board" class="board" role="group" aria-label="Atmiņas spēles laukums"></div>
+          <div id="statusMsg" class="status-msg" aria-live="polite"></div>
+          <div class="game-controls">
+            <button id="showAllBtn" class="show-all-btn" type="button" data-i18n="showAll">Izlaist spēli</button>
+            <div class="game-meta"><span data-i18n="moves">Gājieni</span>: <span id="movesCount">0</span></div>
+          </div>
+          <div id="winPanel" class="win-panel" hidden>
+            <p class="win-flag" data-i18n="winFlag">Lielisks veikums!</p>
+            <div id="winGrid" class="win-grid"></div>
+            <button id="playAgainBtn" class="show-all-btn play-again-btn" type="button">
+              <span data-i18n="playAgain">Spēlēt vēlreiz</span>
+            </button>
+          </div>
+        </section>
+      </section>
+
+      <section class="about-details" id="about-us" aria-labelledby="aboutTitle">
+        <div class="section-heading stacked-heading">
+          <h2 id="aboutTitle" data-i18n="aboutEyebrow">Par mums</h2>
+          <p data-i18n="aboutCopy">Latvijas Universitātes Humanitāro zinātņu fakultātes Digitālo humanitāro zinātņu centrs (LU DHC), dibināts 2025. gada februārī, ir dinamiska vienība stratēģiskai digitālo humanitāro zinātņu attīstībai Latvijas Universitātē un Latvijā. Centra mērķis ir stiprināt šo starpdisciplināro jomu, darbojoties pētniecībā, izglītībā, digitālās infrastruktūras attīstībā, kā arī īstenojot starptautisko sadarbību. Centru vada asociētā tenūrprofesore Sanita Reinsone.</p>
+          <img id="aboutLogo" class="about-logo" src="assets/dhc-logo-lv-white.png" alt="LU Digitālo humanitāro zinātņu centrs">
+        </div>
+        <div class="focus-grid">
+          <article><i data-lucide="microscope" aria-hidden="true"></i><h3 data-i18n="focusResearch">Pētniecība</h3><p data-i18n="focusResearchCopy">Starptautiski pētniecības un attīstības projekti digitālā kultūras mantojuma, digitālās folkloristikas, dzīves pierakstīšanas, valodu tehnoloģiju un mākslīgā intelekta jomās, kā arī digitālās transformācijas procesu, tostarp interneta vēstures izpēte Latvijā, kā arī citas tēmas saistībā ar digitālajām humanitārajām zinātnēm.</p></article>
+          <article><i data-lucide="graduation-cap" aria-hidden="true"></i><h3 data-i18n="focusEducation">Izglītība</h3><p data-i18n="focusEducationCopy">Digitālo humanitāro zinātņu studiju kurss dažādās LU HZF bakalaura studiju programmās, Baltijas Digitālo humanitāro zinātņu vasaras skolas organizēšana un dalība starptautisko studiju kursu un mācību materiālu izstrāde.</p></article>
+          <article><i data-lucide="network" aria-hidden="true"></i><h3 data-i18n="focusInfrastructure">Humanitāro zinātņu digitālā infrastruktūra</h3><p data-i18n="focusInfrastructureCopy">Resursu veidošana un attīstīšana sadarbībā ar partneriem, konsultāciju sniegšana, kā arī daudzveidīga starptautiskā sadarbība, tostarp iesaiste DARIAH-EU un CLARIN-LV.</p></article>
+          <article><i data-lucide="users" aria-hidden="true"></i><h3 data-i18n="focusCommunity">DH komunikācija un sadarbība</h3><p data-i18n="focusCommunityCopy">Pasākumu organizēšana, sadarbības veicināšana LU un ārpus tās, digitālās sabiedriskās zinātnes iniciatīvu īstenošana, kā arī digitālo humanitāro zinātņu atpazīstamības stiprināšana, tostarp koordinējot Latvijas digitālo humanitāro zinātņu sadarbības platformu digitalhumanities.lv.</p></article>
+        </div>
+      </section>
+
+      <section class="resources" id="resources" aria-labelledby="resourcesTitle">
+        <div class="section-heading">
+          <h2 id="resourcesTitle" data-i18n="featuredResources">Resursi un rīki</h2>
+        </div>
+
+        <a class="resource-card resource-teikas" href="https://dhc.lu.lv/teikas" target="_blank" rel="noopener">
+          <div class="resource-visual resource-dot-art visual-teikas" aria-hidden="true"></div>
+          <div class="resource-copy">
+            <h3 data-i18n="teikasTitle">Teikas</h3>
+            <p data-i18n="teikasDesc">Digitāls resurss latviešu tautas teiku meklēšanai, analīzei un kartēšanai.</p>
+            <span class="text-link"><span data-i18n="openResourceDev">Atvērt resursu (izstrādē)</span> <i data-lucide="arrow-right"></i></span>
+          </div>
+        </a>
+
+        <a class="resource-card resource-aira" id="aira" href="http://dhc.lu.lv/aiRA" target="_blank" rel="noopener">
+          <div class="resource-visual resource-dot-art visual-aira" aria-hidden="true"></div>
+          <div class="resource-copy">
+            <h3>aiRA</h3>
+            <p data-i18n="airaDesc">Rīks rokraksta atšifrēšanai un attēlu aprakstīšanai ar mākslīgā intelekta palīdzību.</p>
+            <span class="text-link"><span data-i18n="openTool">Atvērt rīku</span> <i data-lucide="arrow-right"></i></span>
+          </div>
+        </a>
+
+        <a class="resource-card resource-dh" href="https://digitalhumanities.lv/" target="_blank" rel="noopener">
+          <div class="resource-visual resource-dot-art visual-dh" aria-hidden="true"></div>
+          <div class="resource-copy">
+            <h3>digitalhumanities.lv</h3>
+            <p data-i18n="dhDesc">Platforma ziņām, resursiem un projektiem digitālajās humanitārajās zinātnēs Latvijā.</p>
+            <span class="text-link"><span data-i18n="viewSite">Apskatīt vietni</span> <i data-lucide="arrow-right"></i></span>
+          </div>
+        </a>
+      </section>
+
+      <section class="projects-section" id="projects" aria-labelledby="projectsTitle">
+        <div class="section-heading">
+          <h2 id="projectsTitle" data-i18n="navProjects">Projekti</h2>
+        </div>
+        <div class="project-grid">
+          <a class="project-card localized-link" href="https://www.hzf.lu.lv/petnieciba/aktualie-projekti/erasmus-ka2-programmas-projekts-aister/" data-lv-href="https://www.hzf.lu.lv/petnieciba/aktualie-projekti/erasmus-ka2-programmas-projekts-aister/" data-en-href="https://www.hzf.lu.lv/en/research/current-projects/erasmus-ka2-programme-project-aister/" target="_blank" rel="noopener"><span class="project-index">01</span><h3>AISTER</h3><p data-i18n="aisterDesc">Starptautisks Erasmus+ projekts mākslīgā intelekta un sabiedriskās līdzdalības risinājumiem kultūras mantojuma saglabāšanā, īpaši Ukrainā.</p><span class="text-link"><span data-i18n="readMore">Lasīt vairāk</span> <i data-lucide="arrow-right"></i></span></a>
+          <a class="project-card localized-link" href="https://www.hzf.lu.lv/petnieciba/projekti/open/" data-lv-href="https://www.hzf.lu.lv/petnieciba/projekti/open/" data-en-href="https://www.hzf.lu.lv/en/research/current-projects/open/" target="_blank" rel="noopener"><span class="project-index">02</span><h3>ȬPEN</h3><p data-i18n="openDesc">Atvērtu zināšanu ekosistēmas un MI risinājumi sabiedriskās zinātnes, valodu un kultūras mantojuma pieejamības stiprināšanai.</p><span class="text-link"><span data-i18n="readMore">Lasīt vairāk</span> <i data-lucide="arrow-right"></i></span></a>
+          <a class="project-card localized-link" href="https://www.digitalhumanities.lv/projekti/digilate" data-lv-href="https://www.digitalhumanities.lv/projekti/digilate" data-en-href="https://www.digitalhumanities.lv/projects/digilate/" target="_blank" rel="noopener"><span class="project-index">03</span><h3>DigiLATE</h3><p data-i18n="digilateDesc">Valodas resursi un mākslīgā intelekta risinājumi latviešu valodas ilgtspējai digitālajā vidē.</p><span class="text-link"><span data-i18n="readMore">Lasīt vairāk</span> <i data-lucide="arrow-right"></i></span></a>
+          <a class="project-card localized-link" href="https://lulfmi.lv/petijumi/projekti/nams-latviska-identitate-un-zinasanu-strategijas-ka-sabiedribas-noturibas-resurss" data-lv-href="https://lulfmi.lv/petijumi/projekti/nams-latviska-identitate-un-zinasanu-strategijas-ka-sabiedribas-noturibas-resurss" data-en-href="https://lulfmi.lv/en/research/projects/nams-latvian-identity-and-knowledge-strategies-as-resources-for-societal-resilience" target="_blank" rel="noopener"><span class="project-index">04</span><h3>NAMS</h3><p data-i18n="namsDesc">Pētījums par latvisko identitāti un zināšanu stratēģijām kā sabiedrības noturības resursu.</p><span class="text-link"><span data-i18n="readMore">Lasīt vairāk</span> <i data-lucide="arrow-right"></i></span></a>
+        </div>
+      </section>
+
+      <section class="team-section" id="team" aria-labelledby="teamTitle">
+        <div class="section-heading">
+          <h2 id="teamTitle" data-i18n="navTeam">Komanda</h2>
+        </div>
+        <div class="team-grid">
+          <article class="person-card"><div class="person-monogram"><i data-lucide="tree-pine" aria-hidden="true"></i></div>
+<div><h3>Sanita Reinsone, Dr. philol.</h3><p class="role" data-i18n="sanitaRole">asociētā tenūrprofesore, LU DHC vadītāja</p><a href="mailto:sanita.reinsone@lu.lv">sanita.reinsone@lu.lv</a><details><summary data-i18n="researchInterests">Pētnieciskās intereses</summary><p data-i18n="sanitaInterests">Digitālās līdzdalības metodes, digitālā folkloristika un kultūras mantojums, digitālās humanitāro zinātņu infrastruktūras, zinātnes spēles, digitālie arhīvi un dzīves pierakstīšanas prakses.</p></details><div class="profile-links"><a href="https://research.lu.lv/lv/persons/sanita-reinsone" target="_blank" rel="noopener"><span data-i18n="luProfile">LU profils</span><i data-lucide="external-link"></i></a><a href="https://orcid.org/0000-0003-1980-5450" target="_blank" rel="noopener">ORCID<i data-lucide="external-link"></i></a><a href="https://www.sanitareinsone.lv" target="_blank" rel="noopener"><span data-i18n="personalWebsite">Personīgā vietne</span><i data-lucide="external-link"></i></a></div></div></article>
+          <article class="person-card"><div class="person-monogram"><i data-lucide="sun" aria-hidden="true"></i></div>
+<div><h3>Ilze Ļaksa-Timinska, PhD</h3><p class="role" data-i18n="ilzeRole">vecākā eksperte</p><a href="mailto:ilze.laksa-timinska@lu.lv">ilze.laksa-timinska@lu.lv</a><details><summary data-i18n="researchInterests">Pētnieciskās intereses</summary><p data-i18n="ilzeInterests">Digitālie arhīvi, digitalizēšana, NLP, autobiogrāfiskie materiāli, naratīvu pētniecība, mākslas un politikas attiecības.</p></details><div class="profile-links"><a href="https://research.lu.lv/lv/persons/ilze-%C4%BCaksa-timinska" target="_blank" rel="noopener"><span data-i18n="luProfile">LU profils</span><i data-lucide="external-link"></i></a><a href="https://orcid.org/0000-0001-7213-4954" target="_blank" rel="noopener">ORCID<i data-lucide="external-link"></i></a></div></div></article>
+          <article class="person-card"><div class="person-monogram"><i data-lucide="leaf" aria-hidden="true"></i></div>
+<div><h3>Luīze Frančeska Dakša</h3><p class="role" data-i18n="luizeRole">zinātniskā asistenta p. i., doktorante</p><a href="mailto:luize_franceska.daksa@lu.lv">luize_franceska.daksa@lu.lv</a><details><summary data-i18n="researchInterests">Pētnieciskās intereses</summary><p data-i18n="luizeInterests">Digitālā arhivēšana un akadēmiskā izdevniecība, datu vizualizācija, atvērtā zinātne, dzīves rakstība un digitālā folklora.</p></details><div class="profile-links"><a href="https://research.lu.lv/lv/persons/lu%C4%ABze-fran%C4%8Deska-dak%C5%A1a/" target="_blank" rel="noopener"><span data-i18n="luProfile">LU profils</span><i data-lucide="external-link"></i></a><a href="https://orcid.org/0000-0002-1861-0638" target="_blank" rel="noopener">ORCID<i data-lucide="external-link"></i></a></div></div></article>
+          <article class="person-card"><div class="person-monogram"><i data-lucide="mountain" aria-hidden="true"></i></div>
+<div><h3>Viesturs Vēveris</h3><p class="role" data-i18n="viestursRole">zinātniskā asistenta p. i., doktorants</p><a href="mailto:viesturs.veveris@lu.lv">viesturs.veveris@lu.lv</a><details><summary data-i18n="researchInterests">Pētnieciskās intereses</summary><p data-i18n="viestursInterests">IKT tehnoloģijas ikdienas dzīvē, mutvārdu vēsture un datu vizualizēšana.</p></details><div class="profile-links"><a href="https://research.lu.lv/lv/persons/viesturs-v%C4%93veris" target="_blank" rel="noopener"><span data-i18n="luProfile">LU profils</span><i data-lucide="external-link"></i></a><a href="https://orcid.org/0009-0006-1632-4378" target="_blank" rel="noopener">ORCID<i data-lucide="external-link"></i></a></div></div></article>
+          <article class="person-card"><div class="person-monogram"><i data-lucide="waves" aria-hidden="true"></i></div>
+<div><h3>Haralds Matulis</h3><p class="role" data-i18n="haraldsRole">doktorants</p><span class="staff-note" data-i18n="externalStaff">Ārējais darbinieks</span><a href="mailto:haralds.matulis@lu.lv">haralds.matulis@lu.lv</a><details><summary data-i18n="researchInterests">Pētnieciskās intereses</summary><p data-i18n="haraldsInterests">Digitālās humanitārās zinātnes, datu pārvaldība, pētniecības infrastruktūra, dzīves rakstīšana un literatūrzinātne.</p></details><div class="profile-links"><a href="https://research.lu.lv/lv/persons/haralds-matulis" target="_blank" rel="noopener"><span data-i18n="luProfile">LU profils</span><i data-lucide="external-link"></i></a><a href="https://orcid.org/0000-0002-0142-7677" target="_blank" rel="noopener">ORCID<i data-lucide="external-link"></i></a></div></div></article>
+          <article class="person-card"><div class="person-monogram"><i data-lucide="bird" aria-hidden="true"></i></div>
+<div><h3>Edeite Laime</h3><p class="role" data-i18n="edeiteRole">zinātniskā asistenta p. i., maģistrantūras studente</p><a href="mailto:edeite.laime@lu.lv">edeite.laime@lu.lv</a><details><summary data-i18n="researchInterests">Pētnieciskās intereses</summary><p data-i18n="edeiteInterests">Latgaliešu valodas vēsture, sociolingvistika un normēšana, digitālās humanitārās zinātnes un folkloras arhīvi.</p></details><div class="profile-links"><a href="https://research.lu.lv/en/persons/edeite-laime" target="_blank" rel="noopener"><span data-i18n="luProfile">LU profils</span><i data-lucide="external-link"></i></a><a href="https://orcid.org/0009-0008-4117-9250" target="_blank" rel="noopener">ORCID<i data-lucide="external-link"></i></a></div></div></article>
+          <article class="person-card"><div class="person-monogram"><i data-lucide="sprout" aria-hidden="true"></i></div>
+<div><h3>Simona Kaščejeva</h3><p class="role" data-i18n="simonaRole">laborante, bakalaura studente</p><a href="mailto:simona.kascejeva@lu.lv">simona.kascejeva@lu.lv</a><details><summary data-i18n="researchInterests">Pētnieciskās intereses</summary><p data-i18n="simonaInterests">Datu vizualizācija, digitalizēšana un teikas.</p></details><div class="profile-links"><a href="https://research.lu.lv/en/persons/simona-ka%C5%A1%C4%8Dejeva" target="_blank" rel="noopener"><span data-i18n="luProfile">LU profils</span><i data-lucide="external-link"></i></a><a href="https://orcid.org/0009-0001-0775-2315" target="_blank" rel="noopener">ORCID<i data-lucide="external-link"></i></a></div></div></article>
+        </div>
+      </section>
+
+      <section class="contact-section" id="contacts" aria-labelledby="contactTitle">
+        <h2 id="contactTitle" data-i18n="navContact">Kontakti</h2>
+        <div class="contact-details">
+          <a href="mailto:dhc@lu.lv"><i data-lucide="mail"></i><span>dhc@lu.lv</span></a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Visval%C5%BEa+iela+4a%2C+R%C4%ABga" target="_blank" rel="noopener"><i data-lucide="map-pin"></i><address data-i18n="address">Visvalža iela 4a–207, Rīga, LV–1050</address></a>
+        </div>
+      </section>
+      <footer class="site-footer"><span data-i18n="footerText">LU Digitālo humanitāro zinātņu centrs, 2026</span></footer>
+    </main>
+  </div>
+
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script src="script.js"></script>
+  <script data-goatcounter="https://ludhc.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

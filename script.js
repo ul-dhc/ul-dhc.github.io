@@ -211,17 +211,22 @@ let lockBoard = false;
 let revealTimer = null;
 let isFinishing = false;
 
+function shuffledCopy(items){
+  const shuffled = [...items];
+  for(let i=shuffled.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [shuffled[i],shuffled[j]] = [shuffled[j],shuffled[i]];
+  }
+  return shuffled;
+}
+
 function buildDeck(){
   const cards = [];
   TERMS.forEach(t=>{
     cards.push({ pairId:t.id, icon:t.icon, term:t });
     cards.push({ pairId:t.id, icon:t.icon, term:t });
   });
-  for(let i=cards.length-1;i>0;i--){
-    const j = Math.floor(Math.random()*(i+1));
-    [cards[i],cards[j]] = [cards[j],cards[i]];
-  }
-  return cards;
+  return shuffledCopy(cards);
 }
 
 function renderBoard(){
@@ -316,8 +321,8 @@ function showWin(){
   const winPanel = document.getElementById('winPanel');
   const grid = document.getElementById('winGrid');
   grid.innerHTML = '';
-  TERMS.forEach((t, index)=>{
-    const colorName = COLOR_VARS[index];
+  shuffledCopy(TERMS).forEach((t, index)=>{
+    const colorName = COLOR_VARS[TERMS.findIndex(term => term.id === t.id)];
     const item = document.createElement('div');
     item.className = 'win-item';
     item.dataset.pair = t.id;

@@ -161,7 +161,7 @@ const STR = {
     privacy:'Privātuma politika'
     ,aboutEyebrow:'Par mums',
     aboutTitle:'Pētniecība, izglītība un sadarbība',
-    aboutCopy:'Latvijas Universitātes Humanitāro zinātņu fakultātes Digitālo humanitāro zinātņu centrs (LU DHC), dibināts 2025. gada februārī, ir dinamiska vienība stratēģiskai digitālo humanitāro zinātņu attīstībai Latvijas Universitātē un Latvijā. Centra mērķis ir stiprināt šo starpdisciplināro jomu, darbojoties pētniecībā, izglītībā, digitālās infrastruktūras attīstībā, kā arī īstenojot starptautisko sadarbību. Centru vada asociētā profesore Sanita Reinsone.',
+    aboutCopy:'Latvijas Universitātes Humanitāro zinātņu fakultātes Digitālo humanitāro zinātņu centrs (LU DHC), dibināts 2025. gada februārī, ir dinamiska vienība stratēģiskai digitālo humanitāro zinātņu attīstībai Latvijas Universitātē un Latvijā. Centra mērķis ir stiprināt šo starpdisciplināro jomu, darbojoties pētniecībā, izglītībā, digitālās infrastruktūras attīstībā, kā arī īstenojot starptautisko sadarbību. Centru vada asociētā tenūrprofesore Sanita Reinsone.',
     focusResearch:'Pētniecība',
     focusResearchCopy:'Starptautiski pētniecības un attīstības projekti digitālā kultūras mantojuma, digitālās folkloristikas, dzīves pierakstīšanas, valodu tehnoloģiju un mākslīgā intelekta jomās, kā arī digitālās transformācijas procesu, tostarp interneta vēstures izpēte Latvijā, kā arī citas tēmas saistībā ar digitālajām humanitārajām zinātnēm.',
     focusEducation:'Izglītība',
@@ -178,7 +178,7 @@ const STR = {
     readMore:'Lasīt vairāk',
     featuredResources:'Resursi un rīki',
     teamEyebrow:'LU DHC komanda',
-    sanitaRole:'asociētā profesore, LU DHC vadītāja',
+    sanitaRole:'asociētā tenūrprofesore, LU DHC vadītāja',
     ilzeRole:'vecākā eksperte',
     luizeRole:'zinātniskā asistenta p. i., doktorante',
     viestursRole:'zinātniskā asistenta p. i., doktorants',

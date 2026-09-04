@@ -406,7 +406,7 @@ document.addEventListener('submit', (event) => {
   setTimeout(showNotice, 700);
 }, true);
 
-if (!['#lv', '#en', '#info'].includes(location.hash.toLowerCase())) {
+if (!['#lv', '#en', '#info', '#apsveikumi', '#greetings'].includes(location.hash.toLowerCase())) {
   history.replaceState(null, '', '#lv');
 }
 

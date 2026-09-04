@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="lv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Lapa nav atrasta</title>
+  <script>
+    (() => {
+      const { pathname, search, hash } = window.location;
+      if (pathname === '/lu107' || pathname.startsWith('/lu107/')) {
+        const targetPath = `/LU107${pathname.slice('/lu107'.length) || '/'}`;
+        window.location.replace(`${targetPath}${search}${hash}`);
+      }
+    })();
+  </script>
+</head>
+<body>
+  <p>Lapa nav atrasta. <a href="/">Atgriezties sākumlapā</a>.</p>
+</body>
+</html>

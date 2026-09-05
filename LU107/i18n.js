@@ -258,6 +258,10 @@ function translatePage(language) {
   ensureGamePreview();
   ensureWishWallLayout();
 
+  const gameUrl = `https://researchgames.eu/games/LU107/?lang=${lang}`;
+  const gameCard = document.querySelector('.game-launch-card');
+  if (gameCard) gameCard.href = gameUrl;
+
   const headerLogo = document.querySelector('.site-header .brand img');
   if (headerLogo) {
     headerLogo.src = t.headerLogo;
@@ -327,7 +331,7 @@ function translatePage(language) {
 
   const fullscreenLink = document.querySelector('.browser-bar a');
   if (fullscreenLink) {
-    fullscreenLink.href = 'https://researchgames.eu/games/LU107/';
+    fullscreenLink.href = gameUrl;
     fullscreenLink.target = '_blank';
     fullscreenLink.rel = 'noopener';
   }

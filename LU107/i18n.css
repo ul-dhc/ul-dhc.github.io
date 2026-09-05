@@ -446,6 +446,40 @@ html[lang="en"] .wish-heading .wall-total::after {
     gap: 12px;
   }
 
+  .voice-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .voice-heading > div:first-child {
+    display: contents;
+  }
+
+  .voice-heading .section-label {
+    order: 1;
+  }
+
+  .voice-heading h2 {
+    order: 2;
+  }
+
+  .voice-logo {
+    order: 3;
+    width: 100%;
+    margin: 18px auto 26px;
+  }
+
+  .voice-logo img {
+    width: min(300px, 88vw);
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .voice-heading > div:first-child > p:last-child {
+    order: 4;
+  }
+
   .voice-option {
     min-height: 280px;
     padding: 26px;

@@ -38,9 +38,9 @@ const translations = {
     fullscreen: 'Pilnekrāna režīms',
     gamePreviewKicker: 'Uzspēlē LU-107 jubilejas spēli!',
     gamePreviewTitle: 'Cik labi Tu pazīsti Latvijas Universitāti?',
-    gamePreviewText: '18 uzdevumi piecās kārtās · aptuveni 5–7 minūtes · līdz 200 punktiem.',
-    gameRounds: ['LU vēsture', 'LU mūsdienās', 'Kultūra un sports LU', 'Atpazīsti vietu', 'Fināla izaicinājums'],
-    gameRoundCounts: ['5 jautājumi', '5 jautājumi', '5 jautājumi', '1 uzdevums', '2 uzdevumi'],
+    gamePreviewText: '23 uzdevumi piecās kārtās · aptuveni 7–9 minūtes · līdz 250 punktiem.',
+    gameRounds: ['LU vēsture', 'LU mūsdienās', 'Studentu dzīve LU', 'Kultūra un sports LU', 'Fināla izaicinājums'],
+    gameRoundCounts: ['5 jautājumi', '5 jautājumi', '5 jautājumi', '5 jautājumi', '3 uzdevumi'],
     gameLaunch: 'Atvērt spēli',
     wishAnchor: 'apsveikumi',
     wishTitle: 'Apsveikumu siena',
@@ -105,9 +105,9 @@ const translations = {
     fullscreen: 'Full-screen mode',
     gamePreviewKicker: 'Play the LU-107 anniversary game!',
     gamePreviewTitle: 'How well do you know the University of Latvia?',
-    gamePreviewText: '18 tasks in five rounds · approximately 5–7 minutes · up to 200 points.',
-    gameRounds: ['UL History', 'UL Today', 'Culture & Sports at UL', 'Recognise the Place', 'Final Challenge'],
-    gameRoundCounts: ['5 questions', '5 questions', '5 questions', '1 task', '2 tasks'],
+    gamePreviewText: '23 tasks in five rounds · approximately 7–9 minutes · up to 250 points.',
+    gameRounds: ['UL History', 'UL Today', 'Student Life at UL', 'Culture & Sports at UL', 'Final Challenge'],
+    gameRoundCounts: ['5 questions', '5 questions', '5 questions', '5 questions', '3 tasks'],
     gameLaunch: 'Open the game',
     wishAnchor: 'greetings',
     wishTitle: 'Birthday wall',
@@ -203,7 +203,7 @@ function ensureGamePreview() {
   card.target = '_blank';
   card.rel = 'noopener';
   const diagonalIcon = document.querySelector('.voice-option b svg')?.cloneNode(true);
-  const roundImages = ['card-history.jpg', 'card-today.jpg', 'card-culture.jpg', 'card-image.png', 'card-final.jpg'];
+  const roundImages = ['card-history.jpg', 'card-today.jpg', 'card-student-life.jpg', 'card-culture.jpg', 'card-final.jpg'];
   const rounds = roundImages.map((image, index) => `<li><div class="game-round-copy"><span class="game-round-number">${index + 1}</span><span class="game-round-name"></span></div><div class="game-round-photo" aria-hidden="true"><img src="https://researchgames.eu/games/LU107/assets/${image}" alt=""></div><span class="game-round-count"></span></li>`).join('');
   card.innerHTML = `<div class="game-launch-copy"><p class="game-launch-kicker"></p><h3 class="game-launch-title"></h3><p class="game-launch-text"></p><ul class="game-rounds">${rounds}</ul><span class="game-launch-button"><span class="game-launch-label"></span></span></div>`;
   if (diagonalIcon) card.querySelector('.game-launch-button')?.append(diagonalIcon);

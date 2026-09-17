@@ -271,7 +271,7 @@ function translatePage(language) {
     document.querySelector('.hero-button')?.before(programmeLink);
   }
 
-  const gameUrl = 'https://researchgames.eu/games/LU107/';
+  const gameUrl = `https://researchgames.eu/games/LU107/#${lang}`;
   const gameCard = document.querySelector('.game-launch-card');
   if (gameCard) gameCard.href = gameUrl;
 

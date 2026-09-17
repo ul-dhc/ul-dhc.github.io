@@ -1,0 +1,202 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap");
+
+:root {
+  --navy: #002d74;
+  --blue: #002d74;
+  --cream: #f5f7fb;
+  --gold: #ffb60f;
+  --ink: #222223;
+  --lu-blue: #002d74;
+  --lu-gray: #b1b3b3;
+  --lu-gold: #ffb60f;
+  --font-display: "Cinzel", Georgia, "Times New Roman", serif;
+  --font-body: "Raleway", Arial, Helvetica, sans-serif;
+}
+
+html,
+body,
+button,
+input,
+textarea,
+select {
+  font-family: var(--font-body);
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+}
+
+h1,
+h2,
+h3,
+.choice-intro h2,
+.section-heading h2,
+.wish-heading h2,
+.voice-heading h2,
+.choice h3,
+.voice-option h3,
+.project-info-dialog h2,
+.game-launch-title,
+.game-round-name,
+.wall-total strong {
+  font-family: var(--font-display);
+}
+
+.site-header,
+.hero,
+.site-footer,
+.wish-form {
+  background-color: var(--lu-blue);
+}
+
+.hero-photo {
+  background:
+    linear-gradient(90deg, var(--lu-blue) 0%, rgb(0 45 116 / 82%) 24%, rgb(0 45 116 / 8%) 72%),
+    linear-gradient(0deg, rgb(0 45 116 / 48%), transparent 55%),
+    url("/LU107/brand/lu-building.jpeg") center / cover no-repeat;
+}
+
+.hero-copy h1 {
+  letter-spacing: -0.025em;
+}
+
+.hero-list,
+.hero-copy .lead,
+.section-heading > p,
+.wish-heading > p,
+.voice-heading > div:first-child > p:last-child,
+.game-launch-text,
+.wish-section .wall-live .wish p {
+  font-family: var(--font-body);
+}
+
+.button-gold,
+.choice-gold,
+.game-launch-button {
+  background: var(--lu-gold);
+  color: var(--lu-blue);
+}
+
+.choice-blue {
+  background: var(--lu-blue);
+}
+
+.choice-cream {
+  background: #eceeee;
+}
+
+.game-section {
+  background: #f1f3f7;
+}
+
+.game-launch-card {
+  background: var(--lu-blue);
+}
+
+.game-launch-card::before {
+  background:
+    linear-gradient(90deg, var(--lu-blue) 0%, rgb(0 45 116 / 46%) 42%, rgb(0 45 116 / 8%)),
+    url("/LU107/brand/lu-main-building-banner.jpg") center / cover no-repeat;
+}
+
+.game-launch-kicker,
+.choice-blue .card-kicker {
+  color: var(--lu-gold);
+}
+
+.game-launch-title {
+  letter-spacing: -0.02em;
+}
+
+.game-rounds li {
+  background: #052f66;
+}
+
+.game-round-count {
+  background: rgb(0 35 82 / 92%);
+}
+
+.section-heading .section-label,
+.voice-heading .section-label,
+.wish-heading .section-label {
+  color: #8a6100;
+}
+
+.choice-gold .card-kicker,
+.choice-cream .card-kicker,
+.choice-subtitle,
+.voice-option p,
+.wish-heading > p,
+.wall-thanks,
+.project-info-dialog p {
+  color: #3f4f5f;
+}
+
+.wish-heading > p,
+.wish-section .wall-live .wish p,
+.wish-heading .wall-total strong,
+.wish-form-toggle,
+.project-info-dialog,
+.project-info-close {
+  color: var(--lu-blue);
+}
+
+.wish-form-toggle {
+  border-color: var(--lu-blue);
+  background: #fff !important;
+}
+
+.wish-section .wish-form {
+  border-color: #c7cfdb;
+  background: #f5f7fb;
+  color: var(--ink);
+}
+
+.wish-section .wish-form textarea,
+.wish-section .wish-form input:not([type="checkbox"]) {
+  color: var(--ink);
+}
+
+.wish-section .wish-form textarea:focus,
+.wish-section .wish-form input:not([type="checkbox"]):focus {
+  border-color: var(--lu-blue);
+}
+
+.project-info-dialog a {
+  color: var(--lu-blue);
+  text-decoration-color: var(--lu-gold);
+}
+
+.project-info-dialog a:hover {
+  color: #001f50;
+}
+
+.project-info-close:hover {
+  border-color: var(--lu-gold);
+}
+
+.site-footer .project-info-link:hover {
+  text-decoration-color: var(--lu-gold);
+}
+
+@media (max-width: 900px) {
+  .game-launch-card::before {
+    background:
+      linear-gradient(180deg, var(--lu-blue) 0%, rgb(0 45 116 / 20%) 38%, rgb(0 45 116 / 5%)),
+      url("/LU107/brand/lu-main-building-banner.jpg") center 58% / cover no-repeat;
+  }
+}
+
+@media (max-width: 620px) {
+  .hero-copy h1 {
+    max-width: 100%;
+    font-size: clamp(42px, 12.5vw, 50px);
+    letter-spacing: -0.035em;
+  }
+}

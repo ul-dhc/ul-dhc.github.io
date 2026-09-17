@@ -258,7 +258,7 @@ function translatePage(language) {
   ensureGamePreview();
   ensureWishWallLayout();
 
-  const gameUrl = `https://researchgames.eu/games/LU107?lang=${lang}`;
+  const gameUrl = `https://researchgames.eu/games/LU107/#${lang}`;
   const gameCard = document.querySelector('.game-launch-card');
   if (gameCard) gameCard.href = gameUrl;
 

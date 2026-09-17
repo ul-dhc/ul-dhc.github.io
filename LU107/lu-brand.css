@@ -66,6 +66,10 @@ h3,
   letter-spacing: -0.025em;
 }
 
+html[lang="en"] .hero-copy {
+  padding-top: clamp(18px, 2vw, 28px);
+}
+
 .hero-list,
 .hero-copy .lead,
 .section-heading > p,

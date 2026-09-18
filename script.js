@@ -155,7 +155,7 @@ const STR = {
     openResourceDev:'Atvērt resursu (izstrādē)',
     airaDesc:'Rīks rokraksta atšifrēšanai un attēlu aprakstīšanai ar mākslīgā intelekta palīdzību.',
     dhDesc:'Platforma ziņām, resursiem un projektiem digitālajās humanitārajās zinātnēs Latvijā.',
-    researchGamesDesc:'Digitāla platforma, kur pētījumi un datu kopas pārtop interaktīvās spēlēs.',
+    researchGamesDesc:'Pavisam jauna digitālā platforma, kur pētījumi un datu kopas pārtop interaktīvās spēlēs.',
     viewSite:'Apskatīt vietni',
     projectsCopy:'Veidojam pētniecības projektus, digitālos resursus un sadarbības tīklus Latvijā un starptautiski.',
     projectsLink:'Uzzināt par mūsu darbu',

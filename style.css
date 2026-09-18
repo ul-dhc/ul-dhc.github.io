@@ -355,11 +355,16 @@ h1,h2,h3,.headline,.section-heading h2,.contact-section h2,.resources-page-hero 
 .resource-dot-art span.is-accent{
   background:var(--purple);
 }
-.visual-games.resource-dot-art{
+.resource-dot-art{
   grid-template-columns:repeat(3,5px)!important;
   grid-template-rows:repeat(3,5px)!important;
-  place-content:center end;
+  place-content:center;
   gap:14px!important;
+}
+@media(min-width:601px){
+  body:not(.resources-page) .resource-dot-art{place-content:center end}
+  body:not(.resources-page) .resource-dh .resource-copy h3,
+  body:not(.resources-page) .resource-games .resource-copy h3{font-size:calc(22px * var(--font-scale))}
 }
 .visual-dh.resource-dot-art>span.is-accent{
   background:var(--purple);

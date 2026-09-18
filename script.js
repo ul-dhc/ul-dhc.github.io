@@ -542,16 +542,16 @@ if(hash === 'en'){
 
 function buildResourceDotArt(){
   const patterns = {
-    'visual-teikas':[26,27,28,29,34,35,36,37],
-    'visual-aira':[3,4,11,12,19,20,27,28,35,36,43,44,51,52,59,60],
-    'visual-dh':[9,14,18,21,27,28,35,36,42,45,49,54],
-    'visual-games':[0,2,4,6,8]
+    'visual-teikas':[0,1,2,4,7],
+    'visual-aira':[0,2,4,6,8],
+    'visual-dh':[1,3,4,5,7],
+    'visual-games':[0,2,3,5,7]
   };
   document.querySelectorAll('.resource-dot-art').forEach(art=>{
     const type = Object.keys(patterns).find(name=>art.classList.contains(name));
     const accents = new Set(patterns[type] || []);
     const fragment = document.createDocumentFragment();
-    const dotCount = type === 'visual-games' ? 9 : 64;
+    const dotCount = 9;
     for(let index=0;index<dotCount;index++){
       const dot = document.createElement('span');
       if(accents.has(index)) dot.className = 'is-accent';

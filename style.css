@@ -356,13 +356,13 @@ h1,h2,h3,.headline,.section-heading h2,.contact-section h2,.resources-page-hero 
   background:var(--purple);
 }
 .resource-dot-art{
-  grid-template-columns:repeat(5,5px)!important;
-  grid-template-rows:repeat(5,5px)!important;
+  grid-template-columns:repeat(8,5px)!important;
+  grid-template-rows:repeat(8,5px)!important;
   place-content:center;
-  gap:12px!important;
+  gap:clamp(10px,1vw,19px)!important;
 }
 @media(min-width:601px){
-  body:not(.resources-page) .resource-dot-art{place-content:center end}
+  body:not(.resources-page) .resource-dot-art{place-content:center end;transform:translateY(18px)}
   body:not(.resources-page) .resource-dh .resource-copy h3,
   body:not(.resources-page) .resource-games .resource-copy h3{font-size:calc(22px * var(--font-scale))}
 }

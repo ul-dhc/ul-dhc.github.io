@@ -545,7 +545,7 @@ function buildResourceDotArt(){
     'visual-teikas':[24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39],
     'visual-aira':[3,4,11,12,19,20,27,28,35,36,43,44,51,52,59,60],
     'visual-dh':[0,7,9,14,18,21,27,28,35,36,42,45,49,54,56,63],
-    'visual-games':[3,4,10,13,17,22,24,31,32,39,41,46,50,53,59,60]
+    'visual-games':[1,6,10,13,17,18,19,20,21,22,24,25,27,28,30,31,32,33,34,35,36,37,38,39,40,42,45,47,48,55,57,62]
   };
   document.querySelectorAll('.resource-dot-art').forEach(art=>{
     const type = Object.keys(patterns).find(name=>art.classList.contains(name));

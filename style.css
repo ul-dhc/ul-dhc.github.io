@@ -355,6 +355,12 @@ h1,h2,h3,.headline,.section-heading h2,.contact-section h2,.resources-page-hero 
 .resource-dot-art span.is-accent{
   background:var(--purple);
 }
+.visual-games.resource-dot-art{
+  grid-template-columns:repeat(3,5px)!important;
+  grid-template-rows:repeat(3,5px)!important;
+  place-content:center end;
+  gap:14px!important;
+}
 .visual-dh.resource-dot-art>span.is-accent{
   background:var(--purple);
 }

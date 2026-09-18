@@ -545,13 +545,14 @@ function buildResourceDotArt(){
     'visual-teikas':[26,27,28,29,34,35,36,37],
     'visual-aira':[3,4,11,12,19,20,27,28,35,36,43,44,51,52,59,60],
     'visual-dh':[9,14,18,21,27,28,35,36,42,45,49,54],
-    'visual-games':[2,5,10,13,17,22,24,31,32,39,41,46,50,53,58,61]
+    'visual-games':[0,2,4,6,8]
   };
   document.querySelectorAll('.resource-dot-art').forEach(art=>{
     const type = Object.keys(patterns).find(name=>art.classList.contains(name));
     const accents = new Set(patterns[type] || []);
     const fragment = document.createDocumentFragment();
-    for(let index=0;index<64;index++){
+    const dotCount = type === 'visual-games' ? 9 : 64;
+    for(let index=0;index<dotCount;index++){
       const dot = document.createElement('span');
       if(accents.has(index)) dot.className = 'is-accent';
       fragment.appendChild(dot);

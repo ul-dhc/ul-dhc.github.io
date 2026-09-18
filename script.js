@@ -81,6 +81,7 @@ const STR = {
     openResourceDev:'Open resource (in development)',
     airaDesc:'A tool for transcribing handwriting and describing images with the help of artificial intelligence.',
     dhDesc:'A platform for news, resources and projects in digital humanities in Latvia.',
+    researchGamesDesc:'A platform for research games and game-based approaches to research.',
     viewSite:'Visit site',
     projectsCopy:'We create research projects, digital resources and collaborative networks in Latvia and internationally.',
     projectsLink:'Discover our work',
@@ -154,6 +155,7 @@ const STR = {
     openResourceDev:'Atvērt resursu (izstrādē)',
     airaDesc:'Rīks rokraksta atšifrēšanai un attēlu aprakstīšanai ar mākslīgā intelekta palīdzību.',
     dhDesc:'Platforma ziņām, resursiem un projektiem digitālajās humanitārajās zinātnēs Latvijā.',
+    researchGamesDesc:'Platforma pētniecības spēlēm un spēļošanas pieejām pētniecībā.',
     viewSite:'Apskatīt vietni',
     projectsCopy:'Veidojam pētniecības projektus, digitālos resursus un sadarbības tīklus Latvijā un starptautiski.',
     projectsLink:'Uzzināt par mūsu darbu',
@@ -542,7 +544,8 @@ function buildResourceDotArt(){
   const patterns = {
     'visual-teikas':[26,27,28,29,34,35,36,37],
     'visual-aira':[3,4,11,12,19,20,27,28,35,36,43,44,51,52,59,60],
-    'visual-dh':[9,14,18,21,27,28,35,36,42,45,49,54]
+    'visual-dh':[9,14,18,21,27,28,35,36,42,45,49,54],
+    'visual-games':[2,5,10,13,17,22,24,31,32,39,41,46,50,53,58,61]
   };
   document.querySelectorAll('.resource-dot-art').forEach(art=>{
     const type = Object.keys(patterns).find(name=>art.classList.contains(name));

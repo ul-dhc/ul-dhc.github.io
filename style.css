@@ -406,6 +406,13 @@ h1,h2,h3,.headline,.section-heading h2,.contact-section h2,.resources-page-hero 
   .person-card,.person-monogram{transition:none}
 }
 
+@media(min-width:1121px){
+  .resources{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media(min-width:821px) and (max-width:1120px){
+  .resources{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
 /* Keep the full header and hero comfortable on narrow iPhone viewports. */
 @media(max-width:600px){
   .page{padding-inline:16px}

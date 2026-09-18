@@ -81,7 +81,7 @@ const STR = {
     openResourceDev:'Open resource (in development)',
     airaDesc:'A tool for transcribing handwriting and describing images with the help of artificial intelligence.',
     dhDesc:'A platform for news, resources and projects in digital humanities in Latvia.',
-    researchGamesDesc:'A digital platform where research and datasets become interactive games.',
+    researchGamesDesc:'A brand-new digital platform where research and datasets become interactive games.',
     viewSite:'Visit site',
     projectsCopy:'We create research projects, digital resources and collaborative networks in Latvia and internationally.',
     projectsLink:'Discover our work',

@@ -43,8 +43,10 @@ const translations = {
     gameRounds: ['LU vēsture', 'LU mūsdienās', 'Studentu dzīve LU', 'Kultūra un sports LU', 'Fināla izaicinājums'],
     gameRoundCounts: ['5 jautājumi', '5 jautājumi', '5 jautājumi', '5 jautājumi', '3 uzdevumi'],
     gameLaunch: 'Atvērt spēli',
-    wishAnchor: 'apsveikumi',
+    wishAnchor: 'apsveikumu-siena',
     wishTitle: 'Apsveikumu siena',
+    wishShareLabel: 'Kopēt apsveikumu sienas saiti',
+    wishShareCopied: 'Saite nokopēta',
     wishIntro: 'Latvijas Universitātei 107. dzimšanas dienā mēs vēlam…',
     wishCount: 'apsveikumi',
     wishThanks: 'Paldies, ka esat daļa no LU!',
@@ -111,8 +113,10 @@ const translations = {
     gameRounds: ['UL History', 'UL Today', 'Student Life at UL', 'Culture & Sports at UL', 'Final Challenge'],
     gameRoundCounts: ['5 questions', '5 questions', '5 questions', '5 questions', '3 tasks'],
     gameLaunch: 'Open the game',
-    wishAnchor: 'greetings',
+    wishAnchor: 'greetings-wall',
     wishTitle: 'Birthday wall',
+    wishShareLabel: 'Copy the birthday wall link',
+    wishShareCopied: 'Link copied',
     wishIntro: 'On the University of Latvia’s 107th birthday, we wish…',
     wishCount: 'greetings',
     wishThanks: 'Thank you for being part of UL!',
@@ -247,6 +251,40 @@ function ensureWishWallLayout() {
   if (section.getAttribute('data-submit-notice') === 'true') notice.hidden = false;
 }
 
+function ensureWishShareLink(t) {
+  const title = document.querySelector('.wish-heading > h2');
+  if (!title) return;
+  let button = title.querySelector('.wish-share-link');
+  if (!button) {
+    button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'wish-share-link';
+    button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>';
+    title.append(button);
+  }
+  button.dataset.copyUrl = `https://dhc.lu.lv/LU107/#${t.wishAnchor}`;
+  button.setAttribute('aria-label', t.wishShareLabel);
+  button.setAttribute('title', t.wishShareLabel);
+}
+
+async function copyText(value) {
+  try {
+    await navigator.clipboard.writeText(value);
+    return true;
+  } catch {
+    const textarea = document.createElement('textarea');
+    textarea.value = value;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.append(textarea);
+    textarea.select();
+    const copied = document.execCommand('copy');
+    textarea.remove();
+    return copied;
+  }
+}
+
 function translatePage(language) {
   const lang = language === 'en' ? 'en' : 'lv';
   const t = translations[lang];
@@ -315,8 +353,9 @@ function translatePage(language) {
   const wishHash = `#${t.wishAnchor}`;
   if (wishSection) wishSection.id = t.wishAnchor;
   document.querySelector('.site-header nav a:nth-child(3)')?.setAttribute('href', wishHash);
-  document.querySelector('.choice-copy .button[href="#noveli"], .choice-copy .button[href="#apsveikumi"], .choice-copy .button[href="#greetings"]')?.setAttribute('href', wishHash);
+  document.querySelector('.choice-copy .button[href="#noveli"], .choice-copy .button[href="#apsveikumi"], .choice-copy .button[href="#greetings"], .choice-copy .button[href="#apsveikumu-siena"], .choice-copy .button[href="#greetings-wall"]')?.setAttribute('href', wishHash);
   setHtml('.wish-heading > h2', t.wishTitle);
+  ensureWishShareLink(t);
   setText('.wish-heading > p', t.wishIntro);
   setHtml('.wall-total span', t.wishCount);
   setText('.wall-thanks-label', t.wishThanks);
@@ -353,15 +392,17 @@ function translatePage(language) {
     fullscreenLink.rel = 'noopener';
   }
 
-  if (location.hash.toLowerCase() === wishHash) {
+  const currentHash = location.hash.toLowerCase();
+  const wishAliases = lang === 'en' ? ['#greetings', '#greetings-wall'] : ['#apsveikumi', '#apsveikumu-siena'];
+  if (currentHash === wishHash || wishAliases.includes(currentHash)) {
     requestAnimationFrame(() => wishSection?.scrollIntoView({ block: 'start' }));
   }
 }
 
 function selectedLanguage() {
   const hash = location.hash.toLowerCase();
-  if (hash === '#en' || hash === '#greetings') return 'en';
-  if (hash === '#lv' || hash === '#apsveikumi') return 'lv';
+  if (hash === '#en' || hash === '#greetings' || hash === '#greetings-wall') return 'en';
+  if (hash === '#lv' || hash === '#apsveikumi' || hash === '#apsveikumu-siena') return 'lv';
   try {
     return localStorage.getItem('lu107-language') === 'en' ? 'en' : 'lv';
   } catch {
@@ -373,7 +414,28 @@ function applySelectedLanguage() {
   translatePage(selectedLanguage());
 }
 
-document.addEventListener('click', (event) => {
+document.addEventListener('click', async (event) => {
+  const shareButton = event.target.closest('.wish-share-link');
+  if (shareButton) {
+    event.preventDefault();
+    const lang = document.documentElement.lang === 'en' ? 'en' : 'lv';
+    const t = translations[lang];
+    const copied = await copyText(shareButton.dataset.copyUrl);
+    if (copied) {
+      shareButton.classList.add('is-copied');
+      shareButton.setAttribute('aria-label', t.wishShareCopied);
+      shareButton.setAttribute('title', t.wishShareCopied);
+      shareButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>';
+      setTimeout(() => {
+        shareButton.classList.remove('is-copied');
+        shareButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>';
+        shareButton.setAttribute('aria-label', t.wishShareLabel);
+        shareButton.setAttribute('title', t.wishShareLabel);
+      }, 1600);
+    }
+    return;
+  }
+
   const wishToggle = event.target.closest('.wish-form-toggle');
   if (wishToggle) {
     const section = wishToggle.closest('.wish-section');
@@ -427,7 +489,7 @@ document.addEventListener('submit', (event) => {
   setTimeout(showNotice, 700);
 }, true);
 
-if (!['#lv', '#en', '#info', '#apsveikumi', '#greetings'].includes(location.hash.toLowerCase())) {
+if (!['#lv', '#en', '#info', '#apsveikumi', '#greetings', '#apsveikumu-siena', '#greetings-wall'].includes(location.hash.toLowerCase())) {
   history.replaceState(null, '', '#lv');
 }
 

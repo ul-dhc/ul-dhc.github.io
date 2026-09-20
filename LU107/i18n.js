@@ -208,7 +208,7 @@ function ensureGamePreview() {
   card.href = 'https://researchgames.eu/games/LU107/';
   card.target = '_blank';
   card.rel = 'noopener';
-  const diagonalIcon = document.querySelector('.voice-option b svg')?.cloneNode(true);
+  const diagonalIcon = document.querySelector('.voice-option b svg, .lucide-arrow-up-right')?.cloneNode(true);
   const roundImages = ['card-history.jpg', 'card-today.jpg', 'card-student-life.jpg', 'card-culture.jpg', 'card-final.jpg'];
   const rounds = roundImages.map((image, index) => `<li><div class="game-round-copy"><span class="game-round-number">${index + 1}</span><span class="game-round-name"></span></div><div class="game-round-photo" aria-hidden="true"><img src="https://researchgames.eu/games/LU107/assets/${image}" alt=""></div><span class="game-round-count"></span></li>`).join('');
   card.innerHTML = `<div class="game-launch-copy"><p class="game-launch-kicker"></p><h3 class="game-launch-title"></h3><p class="game-launch-text"></p><ul class="game-rounds">${rounds}</ul><span class="game-launch-button"><span class="game-launch-label"></span></span></div>`;

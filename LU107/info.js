@@ -22,3 +22,27 @@ function syncInfoModal(){const modal=document.querySelector('#info');if(!modal)r
 document.addEventListener('click',event=>{const link=event.target.closest('.project-info-link');if(link){event.preventDefault();openInfoModal();return}if(event.target.closest('.project-info-close')||event.target.matches('.project-info-modal')){event.preventDefault();closeInfoModal()}});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&location.hash.toLowerCase()==='#info')closeInfoModal()});window.addEventListener('hashchange',syncInfoModal);
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ensureProjectInfo,{once:true});else ensureProjectInfo();window.addEventListener('load',ensureProjectInfo,{once:true});setTimeout(ensureProjectInfo,1000);setTimeout(ensureProjectInfo,1400);
+
+/* Balsu talka embed: grow the iframe to the height its page reports.
+   The embedded page must post {type:'lu107-embed-height',height:<px>} to the parent. */
+(function(){
+  const EMBED_ORIGIN='https://balsutalka.lv';
+  let reported=0;
+  function applyHeight(){
+    if(!reported)return;
+    const frame=document.querySelector('.voice-embed iframe');
+    if(frame&&frame.style.height!==`${reported}px`)frame.style.height=`${reported}px`;
+  }
+  window.addEventListener('message',event=>{
+    if(event.origin!==EMBED_ORIGIN)return;
+    const data=event.data;
+    if(!data||data.type!=='lu107-embed-height')return;
+    const height=Math.ceil(Number(data.height));
+    if(!Number.isFinite(height)||height<200||height>3000)return;
+    reported=height;
+    applyHeight();
+  });
+  /* React hydration can rewrite the iframe's style, so re-apply afterwards. */
+  window.addEventListener('load',applyHeight);
+  setTimeout(applyHeight,1000);setTimeout(applyHeight,1400);
+})();

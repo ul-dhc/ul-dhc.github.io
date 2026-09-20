@@ -67,7 +67,23 @@ h3,
 }
 
 html[lang="en"] .hero-copy {
-  padding-top: clamp(18px, 2vw, 28px);
+  padding-top: 0;
+}
+
+html[lang="en"] .hero-copy h1 {
+  font-size: clamp(52px, 5.5vw, 84px);
+  line-height: 0.92;
+  margin-block: clamp(16px, 2.2vh, 24px);
+}
+
+html[lang="en"] .hero-copy .lead {
+  font-size: clamp(18px, 1.55vw, 22px);
+  margin-bottom: 24px;
+}
+
+html[lang="en"] .hero-list {
+  gap: 7px;
+  margin-bottom: 26px;
 }
 
 .hero-list,
@@ -202,5 +218,11 @@ html[lang="en"] .hero-copy {
     max-width: 100%;
     font-size: clamp(42px, 12.5vw, 50px);
     letter-spacing: -0.035em;
+  }
+
+  html[lang="en"] .hero-copy h1 {
+    font-size: clamp(39px, 10.5vw, 46px);
+    line-height: 0.94;
+    margin-block: 18px;
   }
 }

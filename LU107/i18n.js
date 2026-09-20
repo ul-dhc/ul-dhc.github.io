@@ -98,8 +98,8 @@ const translations = {
     choiceButtons: ['Choose a contribution', 'Start the game', 'View the wish wall'],
     voiceLabel: 'Take part · do a good deed',
     voiceTitle: 'Invest in the future<br>of the Latvian language!',
-    voiceAnchor: 'ul-voice-drive',
-    voiceShareLabel: 'Copy the UL voice drive link',
+    voiceAnchor: 'UL-voice-crowdsourcing',
+    voiceShareLabel: 'Copy the UL voice crowdsourcing link',
     voiceShareCopied: 'Link copied',
     voiceIntro: 'Record a greeting for the University of Latvia’s 107th anniversary or answer a question about the University. The prompts are in Latvian, and your recording should be in Latvian. Your contribution will help advance Latvian speech technologies.',
     voiceTitles: ['Speak', 'Listen', 'Validate'],
@@ -375,7 +375,7 @@ function translatePage(language) {
   const voiceSection = document.querySelector('.voice-section');
   const voiceHash = `#${t.voiceAnchor}`;
   if (voiceSection) voiceSection.id = t.voiceAnchor;
-  document.querySelector('.choice-copy .button[href="#balsu-talka"], .choice-copy .button[href="#lu-balsu-talka"], .choice-copy .button[href="#ul-voice-drive"]')?.setAttribute('href', voiceHash);
+  document.querySelector('.choice-copy .button[href="#balsu-talka"], .choice-copy .button[href="#lu-balsu-talka"], .choice-copy .button[href="#ul-voice-drive"], .choice-copy .button[href="#UL-voice-crowdsourcing"]')?.setAttribute('href', voiceHash);
   const wishSection = document.querySelector('.wish-section');
   const wishHash = `#${t.wishAnchor}`;
   if (wishSection) wishSection.id = t.wishAnchor;
@@ -420,8 +420,8 @@ function translatePage(language) {
   }
 
   const currentHash = location.hash.toLowerCase();
-  const voiceAliases = lang === 'en' ? ['#ul-voice-drive'] : ['#balsu-talka', '#lu-balsu-talka'];
-  if (currentHash === voiceHash || voiceAliases.includes(currentHash)) {
+  const voiceAliases = lang === 'en' ? ['#ul-voice-crowdsourcing', '#ul-voice-drive'] : ['#balsu-talka', '#lu-balsu-talka'];
+  if (currentHash === voiceHash.toLowerCase() || voiceAliases.includes(currentHash)) {
     requestAnimationFrame(() => voiceSection?.scrollIntoView({ block: 'start' }));
   }
   const wishAliases = lang === 'en' ? ['#greetings', '#greetings-wall'] : ['#apsveikumi', '#apsveikumu-siena'];
@@ -432,7 +432,7 @@ function translatePage(language) {
 
 function selectedLanguage() {
   const hash = location.hash.toLowerCase();
-  if (hash === '#en' || hash === '#greetings' || hash === '#greetings-wall' || hash === '#ul-voice-drive') return 'en';
+  if (hash === '#en' || hash === '#greetings' || hash === '#greetings-wall' || hash === '#ul-voice-crowdsourcing' || hash === '#ul-voice-drive') return 'en';
   if (hash === '#lv' || hash === '#apsveikumi' || hash === '#apsveikumu-siena' || hash === '#balsu-talka' || hash === '#lu-balsu-talka') return 'lv';
   try {
     return localStorage.getItem('lu107-language') === 'en' ? 'en' : 'lv';
@@ -523,7 +523,7 @@ document.addEventListener('submit', (event) => {
   setTimeout(showNotice, 700);
 }, true);
 
-if (!['#lv', '#en', '#info', '#apsveikumi', '#greetings', '#apsveikumu-siena', '#greetings-wall', '#balsu-talka', '#lu-balsu-talka', '#ul-voice-drive'].includes(location.hash.toLowerCase())) {
+if (!['#lv', '#en', '#info', '#apsveikumi', '#greetings', '#apsveikumu-siena', '#greetings-wall', '#balsu-talka', '#lu-balsu-talka', '#ul-voice-crowdsourcing', '#ul-voice-drive'].includes(location.hash.toLowerCase())) {
   history.replaceState(null, '', '#lv');
 }
 

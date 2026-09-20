@@ -81,7 +81,7 @@ const translations = {
     heroTitle: 'The University of Latvia turns 107',
     heroLead: 'We invite students, staff, alumni and friends of the University of Latvia to',
     heroItems: [
-      'do a good deed – devote a few minutes to the future of the Latvian language',
+      'do a good deed – record a greeting or answer a question about the University in Latvian',
       'find out how well you know the University by playing',
       'leave a wish for the University’s year ahead',
     ],
@@ -91,7 +91,7 @@ const translations = {
     choiceKickers: ['Contribute', 'Play', 'Send a wish'],
     choiceTitles: ['Do a good deed.', 'How well do you know UL?', 'Leave your wish'],
     choiceTexts: [
-      'Give a few minutes to the future of Latvian – speak, listen or validate recordings in Balsu talka.',
+      'Give a few minutes to the future of Latvian – record a greeting to the University of Latvia or answer a question about the University in Latvian.',
       'Discover the University’s places, people and stories in an interactive anniversary game.',
       'Write a few words to the University of Latvia and join the anniversary wish wall.',
     ],
@@ -101,7 +101,7 @@ const translations = {
     voiceAnchor: 'ul-voice-drive',
     voiceShareLabel: 'Copy the UL voice drive link',
     voiceShareCopied: 'Link copied',
-    voiceIntro: 'Choose the activity that suits you. Every recording and every validation helps language technologies understand and speak Latvian better.',
+    voiceIntro: 'Record a greeting for the University of Latvia’s 107th anniversary or answer a question about the University. The prompts are in Latvian, and your recording should be in Latvian. Your contribution will help advance Latvian speech technologies.',
     voiceTitles: ['Speak', 'Listen', 'Validate'],
     voiceTexts: [
       'Record a few sentences and help advance speech technologies for Latvian.',

@@ -25,6 +25,9 @@ const translations = {
     choiceButtons: ['Izvēlēties labo darbu', 'Sākt spēli', 'Skatīt novēlējumu sienu'],
     voiceLabel: 'Piedalies · ierunā',
     voiceTitle: 'Ierunā sveicienu vai<br>atbildi uz jautājumu!',
+    voiceAnchor: 'lu-balsu-talka',
+    voiceShareLabel: 'Kopēt LU Balsu talkas saiti',
+    voiceShareCopied: 'Saite nokopēta',
     voiceIntro: 'Ierunā sveicienu Latvijas Universitātes 107. jubilejā vai atbildi uz kādu jautājumu par LU. Tavs ieraksts palīdzēs attīstīt latviešu valodas runas tehnoloģijas.',
     voiceTitles: ['Runā', 'Klausies', 'Pārbaudi'],
     voiceTexts: [
@@ -95,6 +98,9 @@ const translations = {
     choiceButtons: ['Choose a contribution', 'Start the game', 'View the wish wall'],
     voiceLabel: 'Take part · do a good deed',
     voiceTitle: 'Invest in the future<br>of the Latvian language!',
+    voiceAnchor: 'ul-voice-drive',
+    voiceShareLabel: 'Copy the UL voice drive link',
+    voiceShareCopied: 'Link copied',
     voiceIntro: 'Choose the activity that suits you. Every recording and every validation helps language technologies understand and speak Latvian better.',
     voiceTitles: ['Speak', 'Listen', 'Validate'],
     voiceTexts: [
@@ -267,6 +273,22 @@ function ensureWishShareLink(t) {
   button.setAttribute('title', t.wishShareLabel);
 }
 
+function ensureVoiceShareLink(t) {
+  const title = document.querySelector('.voice-heading h2');
+  if (!title) return;
+  let button = title.querySelector('.voice-share-link');
+  if (!button) {
+    button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'voice-share-link';
+    button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>';
+    title.append(button);
+  }
+  button.dataset.copyUrl = `https://dhc.lu.lv/LU107/#${t.voiceAnchor}`;
+  button.setAttribute('aria-label', t.voiceShareLabel);
+  button.setAttribute('title', t.voiceShareLabel);
+}
+
 async function copyText(value) {
   try {
     await navigator.clipboard.writeText(value);
@@ -336,6 +358,7 @@ function translatePage(language) {
   setManyControlText('.choice-copy .button', t.choiceButtons);
   setText('.voice-heading .section-label', t.voiceLabel);
   setHtml('.voice-heading h2', t.voiceTitle);
+  ensureVoiceShareLink(t);
   setText('.voice-heading > div:first-child > p:last-child', t.voiceIntro);
   setManyText('.voice-option h3', t.voiceTitles);
   setManyText('.voice-option p', t.voiceTexts);
@@ -349,6 +372,10 @@ function translatePage(language) {
   setManyText('.game-round-name', t.gameRounds);
   setManyText('.game-round-count', t.gameRoundCounts);
   setText('.game-launch-label', t.gameLaunch);
+  const voiceSection = document.querySelector('.voice-section');
+  const voiceHash = `#${t.voiceAnchor}`;
+  if (voiceSection) voiceSection.id = t.voiceAnchor;
+  document.querySelector('.choice-copy .button[href="#balsu-talka"], .choice-copy .button[href="#lu-balsu-talka"], .choice-copy .button[href="#ul-voice-drive"]')?.setAttribute('href', voiceHash);
   const wishSection = document.querySelector('.wish-section');
   const wishHash = `#${t.wishAnchor}`;
   if (wishSection) wishSection.id = t.wishAnchor;
@@ -393,6 +420,10 @@ function translatePage(language) {
   }
 
   const currentHash = location.hash.toLowerCase();
+  const voiceAliases = lang === 'en' ? ['#ul-voice-drive'] : ['#balsu-talka', '#lu-balsu-talka'];
+  if (currentHash === voiceHash || voiceAliases.includes(currentHash)) {
+    requestAnimationFrame(() => voiceSection?.scrollIntoView({ block: 'start' }));
+  }
   const wishAliases = lang === 'en' ? ['#greetings', '#greetings-wall'] : ['#apsveikumi', '#apsveikumu-siena'];
   if (currentHash === wishHash || wishAliases.includes(currentHash)) {
     requestAnimationFrame(() => wishSection?.scrollIntoView({ block: 'start' }));
@@ -401,8 +432,8 @@ function translatePage(language) {
 
 function selectedLanguage() {
   const hash = location.hash.toLowerCase();
-  if (hash === '#en' || hash === '#greetings' || hash === '#greetings-wall') return 'en';
-  if (hash === '#lv' || hash === '#apsveikumi' || hash === '#apsveikumu-siena') return 'lv';
+  if (hash === '#en' || hash === '#greetings' || hash === '#greetings-wall' || hash === '#ul-voice-drive') return 'en';
+  if (hash === '#lv' || hash === '#apsveikumi' || hash === '#apsveikumu-siena' || hash === '#balsu-talka' || hash === '#lu-balsu-talka') return 'lv';
   try {
     return localStorage.getItem('lu107-language') === 'en' ? 'en' : 'lv';
   } catch {
@@ -415,22 +446,25 @@ function applySelectedLanguage() {
 }
 
 document.addEventListener('click', async (event) => {
-  const shareButton = event.target.closest('.wish-share-link');
+  const shareButton = event.target.closest('.wish-share-link, .voice-share-link');
   if (shareButton) {
     event.preventDefault();
     const lang = document.documentElement.lang === 'en' ? 'en' : 'lv';
     const t = translations[lang];
+    const isVoiceLink = shareButton.classList.contains('voice-share-link');
+    const copiedLabel = isVoiceLink ? t.voiceShareCopied : t.wishShareCopied;
+    const shareLabel = isVoiceLink ? t.voiceShareLabel : t.wishShareLabel;
     const copied = await copyText(shareButton.dataset.copyUrl);
     if (copied) {
       shareButton.classList.add('is-copied');
-      shareButton.setAttribute('aria-label', t.wishShareCopied);
-      shareButton.setAttribute('title', t.wishShareCopied);
+      shareButton.setAttribute('aria-label', copiedLabel);
+      shareButton.setAttribute('title', copiedLabel);
       shareButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>';
       setTimeout(() => {
         shareButton.classList.remove('is-copied');
         shareButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>';
-        shareButton.setAttribute('aria-label', t.wishShareLabel);
-        shareButton.setAttribute('title', t.wishShareLabel);
+        shareButton.setAttribute('aria-label', shareLabel);
+        shareButton.setAttribute('title', shareLabel);
       }, 1600);
     }
     return;
@@ -489,7 +523,7 @@ document.addEventListener('submit', (event) => {
   setTimeout(showNotice, 700);
 }, true);
 
-if (!['#lv', '#en', '#info', '#apsveikumi', '#greetings', '#apsveikumu-siena', '#greetings-wall'].includes(location.hash.toLowerCase())) {
+if (!['#lv', '#en', '#info', '#apsveikumi', '#greetings', '#apsveikumu-siena', '#greetings-wall', '#balsu-talka', '#lu-balsu-talka', '#ul-voice-drive'].includes(location.hash.toLowerCase())) {
   history.replaceState(null, '', '#lv');
 }
 

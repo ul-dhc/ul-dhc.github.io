@@ -119,7 +119,8 @@
   font-size: clamp(54px, 6vw, 82px);
 }
 
-.wish-share-link {
+.wish-share-link,
+.voice-share-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -133,25 +134,30 @@
   transition: color 0.2s, border-color 0.2s, background-color 0.2s;
 }
 
-.wish-share-link svg {
+.wish-share-link svg,
+.voice-share-link svg {
   width: 0.42em;
   height: 0.42em;
   stroke-width: 1.8;
 }
 
 .wish-share-link:hover,
-.wish-share-link:focus-visible {
+.wish-share-link:focus-visible,
+.voice-share-link:hover,
+.voice-share-link:focus-visible {
   border-color: #a9bdd5;
   background: #f1f6fb;
   color: #1879a7;
 }
 
-.wish-share-link:focus-visible {
+.wish-share-link:focus-visible,
+.voice-share-link:focus-visible {
   outline: 2px solid #ffb60f;
   outline-offset: 3px;
 }
 
-.wish-share-link.is-copied {
+.wish-share-link.is-copied,
+.voice-share-link.is-copied {
   color: #23813b;
 }
 

@@ -67,6 +67,12 @@
   }
 }
 
+.site-footer > p,
+.site-footer .project-info-link {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 .site-footer > p a {
   color: inherit;
   text-decoration: none;

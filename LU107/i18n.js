@@ -257,6 +257,55 @@ function ensureWishWallLayout() {
   if (section.getAttribute('data-submit-notice') === 'true') notice.hidden = false;
 }
 
+const emojiGraphemePattern = /[\p{Extended_Pictographic}\p{Regional_Indicator}\uFE0F\u20E3]/u;
+const emojiSegmenter = typeof Intl.Segmenter === 'function'
+  ? new Intl.Segmenter(undefined, { granularity: 'grapheme' })
+  : null;
+let wishEmojiObserver;
+
+function wrapWishEmoji(root) {
+  root.querySelectorAll('.wish-section .wall-live .wish p').forEach((paragraph) => {
+    const walker = document.createTreeWalker(paragraph, NodeFilter.SHOW_TEXT);
+    const textNodes = [];
+    let textNode;
+
+    while ((textNode = walker.nextNode())) {
+      if (!textNode.parentElement?.closest('.wish-emoji') && emojiGraphemePattern.test(textNode.data)) {
+        textNodes.push(textNode);
+      }
+    }
+
+    textNodes.forEach((node) => {
+      const segments = emojiSegmenter
+        ? [...emojiSegmenter.segment(node.data)].map(({ segment }) => segment)
+        : Array.from(node.data);
+      const fragment = document.createDocumentFragment();
+
+      segments.forEach((segment) => {
+        if (emojiGraphemePattern.test(segment)) {
+          const emoji = document.createElement('span');
+          emoji.className = 'wish-emoji';
+          emoji.textContent = segment;
+          fragment.append(emoji);
+        } else {
+          fragment.append(document.createTextNode(segment));
+        }
+      });
+
+      node.replaceWith(fragment);
+    });
+  });
+}
+
+function ensureWishEmojiStyling() {
+  const wall = document.querySelector('.wish-section .wall-live');
+  if (!wall) return;
+  wrapWishEmoji(wall);
+  if (wishEmojiObserver) return;
+  wishEmojiObserver = new MutationObserver(() => wrapWishEmoji(wall));
+  wishEmojiObserver.observe(wall, { childList: true, subtree: true });
+}
+
 function ensureWishShareLink(t) {
   const title = document.querySelector('.wish-heading > h2');
   if (!title) return;
@@ -443,6 +492,7 @@ function selectedLanguage() {
 
 function applySelectedLanguage() {
   translatePage(selectedLanguage());
+  ensureWishEmojiStyling();
 }
 
 document.addEventListener('click', async (event) => {

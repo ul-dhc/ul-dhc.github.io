@@ -368,7 +368,8 @@ html[lang="en"] .wish-heading .wall-total::after {
   }
 
   .wish-heading {
-    grid-template-columns: 1fr;
+    min-width: 0;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .wish-heading::after {
@@ -379,6 +380,13 @@ html[lang="en"] .wish-heading .wall-total::after {
   .wish-heading .wall-total,
   .wish-form-toggle {
     grid-column: 1;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .wish-heading > h2 {
+    font-size: clamp(38px, 11.5vw, 46px);
+    line-height: 1.02;
   }
 
   .wish-heading .wall-total {
@@ -388,6 +396,7 @@ html[lang="en"] .wish-heading .wall-total::after {
 
   .wish-form-toggle {
     grid-row: 3;
+    width: 100%;
     justify-self: stretch;
     justify-content: center;
   }

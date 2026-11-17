@@ -7,11 +7,13 @@
   let filter = 'all', theme = storage.get('dhc-theme','light');
   let fontIndex = Math.max(0,Math.min(2,Number(storage.get('dhc-font-scale','1')) || 0));
   const ui = {
-    lv:{back:'← Atpakaļ uz sākumu',title:'Hronika',intro:'Pētām, veidojam, satiekamies.\nCentra darbi un notikumi – gadu pa gadam.',rhythm:'Gada ritms',rhythmHint:'Katrs punkts – viens notikums. Izvēlies mēnesi.',browse:'Pārlūkot hroniku',yearLabel:'Darbi un sastapšanās',empty:'Šajā kategorijā vēl nav ierakstu.',top:'Atpakaļ uz augšu ↑',footer:'LU Digitālo humanitāro zinātņu centrs, 2026',all:'Visi',source:'Avots',programme:'Programma',navAbout:'Par mums',navResources:'Digitālie resursi un rīki',navProjects:'Projekti',navTeam:'Komanda',navContact:'Kontakti'},
-    en:{back:'← Back to home',title:'Chronicle',intro:'Researching, building, connecting.\nThe centre’s work and events, year by year.',rhythm:'The year in dots',rhythmHint:'Each dot is an event. Choose a month.',browse:'Explore the chronicle',yearLabel:'Work and encounters',empty:'No entries in this category yet.',top:'Back to top ↑',footer:'UL Digital Humanities Centre, 2026',all:'All',source:'Source',programme:'Programme',navAbout:'About us',navResources:'Digital resources and tools',navProjects:'Projects',navTeam:'Team',navContact:'Contact'}
+    lv:{back:'Atpakaļ uz sākumu',title:'Hronika',intro:'Pētām, veidojam, satiekamies.\nCentra darbi un notikumi – gadu pa gadam.',rhythm:'Gada ritms',rhythmHint:'Katrs punkts – viens notikums. Izvēlies mēnesi.',browse:'Pārlūkot hroniku',yearLabel:'Darbi un sastapšanās',empty:'Šajā kategorijā vēl nav ierakstu.',top:'Atpakaļ uz augšu',footer:'LU Digitālo humanitāro zinātņu centrs, 2026',all:'Visi',source:'Avots',programme:'Programma',navAbout:'Par mums',navResources:'Digitālie resursi un rīki',navProjects:'Projekti',navTeam:'Komanda',navContact:'Kontakti'},
+    en:{back:'Back to home',title:'Chronicle',intro:'Researching, building, connecting.\nThe centre’s work and events, year by year.',rhythm:'The year in dots',rhythmHint:'Each dot is an event. Choose a month.',browse:'Explore the chronicle',yearLabel:'Work and encounters',empty:'No entries in this category yet.',top:'Back to top',footer:'UL Digital Humanities Centre, 2026',all:'All',source:'Source',programme:'Programme',navAbout:'About us',navResources:'Digital resources and tools',navProjects:'Projects',navTeam:'Team',navContact:'Contact'}
   };
   const countText = n => lang === 'en' ? `${n} ${n===1?'event':'events'}` : `${n} ${n%10===1 && n%100!==11?'notikums':'notikumi'}`;
   const el = (tag,classes,text) => {const node=document.createElement(tag); if(classes)node.className=classes;if(text!==undefined)node.textContent=text;return node;};
+  const icon = (name,classes='') => {const node=el('i',classes);node.dataset.lucide=name;node.setAttribute('aria-hidden','true');return node;};
+  const refreshIcons = () => {if(window.lucide)window.lucide.createIcons({attrs:{'stroke-width':1.5,'aria-hidden':'true'}});};
   const monthName = (year,month,short=false) => new Intl.DateTimeFormat(lang,{month:short?'short':'long',timeZone:'UTC'}).format(new Date(Date.UTC(year,month-1,1)));
   const dateText = event => {
     const [y,m,d]=event.start.split('-'),[,em,ed]=event.end.split('-');
@@ -22,8 +24,9 @@
     const li=el('li','chronicle-entry');li.id=event.id;li.dataset.category=event.category;
     const time=el('time','',dateText(event));time.dateTime=event.start;
     const copy=el('div','entry-copy');
-    copy.append(el('div','entry-category',data.categories.find(c=>c.id===event.category)[lang]),el('h3','',event.title[lang]),el('p','',event.text[lang]));
-    const links=el('div','entry-links');event.sources.forEach((url,index)=>{const a=el('a','',ui[lang][index?'programme':'source']+' ');a.href=url;a.target='_blank';a.rel='noopener noreferrer';const arrow=el('span','','↗');arrow.setAttribute('aria-hidden','true');a.append(arrow);links.append(a);});copy.append(links);li.append(time,copy);return li;
+    const tag=el('button','entry-category entry-tag',data.categories.find(c=>c.id===event.category)[lang]);tag.type='button';tag.setAttribute('aria-pressed',String(filter===event.category));tag.setAttribute('aria-label',`${lang==='lv'?'Atlasīt:':'Filter:'} ${tag.textContent}`);tag.addEventListener('click',()=>{filter=event.category;render();document.querySelector('.chronicle-tools').scrollIntoView({block:'start'});});
+    copy.append(tag,el('h3','',event.title[lang]),el('p','',event.text[lang]));
+    const links=el('div','entry-links');event.sources.forEach((url,index)=>{const a=el('a','',ui[lang][index?'programme':'source']+' ');a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.append(icon('arrow-up-right'));links.append(a);});copy.append(links);li.append(time,copy);return li;
   }
   function renderFilters() {
     const box=$('category-filters');box.replaceChildren();
@@ -44,10 +47,10 @@
       const list=events.filter(e=>e.start.startsWith(year));
       const details=el('details','year-section');details.dataset.year=year;details.open=states.get(year)??true;
       const summary=el('summary');summary.append(el('span','year-number',year),el('span','year-description',ui[lang].yearLabel),el('span','year-count',String(list.length)));
-      const toggle=el('span','year-toggle');toggle.setAttribute('aria-hidden','true');summary.append(toggle);details.append(summary);
+      const toggle=el('span','year-toggle');toggle.setAttribute('aria-hidden','true');toggle.append(icon('plus','year-expand'),icon('minus','year-collapse'));summary.append(toggle);details.append(summary);
       const content=el('div','year-content');
-      for(let month=12;month>0;month--){const monthEvents=list.filter(e=>Number(e.start.slice(5,7))===month);if(!monthEvents.length)continue;
-        const group=el('section','month-group');group.id=`month-${year}-${String(month).padStart(2,'0')}`;const title=el('h2','month-title');title.id=`month-title-${year}-${month}`;group.setAttribute('aria-labelledby',title.id);title.append(el('span','',String(month).padStart(2,'0')),document.createTextNode(monthName(year,month)));const ol=el('ol','entry-list');monthEvents.forEach(e=>ol.append(entry(e)));group.append(title,ol);content.append(group);
+      for(let month=12;month>0;month--){const monthEvents=list.filter(e=>Number(e.start.slice(5,7))===month);const note=filter==='all'&&data.notes?.find(n=>n.year===Number(year)&&n.month===month);if(!monthEvents.length&&!note)continue;
+        const group=el('section','month-group');group.id=`month-${year}-${String(month).padStart(2,'0')}`;const title=el('h2','month-title');title.id=`month-title-${year}-${month}`;group.setAttribute('aria-labelledby',title.id);title.append(el('span','',String(month).padStart(2,'0')),document.createTextNode(monthName(year,month)));const ol=el('ol','entry-list');monthEvents.forEach(e=>ol.append(entry(e)));group.append(title);if(note)group.append(el('p','month-note',note.text[lang]));if(monthEvents.length)group.append(ol);content.append(group);
       }
       details.append(content);container.append(details);
     });
@@ -56,24 +59,27 @@
     const rhythm=$('year-rhythm');rhythm.replaceChildren();
     for(let month=1;month<=12;month++){
       const list=events.filter(e=>e.start.startsWith('2026')&&Number(e.start.slice(5,7))===month);
-      const a=el('a','rhythm-month'+(list.length?'':' is-empty'));a.href=`#month-2026-${String(month).padStart(2,'0')}`;a.dataset.month=month;a.setAttribute('aria-label',`${monthName(2026,month)}: ${countText(list.length)}`);
-      if(!list.length){a.setAttribute('aria-disabled','true');a.tabIndex=-1;}
-      const dots=el('span','rhythm-dots');dots.setAttribute('aria-hidden','true');[...list].reverse().forEach(e=>{const dot=el('span','rhythm-dot');dot.dataset.category=e.category;dots.append(dot);});a.append(dots,el('span','rhythm-label',monthName(2026,month,true).replace('.','').toUpperCase()));
-      a.addEventListener('click',event=>{if(!list.length){event.preventDefault();return;}document.querySelector('.year-section[data-year="2026"]').open=true;});rhythm.append(a);
+      const note=filter==='all'&&data.notes?.find(n=>n.year===2026&&n.month===month);
+      const a=el('a','rhythm-month'+(list.length||note?'':' is-empty')+(note?' is-holiday':''));a.href=`#month-2026-${String(month).padStart(2,'0')}`;a.dataset.month=month;a.setAttribute('aria-label',`${monthName(2026,month)}: ${note?note.text[lang]:countText(list.length)}`);
+      if(!list.length&&!note){a.setAttribute('aria-disabled','true');a.tabIndex=-1;}
+      const dots=el('span','rhythm-dots');dots.setAttribute('aria-hidden','true');if(note)dots.append(icon('sun','holiday-icon'));[...list].reverse().forEach(e=>{const dot=el('span','rhythm-dot');dot.dataset.category=e.category;dots.append(dot);});a.append(dots,el('span','rhythm-label',monthName(2026,month,true).replace('.','').toUpperCase()));
+      a.addEventListener('click',event=>{if(!list.length&&!note){event.preventDefault();return;}document.querySelector('.year-section[data-year="2026"]').open=true;});rhythm.append(a);
     }
+    refreshIcons();
   }
   function appearance() {
     document.body.classList.toggle('theme-dark',theme==='dark');document.body.classList.toggle('theme-light',theme!=='dark');
     $('brandLogo').src=`../assets/official-lu-${lang}-${theme==='dark'?'white':'black'}.png`;
     $('brandLogo').alt=lang==='lv'?'Latvijas Universitāte':'University of Latvia';
-    $('themeToggle').innerHTML=theme==='dark'?'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>':'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 15.5A9 9 0 0 1 8.5 4a9 9 0 1 0 11.5 11.5Z"/></svg>';
+    $('themeToggle').replaceChildren(icon(theme==='dark'?'sun':'moon'));
     $('themeToggle').setAttribute('aria-label',lang==='lv'?'Pārslēgt krāsu režīmu':'Toggle colour theme');
     document.querySelector('meta[name="theme-color"]').content=theme==='dark'?'#090c1e':'#ffffff';
+    refreshIcons();
   }
   function language() {
     document.documentElement.lang=lang;document.body.dataset.lang=lang;
     document.title=`${ui[lang].title} – ${lang==='lv'?'LU Digitālo humanitāro zinātņu centrs':'UL Digital Humanities Centre'}`;
-    document.querySelectorAll('[data-i18n]').forEach(node=>{const key=node.dataset.i18n;if(!ui[lang][key])return;node.replaceChildren();ui[lang][key].split('\n').forEach((line,index)=>{if(index)node.append(el('br'));node.append(document.createTextNode(line));});if(key==='title')node.append(el('span','','.'));});
+    document.querySelectorAll('[data-i18n]').forEach(node=>{const key=node.dataset.i18n;if(!ui[lang][key])return;node.replaceChildren();ui[lang][key].split('\n').forEach((line,index)=>{if(index)node.append(el('br'));node.append(document.createTextNode(line));});if(key==='title')node.append(el('span','','.'));if(key==='back')node.prepend(icon('arrow-left'));if(key==='top')node.append(icon('arrow-up'));});
     $('langToggle').textContent=lang==='lv'?'EN':'LV';$('langToggle').setAttribute('aria-label',lang==='lv'?'Read in English':'Lasīt latviski');
     document.querySelector('.skip-link').textContent=lang==='lv'?'Uz hroniku':'Skip to chronicle';
     $('fontDecrease').setAttribute('aria-label',lang==='lv'?'Samazināt teksta izmēru':'Decrease text size');$('fontIncrease').setAttribute('aria-label',lang==='lv'?'Palielināt teksta izmēru':'Increase text size');
@@ -88,8 +94,9 @@
   $('themeToggle').addEventListener('click',()=>{theme=theme==='dark'?'light':'dark';storage.set('dhc-theme',theme);appearance();});
   $('fontDecrease').addEventListener('click',()=>{fontIndex=Math.max(0,fontIndex-1);font();});$('fontIncrease').addEventListener('click',()=>{fontIndex=Math.min(2,fontIndex+1);font();});
   $('menuToggle').setAttribute('aria-controls','mainNav');
-  function closeMenu(){$('mainNav').classList.remove('open');$('menuToggle').setAttribute('aria-expanded','false');}
-  $('menuToggle').addEventListener('click',()=>{const open=$('mainNav').classList.toggle('open');$('menuToggle').setAttribute('aria-expanded',String(open));});
+  function menuIcon(open){$('menuToggle').replaceChildren(icon(open?'x':'menu'));refreshIcons();}
+  function closeMenu(){$('mainNav').classList.remove('open');$('menuToggle').setAttribute('aria-expanded','false');menuIcon(false);}
+  $('menuToggle').addEventListener('click',()=>{const open=$('mainNav').classList.toggle('open');$('menuToggle').setAttribute('aria-expanded',String(open));menuIcon(open);});
   $('mainNav').querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu();});
   document.body.classList.add('js-ready');
   language();font();

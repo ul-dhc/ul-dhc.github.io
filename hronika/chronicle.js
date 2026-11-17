@@ -25,8 +25,8 @@
     const time=el('time','',dateText(event));time.dateTime=event.start;
     const copy=el('div','entry-copy');
     const tag=el('button','entry-category entry-tag',data.categories.find(c=>c.id===event.category)[lang]);tag.type='button';tag.setAttribute('aria-pressed',String(filter===event.category));tag.setAttribute('aria-label',`${lang==='lv'?'Atlasīt:':'Filter:'} ${tag.textContent}`);tag.addEventListener('click',()=>{filter=event.category;render();document.querySelector('.chronicle-tools').scrollIntoView({block:'start'});});
-    copy.append(tag,el('h3','',event.title[lang]),el('p','',event.text[lang]));
-    const links=el('div','entry-links');event.sources.forEach((url,index)=>{const a=el('a','',ui[lang][index?'programme':'source']+' ');a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.append(icon('arrow-up-right'));links.append(a);});copy.append(links);li.append(time,copy);return li;
+    const paragraph=el('p','',event.text[lang]);copy.append(tag,el('h3','',event.title[lang]),paragraph);
+    const links=el('span','entry-links');event.sources.forEach((url,index)=>{const a=el('a');a.setAttribute('aria-label',`${ui[lang][index?'programme':'source']}: ${event.title[lang]}`);a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.append(icon('arrow-up-right'));links.append(a);});if(event.sources.length)paragraph.append(document.createTextNode(' '),links);li.append(time,copy);return li;
   }
   function renderFilters() {
     const box=$('category-filters');box.replaceChildren();

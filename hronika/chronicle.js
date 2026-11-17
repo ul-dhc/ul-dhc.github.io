@@ -16,13 +16,14 @@
   const refreshIcons = () => {if(window.lucide)window.lucide.createIcons({attrs:{'stroke-width':1.5,'aria-hidden':'true'}});};
   const monthName = (year,month,short=false) => new Intl.DateTimeFormat(lang,{month:short?'short':'long',timeZone:'UTC'}).format(new Date(Date.UTC(year,month-1,1)));
   const dateText = event => {
+    if(event.precision==='month')return monthName(Number(event.start.slice(0,4)),Number(event.start.slice(5,7)));
     const [y,m,d]=event.start.split('-'),[,em,ed]=event.end.split('-');
     if(event.start===event.end)return `${d}.${m}.`;
     return m===em?`${d}.–${ed}.${m}.`:`${d}.${m}.–${ed}.${em}.`;
   };
   function entry(event) {
     const li=el('li','chronicle-entry');li.id=event.id;li.dataset.category=event.category;
-    const time=el('time','',dateText(event));time.dateTime=event.start;
+    const time=el('time','',dateText(event));time.dateTime=event.precision==='month'?event.start.slice(0,7):event.start;
     const copy=el('div','entry-copy');
     const tag=el('button','entry-category entry-tag',data.categories.find(c=>c.id===event.category)[lang]);tag.type='button';tag.setAttribute('aria-pressed',String(filter===event.category));tag.setAttribute('aria-label',`${lang==='lv'?'Atlasīt:':'Filter:'} ${tag.textContent}`);tag.addEventListener('click',()=>{filter=event.category;render();document.querySelector('.chronicle-tools').scrollIntoView({block:'start'});});
     const paragraph=el('p','',event.text[lang]);copy.append(tag,el('h3','',event.title[lang]),paragraph);

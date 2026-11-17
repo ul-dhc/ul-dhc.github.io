@@ -90,3 +90,5 @@
 .holiday-icon{width:13px;height:13px;color:var(--chronicle-amber)}
 .chronicle-tools{scroll-margin-top:28px}
 @media(max-width:820px){.month-note{padding:18px 0 24px;margin:0}}
+
+[data-category="publication"]{--category-color:var(--purple)}

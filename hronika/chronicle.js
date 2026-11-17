@@ -50,7 +50,7 @@
       const toggle=el('span','year-toggle');toggle.setAttribute('aria-hidden','true');toggle.append(icon('plus','year-expand'),icon('minus','year-collapse'));summary.append(toggle);details.append(summary);
       const content=el('div','year-content');
       for(let month=12;month>0;month--){const monthEvents=list.filter(e=>Number(e.start.slice(5,7))===month);const note=filter==='all'&&data.notes?.find(n=>n.year===Number(year)&&n.month===month);if(!monthEvents.length&&!note)continue;
-        const group=el('section','month-group');group.id=`month-${year}-${String(month).padStart(2,'0')}`;const title=el('h2','month-title');title.id=`month-title-${year}-${month}`;group.setAttribute('aria-labelledby',title.id);title.append(el('span','',String(month).padStart(2,'0')),document.createTextNode(monthName(year,month)));const ol=el('ol','entry-list');monthEvents.forEach(e=>ol.append(entry(e)));group.append(title);if(note)group.append(el('p','month-note',note.text[lang]));if(monthEvents.length)group.append(ol);content.append(group);
+        const group=el('section','month-group');group.id=`month-${year}-${String(month).padStart(2,'0')}`;const title=el('h2','month-title');title.id=`month-title-${year}-${month}`;group.setAttribute('aria-labelledby',title.id);title.textContent=monthName(year,month);const ol=el('ol','entry-list');monthEvents.forEach(e=>ol.append(entry(e)));group.append(title);if(note)group.append(el('p','month-note',note.text[lang]));if(monthEvents.length)group.append(ol);content.append(group);
       }
       details.append(content);container.append(details);
     });

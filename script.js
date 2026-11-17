@@ -534,9 +534,10 @@ document.getElementById('fontDecrease').addEventListener('click', ()=>{ fontScal
 document.getElementById('fontIncrease').addEventListener('click', ()=>{ fontScaleIndex++; applyFontScale(); });
 
 const hash = window.location.hash.replace('#','').toLowerCase();
-if(hash === 'en'){
+const requestedLanguage = new URLSearchParams(window.location.search).get('lang') || hash;
+if(requestedLanguage === 'en'){
   lang = 'en';
-} else if(hash === 'lv'){
+} else if(requestedLanguage === 'lv'){
   lang = 'lv';
 }
 

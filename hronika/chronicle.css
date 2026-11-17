@@ -94,3 +94,5 @@
 [data-category="publication"]{--category-color:var(--purple)}
 
 .chronicle-page .filter-button:focus-visible{outline:none;border-color:var(--text);box-shadow:none}
+
+[data-category="people"]{--category-color:var(--chronicle-blue)}

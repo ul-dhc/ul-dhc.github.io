@@ -25,7 +25,7 @@
     const li=el('li','chronicle-entry');li.id=event.id;li.dataset.category=event.category;
     const time=el('time','',dateText(event));time.dateTime=event.precision==='month'?event.start.slice(0,7):event.start;
     const copy=el('div','entry-copy');
-    const tag=el('button','entry-category entry-tag',data.categories.find(c=>c.id===event.category)[lang]);tag.type='button';tag.setAttribute('aria-pressed',String(filter===event.category));tag.setAttribute('aria-label',`${lang==='lv'?'Atlasīt:':'Filter:'} ${tag.textContent}`);tag.addEventListener('click',()=>{filter=event.category;render();document.querySelector('.chronicle-tools').scrollIntoView({block:'start'});});
+    const tag=el('button','entry-category entry-tag',data.categories.find(c=>c.id===event.category)[lang]);tag.type='button';tag.setAttribute('aria-pressed',String(filter===event.category));tag.setAttribute('aria-label',`${lang==='lv'?'Atlasīt:':'Filter:'} ${tag.textContent}`);tag.addEventListener('click',()=>{filter=filter===event.category?'all':event.category;render();document.querySelector('.chronicle-tools').scrollIntoView({block:'start'});});
     const paragraph=el('p','',event.text[lang]);copy.append(tag,el('h3','',event.title[lang]),paragraph);
     const links=el('span','entry-links');event.sources.forEach((url,index)=>{const a=el('a');a.setAttribute('aria-label',`${ui[lang][index?'programme':'source']}: ${event.title[lang]}`);a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.append(icon('arrow-up-right'));links.append(a);});if(event.sources.length)paragraph.append(document.createTextNode(' '),links);li.append(time,copy);return li;
   }
@@ -35,7 +35,7 @@
       const b=el('button','filter-button');b.type='button';b.dataset.filter=c.id;
       if(c.id!=='all'){b.dataset.category=c.id;const dot=el('span','category-dot');dot.setAttribute('aria-hidden','true');b.append(dot);}
       b.append(document.createTextNode(c[lang]),el('span','',String(c.id==='all'?data.events.length:data.events.filter(e=>e.category===c.id).length)));
-      b.addEventListener('click',()=>{filter=c.id;render();});box.append(b);
+      b.addEventListener('click',()=>{filter=filter===c.id?'all':c.id;render();});box.append(b);
     });
     box.setAttribute('aria-label',lang==='lv'?'Notikumu kategorijas':'Event categories');
   }

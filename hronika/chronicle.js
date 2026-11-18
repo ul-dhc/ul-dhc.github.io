@@ -7,8 +7,8 @@
   let filter = 'all', theme = storage.get('dhc-theme','light');
   let fontIndex = Math.max(0,Math.min(2,Number(storage.get('dhc-font-scale','1')) || 0));
   const ui = {
-    lv:{back:'Atpakaļ uz sākumu',title:'LU DHC hronika',yearLabel:'Darbi un sastapšanās',empty:'Šajā kategorijā vēl nav ierakstu.',top:'Atpakaļ uz augšu',footer:'LU Digitālo humanitāro zinātņu centrs, 2026',all:'Visi',source:'Avots',programme:'Programma',navAbout:'Par mums',navResources:'Digitālie resursi un rīki',navProjects:'Projekti',navTeam:'Komanda',navContact:'Kontakti'},
-    en:{back:'Back to home',title:'UL DHC chronicle',yearLabel:'Work and encounters',empty:'No entries in this category yet.',top:'Back to top',footer:'UL Digital Humanities Centre, 2026',all:'All',source:'Source',programme:'Programme',navAbout:'About us',navResources:'Digital resources and tools',navProjects:'Projects',navTeam:'Team',navContact:'Contact'}
+    lv:{back:'Atpakaļ uz sākumu',title:'LU DHC hronika',empty:'Šajā kategorijā vēl nav ierakstu.',top:'Atpakaļ uz augšu',footer:'LU Digitālo humanitāro zinātņu centrs, 2026',all:'Visi',source:'Avots',programme:'Programma',navAbout:'Par mums',navResources:'Digitālie resursi un rīki',navProjects:'Projekti',navTeam:'Komanda',navContact:'Kontakti'},
+    en:{back:'Back to home',title:'UL DHC chronicle',empty:'No entries in this category yet.',top:'Back to top',footer:'UL Digital Humanities Centre, 2026',all:'All',source:'Source',programme:'Programme',navAbout:'About us',navResources:'Digital resources and tools',navProjects:'Projects',navTeam:'Team',navContact:'Contact'}
   };
   const countText = n => lang === 'en' ? `${n} ${n===1?'event':'events'}` : `${n} ${n%10===1 && n%100!==11?'notikums':'notikumi'}`;
   const el = (tag,classes,text) => {const node=document.createElement(tag); if(classes)node.className=classes;if(text!==undefined)node.textContent=text;return node;};
@@ -47,7 +47,7 @@
     years.forEach(year=>{
       const list=events.filter(e=>e.start.startsWith(year));
       const details=el('details','year-section');details.dataset.year=year;details.open=states.get(year)??true;
-      const summary=el('summary');summary.append(el('span','year-number',year),el('span','year-description',ui[lang].yearLabel),el('span','year-count',String(list.length)));
+      const summary=el('summary');summary.append(el('span','year-number',year),el('span','year-count',String(list.length)));
       const toggle=el('span','year-toggle');toggle.setAttribute('aria-hidden','true');toggle.append(icon('plus','year-expand'),icon('minus','year-collapse'));summary.append(toggle);details.append(summary);
       const content=el('div','year-content');
       for(let month=12;month>0;month--){const monthEvents=list.filter(e=>Number(e.start.slice(5,7))===month);const note=filter==='all'&&data.notes?.find(n=>n.year===Number(year)&&n.month===month);if(!monthEvents.length&&!note)continue;

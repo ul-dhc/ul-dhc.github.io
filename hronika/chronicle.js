@@ -80,7 +80,7 @@
   function language() {
     document.documentElement.lang=lang;document.body.dataset.lang=lang;
     document.title=`${ui[lang].title} – ${lang==='lv'?'LU Digitālo humanitāro zinātņu centrs':'UL Digital Humanities Centre'}`;
-    document.querySelectorAll('[data-i18n]').forEach(node=>{const key=node.dataset.i18n;if(!ui[lang][key])return;node.replaceChildren();ui[lang][key].split('\n').forEach((line,index)=>{if(index)node.append(el('br'));node.append(document.createTextNode(line));});if(key==='title')node.append(el('span','','.'));if(key==='back')node.prepend(icon('arrow-left'));if(key==='top')node.append(icon('arrow-up'));});
+    document.querySelectorAll('[data-i18n]').forEach(node=>{const key=node.dataset.i18n;if(!ui[lang][key])return;node.replaceChildren();ui[lang][key].split('\n').forEach((line,index)=>{if(index)node.append(el('br'));node.append(document.createTextNode(line));});if(key==='title')node.append(el('span','','.'));if(key==='top')node.append(icon('arrow-up'));});
     $('langToggle').textContent=lang==='lv'?'EN':'LV';$('langToggle').setAttribute('aria-label',lang==='lv'?'Read in English':'Lasīt latviski');
     document.querySelector('.skip-link').textContent=lang==='lv'?'Uz hroniku':'Skip to chronicle';
     $('fontDecrease').setAttribute('aria-label',lang==='lv'?'Samazināt teksta izmēru':'Decrease text size');$('fontIncrease').setAttribute('aria-label',lang==='lv'?'Palielināt teksta izmēru':'Increase text size');
@@ -88,6 +88,7 @@
     document.querySelectorAll('.main-nav a').forEach(a=>{const url=new URL(a.href);if(lang==='en')url.searchParams.set('lang','en');else url.searchParams.delete('lang');a.href=url.href;});
     document.querySelector('.brand').href=`../index.html#${lang}`;
     document.querySelector('.back-link').href=`../index.html#${lang}`;
+    document.querySelector('.back-link').setAttribute('aria-label',ui[lang].back);
     appearance();renderFilters();render();
   }
   function font() {document.documentElement.style.setProperty('--font-scale',[.94,1,1.08][fontIndex]);$('fontDecrease').disabled=fontIndex===0;$('fontIncrease').disabled=fontIndex===2;storage.set('dhc-font-scale',fontIndex);}

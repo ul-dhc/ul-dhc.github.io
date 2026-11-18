@@ -98,3 +98,5 @@
 
 .month-note{display:flex;align-items:center;gap:8px}
 .month-note .holiday-icon{width:16px;height:16px;flex:none}
+
+[data-category="project"]{--category-color:var(--chronicle-green)}

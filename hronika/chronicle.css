@@ -51,6 +51,7 @@
 .year-content{padding:0 0 30px}
 .month-group{display:grid;grid-template-columns:180px minmax(0,1fr);gap:30px;scroll-margin-top:28px}
 .month-title{position:sticky;top:28px;align-self:start;display:flex;align-items:baseline;gap:12px;margin:0;padding-top:30px;font-family:var(--heading);font-size:30px;font-weight:500;line-height:1.15}
+.month-group.is-current .month-title{color:var(--purple)}
 .entry-list{position:relative;list-style:none;padding:0;margin:0 0 0 6px;min-width:0}
 .entry-list::before{content:'';position:absolute;top:0;bottom:0;left:0;width:1px;background:var(--border)}
 .chronicle-entry{display:grid;grid-template-columns:94px minmax(0,1fr);gap:24px;position:relative;padding:28px 0 28px 30px;border-top:1px solid var(--border);scroll-margin-top:28px}

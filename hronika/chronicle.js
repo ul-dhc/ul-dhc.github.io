@@ -5,6 +5,21 @@
   const storage = {get(key, fallback) {try {return localStorage.getItem(key) ?? fallback;} catch {return fallback;}}, set(key,value) {try {localStorage.setItem(key,value);} catch {}}};
   let lang = new URLSearchParams(location.search).get('lang') === 'en' ? 'en' : 'lv';
   let filter = 'all', theme = storage.get('dhc-theme','light');
+  let monthFrame = null;
+  function updateCurrentMonth() {
+    monthFrame = null;
+    const groups = [...document.querySelectorAll('.year-section[open] .month-group')];
+    let current = null, largestVisible = 0;
+    for (const group of groups) {
+      const rect = group.getBoundingClientRect();
+      const visible = Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
+      if (visible > largestVisible) {current = group; largestVisible = visible;}
+    }
+    document.querySelectorAll('.month-group').forEach(group => group.classList.toggle('is-current', group === current));
+  }
+  function scheduleCurrentMonth() {
+    if (monthFrame === null) monthFrame = requestAnimationFrame(updateCurrentMonth);
+  }
   let fontIndex = Math.max(0,Math.min(2,Number(storage.get('dhc-font-scale','1')) || 0));
   const ui = {
     lv:{back:'Atpakaļ uz sākumu',title:'LU DHC hronika',empty:'Šajā kategorijā vēl nav ierakstu.',top:'Atpakaļ uz augšu',footer:'LU Digitālo humanitāro zinātņu centrs, 2026',all:'Visi',source:'Avots',programme:'Programma',navAbout:'Par mums',navResources:'Digitālie resursi un rīki',navProjects:'Projekti',navTeam:'Komanda',navContact:'Kontakti'},
@@ -67,6 +82,7 @@
       a.addEventListener('click',event=>{if(!list.length&&!note){event.preventDefault();return;}document.querySelector('.year-section[data-year="2026"]').open=true;});rhythm.append(a);
     }
     refreshIcons();
+    scheduleCurrentMonth();
   }
   function appearance() {
     document.body.classList.toggle('theme-dark',theme==='dark');document.body.classList.toggle('theme-light',theme!=='dark');
@@ -101,5 +117,9 @@
   $('menuToggle').addEventListener('click',()=>{const open=$('mainNav').classList.toggle('open');$('menuToggle').setAttribute('aria-expanded',String(open));menuIcon(open);});
   $('mainNav').querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu();});
   document.body.classList.add('js-ready');
+  window.addEventListener('scroll', scheduleCurrentMonth, {passive:true});
+  window.addEventListener('resize', scheduleCurrentMonth);
+  $('chronicle-years').addEventListener('toggle', scheduleCurrentMonth, true);
+  if (window.ResizeObserver) new ResizeObserver(scheduleCurrentMonth).observe($('chronicle-years'));
   language();font();
 })();

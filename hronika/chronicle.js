@@ -22,8 +22,8 @@
   }
   let fontIndex = Math.max(0,Math.min(2,Number(storage.get('dhc-font-scale','1')) || 0));
   const ui = {
-    lv:{back:'Atpakaļ uz sākumu',title:'LU DHC hronika',empty:'Šajā kategorijā vēl nav ierakstu.',top:'Atpakaļ uz augšu',footer:'LU Digitālo humanitāro zinātņu centrs, 2026',all:'Visi',source:'Avots',programme:'Programma',navAbout:'Par mums',navResources:'Digitālie resursi un rīki',navProjects:'Projekti',navTeam:'Komanda',navContact:'Kontakti'},
-    en:{back:'Back to home',title:'UL DHC chronicle',empty:'No entries in this category yet.',top:'Back to top',footer:'UL Digital Humanities Centre, 2026',all:'All',source:'Source',programme:'Programme',navAbout:'About us',navResources:'Digital resources and tools',navProjects:'Projects',navTeam:'Team',navContact:'Contact'}
+    lv:{back:'Atpakaļ uz sākumu',title:'LU DHC hronika',empty:'Šajā kategorijā vēl nav ierakstu.',top:'Atpakaļ uz augšu',footer:'LU Digitālo humanitāro zinātņu centrs, 2026',all:'Visi',source:'Avots',programme:'Programma',navAbout:'Par mums',navResources:'Digitālie resursi un rīki',navProjects:'Projekti',navTeam:'Komanda',navChronicle:'Hronika',navContact:'Kontakti'},
+    en:{back:'Back to home',title:'UL DHC chronicle',empty:'No entries in this category yet.',top:'Back to top',footer:'UL Digital Humanities Centre, 2026',all:'All',source:'Source',programme:'Programme',navAbout:'About us',navResources:'Digital resources and tools',navProjects:'Projects',navTeam:'Team',navChronicle:'Chronicle',navContact:'Contact'}
   };
   const countText = n => lang === 'en' ? `${n} ${n===1?'event':'events'}` : `${n} ${n%10===1 && n%100!==11?'notikums':'notikumi'}`;
   const el = (tag,classes,text) => {const node=document.createElement(tag); if(classes)node.className=classes;if(text!==undefined)node.textContent=text;return node;};

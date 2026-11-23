@@ -445,3 +445,12 @@ h1,h2,h3,.headline,.section-heading h2,.contact-section h2,.resources-page-hero 
   .tagline{margin:18px 0 14px;font-size:17px;line-height:1.35;letter-spacing:.07em}
   .lede{font-size:calc(15px * var(--font-scale));line-height:1.58}
 }
+
+/* Allow room for the chronicle link on compact screens. */
+@media(min-width:821px) and (max-width:1200px){
+  .topbar{grid-template-columns:minmax(0,1fr) auto}
+  .menu-btn{display:grid}
+  .main-nav{position:absolute;z-index:20;left:34px;right:34px;top:90px;display:none;flex-direction:column;align-items:stretch;gap:0;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:8px;box-shadow:var(--shadow)}
+  .main-nav.open{display:flex}
+  .main-nav a{padding:14px}
+}

@@ -50,6 +50,7 @@
 .year-section[open]>summary .year-toggle .year-collapse{display:block}
 .year-content{padding:0 0 30px}
 .month-group{display:grid;grid-template-columns:180px minmax(0,1fr);gap:30px;scroll-margin-top:28px}
+.month-content{min-width:0}
 .month-title{position:sticky;top:28px;align-self:start;display:flex;align-items:baseline;gap:12px;margin:0;padding-top:30px;font-family:var(--heading);font-size:30px;font-weight:500;line-height:1.15}
 .month-group.is-current .month-title{color:var(--purple)}
 .entry-list{position:relative;list-style:none;padding:0;margin:0 0 0 6px;min-width:0}
